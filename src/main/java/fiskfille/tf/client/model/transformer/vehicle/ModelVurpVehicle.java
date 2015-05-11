@@ -6,7 +6,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelVurpVehicle extends ModelBaseVehicle {
+public class ModelVurpVehicle extends ModelBaseVehicle
+{
     public MowzieModelRenderer vehicleBase;
     public MowzieModelRenderer vehicleWaist1;
     public MowzieModelRenderer vehicleWaist2;
@@ -60,7 +61,8 @@ public class ModelVurpVehicle extends ModelBaseVehicle {
     public MowzieModelRenderer vehiclerear1;
     public MowzieModelRenderer vehicleRear2;
 
-    public ModelVurpVehicle() {
+    public ModelVurpVehicle()
+    {
         this.textureWidth = 128;
         this.textureHeight = 128;
 
@@ -332,12 +334,14 @@ public class ModelVurpVehicle extends ModelBaseVehicle {
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    {
         this.vehicleBase.render(f5);
     }
 
     @Override
-    public void render() {
+    public void render()
+    {
         vehicleBase.render(0.0625F);
 
         float scale = 1.25F;
@@ -347,7 +351,8 @@ public class ModelVurpVehicle extends ModelBaseVehicle {
         vehicleWheelBackL.setScale(1, scale, scale);
     }
 
-    public void setRotateAngle(MowzieModelRenderer modelRenderer, float x, float y, float z) {
+    public void setRotateAngle(MowzieModelRenderer modelRenderer, float x, float y, float z)
+    {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

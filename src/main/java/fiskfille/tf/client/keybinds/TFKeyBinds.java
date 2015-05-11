@@ -6,7 +6,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
 @SideOnly(Side.CLIENT)
-public class TFKeyBinds {
+public class TFKeyBinds
+{
     public static TFKeyBinding keyBindingTransform = new TFKeyBinding("Transform", Keyboard.KEY_C);
     public static TFKeyBinding keyBindingNitro = new TFKeyBinding("Nitro Boost", Keyboard.KEY_X);
     public static TFKeyBinding keyBindingBrake = new TFKeyBinding("Brake", Keyboard.KEY_Z);
@@ -15,7 +16,8 @@ public class TFKeyBinds {
     public static TFKeyBinding keyBindingVehicleFirstPerson = new TFKeyBinding("Vehicle First Person", Keyboard.KEY_G);
     public static TFKeyBinding keyBindingViewFront = new TFKeyBinding("View Vehicle Front", Keyboard.KEY_R);
 
-    public static void register() {
+    public static void register()
+    {
         ClientRegistry.registerKeyBinding(keyBindingTransform);
         ClientRegistry.registerKeyBinding(keyBindingStealthMode);
         ClientRegistry.registerKeyBinding(keyBindingNitro);

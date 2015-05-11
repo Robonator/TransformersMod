@@ -13,54 +13,65 @@ import net.minecraft.util.Vec3;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NitroParticleHandler {
+public class NitroParticleHandler
+{
     private static Map<EntityPlayer, Boolean> nitroOnMap = new HashMap<EntityPlayer, Boolean>();
 
     //TODO-TF Vehicle motion needs a real cleanup
 
-    public static void doNitroParticles(EntityPlayer player) {
+    public static void doNitroParticles(EntityPlayer player)
+    {
         boolean nitro = getNitro(player);
 
-        if (nitro) {
-            if (TFDataManager.isInVehicleMode(player)) {
+        if (nitro)
+        {
+            if (TFDataManager.isInVehicleMode(player))
+            {
                 Transformer transformer = TFHelper.getTransformer(player);
 
-                if (transformer != null) {
+                if (transformer != null)
+                {
                     transformer.doNitroParticles(player);
                 }
             }
         }
     }
 
-    public static void setNitro(EntityPlayer player, boolean nitro) {
+    public static void setNitro(EntityPlayer player, boolean nitro)
+    {
         nitroOnMap.put(player, nitro);
     }
 
-    public static boolean getNitro(EntityPlayer player) {
+    public static boolean getNitro(EntityPlayer player)
+    {
         boolean nitro = false;
 
         Boolean nitroObj = nitroOnMap.get(player);
 
-        if (nitroObj == null) {
+        if (nitroObj == null)
+        {
             nitroOnMap.put(player, false);
             nitroObj = false;
         }
 
         nitro = nitroObj;
 
-        if (player == Minecraft.getMinecraft().thePlayer) {
+        if (player == Minecraft.getMinecraft().thePlayer)
+        {
             nitro = TFMotionManager.getTransformerPlayer(player).isBoosting();
         }
 
         return nitro;
     }
 
-    public static Vec3 getBackSideCoords(EntityPlayer player, double amount, boolean side, double backAmount, boolean pitch) {
+    public static Vec3 getBackSideCoords(EntityPlayer player, double amount, boolean side, double backAmount, boolean pitch)
+    {
         Vec3 front = getFrontCoords(player, backAmount, pitch).addVector(-player.posX, -player.posY, -player.posZ);
         return getSideCoords(player, amount, side, pitch).addVector(front.xCoord, front.yCoord, front.zCoord);
     }
 
-    public static Vec3 getSideCoords(EntityPlayer player, double amount, int side) {
+    public static Vec3 getSideCoords(EntityPlayer player, double amount, int side)
+    {
         float f = 1.0F;
         float f1 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * f;
         float f2 = (player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) + side);
@@ -78,11 +89,13 @@ public class NitroParticleHandler {
         return vec3.addVector(f7 * amount, f6 * amount, f8 * amount);
     }
 
-    public static Vec3 getSideCoords(EntityPlayer player, double amount, boolean side, boolean pitch) {
+    public static Vec3 getSideCoords(EntityPlayer player, double amount, boolean side, boolean pitch)
+    {
         float f = 1.0F;
         float f1 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * f;
 
-        if (!pitch) {
+        if (!pitch)
+        {
             f1 = 0;
         }
 
@@ -100,10 +113,12 @@ public class NitroParticleHandler {
         return vec3.addVector(f7 * amount, f6 * amount, f8 * amount);
     }
 
-    public static Vec3 getFrontCoords(EntityPlayer player, double amount, boolean pitch) {
+    public static Vec3 getFrontCoords(EntityPlayer player, double amount, boolean pitch)
+    {
         EntityPlayerSP thePlayer = Minecraft.getMinecraft().thePlayer;
 
-        if (!(thePlayer == player)) {
+        if (!(thePlayer == player))
+        {
             amount -= 0.25F;
         }
 
@@ -111,7 +126,8 @@ public class NitroParticleHandler {
         float f1 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * f;
         float f2 = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * f;
 
-        if (!pitch) {
+        if (!pitch)
+        {
             f1 = 0;
         }
 
@@ -127,7 +143,8 @@ public class NitroParticleHandler {
         float f8 = f3 * f5;
         Vec3 frontCoords = vec3.addVector(f7 * amount, f6 * amount, f8 * amount);
 
-        if (thePlayer != player) {
+        if (thePlayer != player)
+        {
             Transformer transformer = TFHelper.getTransformer(player);
 
             frontCoords = frontCoords.addVector(0F, ((transformer.getCameraYOffset(thePlayer) * 0.8F) + 1) - 0.4F, 0F);
@@ -136,7 +153,8 @@ public class NitroParticleHandler {
         return frontCoords;
     }
 
-    public static Vec3 getFrontCoords(EntityPlayer player, float angle, double amount) {
+    public static Vec3 getFrontCoords(EntityPlayer player, float angle, double amount)
+    {
         float f = 1.0F;
         float f1 = angle * f;
         float f2 = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * f;
@@ -153,7 +171,8 @@ public class NitroParticleHandler {
         return vec3.addVector(f7 * amount, f6 * amount, f8 * amount);
     }
 
-    public static Vec3 getAboveCoords(EntityPlayer player, float angle, double amount) {
+    public static Vec3 getAboveCoords(EntityPlayer player, float angle, double amount)
+    {
         float f = 1.0F;
         float f1 = angle * f;
         float f2 = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * f;
@@ -170,7 +189,8 @@ public class NitroParticleHandler {
         return vec3.addVector(f7 * amount, f6 * amount, f8 * amount);
     }
 
-    public static Vec3 getVerticalCoords(EntityPlayer player, float angle, double amount) {
+    public static Vec3 getVerticalCoords(EntityPlayer player, float angle, double amount)
+    {
         float f = 1.0F;
         float f1 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * f - angle;
         float f2 = angle * f;

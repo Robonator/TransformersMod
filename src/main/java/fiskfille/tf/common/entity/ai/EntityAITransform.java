@@ -10,7 +10,8 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class EntityAITransform extends EntityAIBase {
+public class EntityAITransform extends EntityAIBase
+{
     private EntityTransformer transformer;
     private Class<? extends Entity> enemy;
     private World world;
@@ -19,7 +20,8 @@ public class EntityAITransform extends EntityAIBase {
 
     private int distance;
 
-    public EntityAITransform(EntityTransformer transformer, Class<? extends EntityLivingBase> enemy, int distance) {
+    public EntityAITransform(EntityTransformer transformer, Class<? extends EntityLivingBase> enemy, int distance)
+    {
         this.transformer = transformer;
         this.enemy = enemy;
         this.world = transformer.worldObj;
@@ -27,17 +29,21 @@ public class EntityAITransform extends EntityAIBase {
     }
 
     @Override
-    public boolean shouldExecute() {
+    public boolean shouldExecute()
+    {
         return true;
     }
 
-    private boolean hasEnemy() {
+    private boolean hasEnemy()
+    {
         List entities = world.getEntitiesWithinAABBExcludingEntity(transformer, entityBoundingBox(transformer, distance, distance, distance));
 
         boolean hasEnemy = false;
 
-        for (Object object : entities) {
-            if (enemy.isAssignableFrom(object.getClass()) && object.getClass() != transformer.getClass()) {
+        for (Object object : entities)
+        {
+            if (enemy.isAssignableFrom(object.getClass()) && object.getClass() != transformer.getClass())
+            {
                 hasEnemy = true;
                 closestEnemy = (Entity) object;
                 break;
@@ -47,7 +53,8 @@ public class EntityAITransform extends EntityAIBase {
         return hasEnemy;
     }
 
-    private AxisAlignedBB entityBoundingBox(Entity entity, double x, double y, double z) {
+    private AxisAlignedBB entityBoundingBox(Entity entity, double x, double y, double z)
+    {
         double dX = x / 2;
         double dY = y / 2;
         double dZ = z / 2;
@@ -63,7 +70,8 @@ public class EntityAITransform extends EntityAIBase {
      * Returns whether an in-progress EntityAIBase should continue executing
      */
     @Override
-    public boolean continueExecuting() {
+    public boolean continueExecuting()
+    {
         return transformer.isEntityAlive();
     }
 
@@ -71,14 +79,16 @@ public class EntityAITransform extends EntityAIBase {
      * Execute a one shot task or start executing a continuous task
      */
     @Override
-    public void startExecuting() {
+    public void startExecuting()
+    {
     }
 
     /**
      * Resets the task
      */
     @Override
-    public void resetTask() {
+    public void resetTask()
+    {
         this.closestEnemy = null;
     }
 
@@ -86,10 +96,12 @@ public class EntityAITransform extends EntityAIBase {
      * Updates the task
      */
     @Override
-    public void updateTask() {
+    public void updateTask()
+    {
         boolean hasEnemy = hasEnemy();
 
-        if (hasEnemy != transformer.isTransformed()) {
+        if (hasEnemy != transformer.isTransformed())
+        {
             String end = hasEnemy ? "vehicle" : "robot";
             world.playSoundAtEntity(transformer, TransformersMod.modid + ":transform_" + end, 1.0F, 1.0F);
         }

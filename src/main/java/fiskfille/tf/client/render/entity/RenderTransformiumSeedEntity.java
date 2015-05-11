@@ -9,16 +9,19 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class RenderTransformiumSeedEntity extends Render {
+public class RenderTransformiumSeedEntity extends Render
+{
     private ModelTransformiumSeed model;
 
-    public RenderTransformiumSeedEntity() {
+    public RenderTransformiumSeedEntity()
+    {
         super(Minecraft.getMinecraft().getRenderManager());
         model = new ModelTransformiumSeed();
         shadowSize = 0.5F;
     }
 
-    public void doRender(EntityTransformiumSeed seed, double x, double y, double z, float rotationYaw, float p_76986_9_) {
+    public void doRender(EntityTransformiumSeed seed, double x, double y, double z, float rotationYaw, float p_76986_9_)
+    {
         this.bindTexture(getEntityTexture(seed));
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x, (float) y, (float) z);
@@ -28,11 +31,13 @@ public class RenderTransformiumSeedEntity extends Render {
         GL11.glPopMatrix();
     }
 
-    protected ResourceLocation getEntityTexture(Entity entity) {
+    protected ResourceLocation getEntityTexture(Entity entity)
+    {
         return new ResourceLocation(TransformersMod.modid + ":textures/models/tiles/transformium_seed.png");
     }
 
-    public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_) {
+    public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
+    {
         this.doRender((EntityTransformiumSeed) p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 }

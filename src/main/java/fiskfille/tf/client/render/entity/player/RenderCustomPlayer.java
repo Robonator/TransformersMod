@@ -7,8 +7,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderCustomPlayer extends RenderPlayer {
-    public RenderCustomPlayer() {
+public class RenderCustomPlayer extends RenderPlayer
+{
+    public RenderCustomPlayer()
+    {
         super(Minecraft.getMinecraft().getRenderManager());
         this.mainModel = new ModelBipedTF();
     }

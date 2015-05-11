@@ -18,33 +18,40 @@ import java.util.Random;
 /**
  * @author gegy1000
  */
-public abstract class TransformerJet extends Transformer {
-    public TransformerJet(String name) {
+public abstract class TransformerJet extends Transformer
+{
+    public TransformerJet(String name)
+    {
         super(name);
     }
 
     @Override
-    public float fall(EntityPlayer player, float distance) {
+    public float fall(EntityPlayer player, float distance)
+    {
         return 0;
     }
 
     @Override
-    public float getCameraYOffset(EntityPlayer player) {
+    public float getCameraYOffset(EntityPlayer player)
+    {
         return 0;
     }
 
     @Override
-    public float getVehicleCameraYOffset(EntityPlayer player) {
+    public float getVehicleCameraYOffset(EntityPlayer player)
+    {
         return 0;
     }
 
     @Override
-    public float getThirdPersonDistance(EntityPlayer player) {
+    public float getThirdPersonDistance(EntityPlayer player)
+    {
         return 4.0F;
     }
 
     @Override
-    public void updateMovement(EntityPlayer player) {
+    public void updateMovement(EntityPlayer player)
+    {
         //    	TFMotionManager.motion(player, true, 100, 140, 0, -10, false, false, false, false);
         //    	player.motionY -= 0.1D;
         //    	
@@ -107,29 +114,35 @@ public abstract class TransformerJet extends Transformer {
     }
 
     @Override
-    public boolean canShoot(EntityPlayer player) {
+    public boolean canShoot(EntityPlayer player)
+    {
         return true;
     }
 
     @Override
-    public Item getShootItem() {
+    public Item getShootItem()
+    {
         return TFItems.missile;
     }
 
     @Override
-    public Entity getShootEntity(EntityPlayer player) {
+    public Entity getShootEntity(EntityPlayer player)
+    {
         //        EntityMissile entityMissile = new EntityMissile(player.worldObj, player, 3, TFConfig.allowMissileExplosions, TFDataManager.isInStealthMode(player));
         EntityMissile entityMissile = new EntityMissile(player.worldObj, player, TFConfig.allowMissileExplosions, TFDataManager.isInStealthMode(player));
         return entityMissile;
     }
 
     @Override
-    public void doNitroParticles(EntityPlayer player) {
-        for (int i = 0; i < 4; ++i) {
+    public void doNitroParticles(EntityPlayer player)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
             Vec3 side = NitroParticleHandler.getBackSideCoords(player, 0.2F, i < 2, -1.5, true);
             Random rand = new Random();
 
-            if (player != Minecraft.getMinecraft().thePlayer) {
+            if (player != Minecraft.getMinecraft().thePlayer)
+            {
                 side.addVector(0f, 0.8f, 0.8f);
             }
 

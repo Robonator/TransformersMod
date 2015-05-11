@@ -6,7 +6,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelBassBlaster extends ModelBase {
+public class ModelBassBlaster extends ModelBase
+{
     public ModelRenderer weaponbase;
     public ModelRenderer wepbody1;
     public ModelRenderer wepbody2;
@@ -24,7 +25,8 @@ public class ModelBassBlaster extends ModelBase {
     public ModelRenderer lowerflap2;
     public ModelRenderer upperflap2;
 
-    public ModelBassBlaster() {
+    public ModelBassBlaster()
+    {
         this.textureWidth = 64;
         this.textureHeight = 64;
         this.upperflap2 = new ModelRenderer(this, 0, 24);
@@ -103,12 +105,14 @@ public class ModelBassBlaster extends ModelBase {
         this.weaponbase.addChild(this.wepbody6);
     }
 
-    public void render() {
+    public void render()
+    {
         float f5 = 0.0625f;
         this.weaponbase.render(f5);
     }
 
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
+    {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

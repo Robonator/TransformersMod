@@ -7,11 +7,13 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class TFNetworkManager {
+public class TFNetworkManager
+{
     public static SimpleNetworkWrapper networkWrapper;
     private static int packetId = 0;
 
-    public static void registerPackets() {
+    public static void registerPackets()
+    {
         networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("transformersMod");
 
         registerPacket(MessageHandleTransformation.Handler.class, MessageHandleTransformation.class);
@@ -25,7 +27,8 @@ public class TFNetworkManager {
         registerPacket(MessageSendFlying.Handler.class, MessageSendFlying.class);
     }
 
-    private static <REQ extends IMessage, REPLY extends IMessage> void registerPacket(Class<? extends IMessageHandler<REQ, REPLY>> messageHandler, Class<REQ> requestMessageType) {
+    private static <REQ extends IMessage, REPLY extends IMessage> void registerPacket(Class<? extends IMessageHandler<REQ, REPLY>> messageHandler, Class<REQ> requestMessageType)
+    {
         networkWrapper.registerMessage(messageHandler, requestMessageType, packetId++, Side.CLIENT);
         networkWrapper.registerMessage(messageHandler, requestMessageType, packetId++, Side.SERVER);
     }

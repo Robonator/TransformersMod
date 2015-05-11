@@ -6,7 +6,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelPurgesKatana extends ModelBase {
+public class ModelPurgesKatana extends ModelBase
+{
     ModelRenderer handle;
     ModelRenderer blade;
     ModelRenderer frontTip;
@@ -18,7 +19,8 @@ public class ModelPurgesKatana extends ModelBase {
     ModelRenderer wheel5;
     ModelRenderer wheel6;
 
-    public ModelPurgesKatana() {
+    public ModelPurgesKatana()
+    {
         textureWidth = 16;
         textureHeight = 32;
 
@@ -84,14 +86,16 @@ public class ModelPurgesKatana extends ModelBase {
         setRotation(wheel6, 0F, 1.570796F, 0F);
     }
 
-    public void render(float f5) {
+    public void render(float f5)
+    {
         handle.render(f5);
         blade.render(f5);
         frontTip.render(f5);
         backTip.render(f5);
     }
 
-    public void renderWheels(float f5) {
+    public void renderWheels(float f5)
+    {
         wheel1.render(f5);
         wheel2.render(f5);
         wheel3.render(f5);
@@ -100,7 +104,8 @@ public class ModelPurgesKatana extends ModelBase {
         wheel6.render(f5);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z) {
+    private void setRotation(ModelRenderer model, float x, float y, float z)
+    {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

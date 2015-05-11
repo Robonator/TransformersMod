@@ -42,7 +42,8 @@ public class TFMotionManager //TODO-TF Clean this up
      * @param canMoveSideways     If the vehicle can move to the left or to the right
      * @param faceForward         If the vehicle should face forward or not. Used by tanks to make the head and body rotations different.
      */
-    public static void motion(EntityPlayer player, double speedLimit, double nitroSpeedLimit, double sidewaysSpeedLimit, double reversingSpeedLimit, boolean canDrift, boolean canDriveOffroad, boolean canMoveSideways, boolean faceForward) {
+    public static void motion(EntityPlayer player, double speedLimit, double nitroSpeedLimit, double sidewaysSpeedLimit, double reversingSpeedLimit, boolean canDrift, boolean canDriveOffroad, boolean canMoveSideways, boolean faceForward)
+    {
         Minecraft mc = Minecraft.getMinecraft();
         Random rand = new Random();
 
@@ -64,100 +65,141 @@ public class TFMotionManager //TODO-TF Clean this up
 
         VehicleMotion transformedPlayer = TFMotionManager.getTransformerPlayer(player);
 
-        if (transformedPlayer != null) {
+        if (transformedPlayer != null)
+        {
             nitro = transformedPlayer.getNitro();
             forwardVelocity = transformedPlayer.getForwardVelocity();
             horizontalVelocity = transformedPlayer.getHorizontalVelocity();
             currentSpeedLimit = canMoveSideways ? sidewaysSpeedLimit : (nitroPressed && nitro > 0 ? nitroSpeedLimit : speedLimit);
 
-            if (moveForward) {
-                if (forwardVelocity < currentSpeedLimit) {
+            if (moveForward)
+            {
+                if (forwardVelocity < currentSpeedLimit)
+                {
                     forwardVelocity += inStealthMode ? 1 : ((currentSpeedLimit - forwardVelocity) / 20);
                 }
-            } else if (!moveBack && forwardVelocity > 0) {
+            }
+            else if (!moveBack && forwardVelocity > 0)
+            {
                 forwardVelocity -= 1;
             }
 
-            if (moveBack) {
-                if (forwardVelocity > -reversingSpeedLimit) {
+            if (moveBack)
+            {
+                if (forwardVelocity > -reversingSpeedLimit)
+                {
                     forwardVelocity -= 2;
                 }
-            } else if (!moveForward && forwardVelocity < 0) {
+            }
+            else if (!moveForward && forwardVelocity < 0)
+            {
                 forwardVelocity += 1;
             }
 
-            if (canMoveSideways) {
-                if (moveRight) {
-                    if (horizontalVelocity < sidewaysSpeedLimit) {
+            if (canMoveSideways)
+            {
+                if (moveRight)
+                {
+                    if (horizontalVelocity < sidewaysSpeedLimit)
+                    {
                         horizontalVelocity += 1;
                     }
-                } else if (horizontalVelocity > 0) {
+                }
+                else if (horizontalVelocity > 0)
+                {
                     horizontalVelocity -= 1;
                 }
 
-                if (moveLeft) {
-                    if (horizontalVelocity > -sidewaysSpeedLimit) {
+                if (moveLeft)
+                {
+                    if (horizontalVelocity > -sidewaysSpeedLimit)
+                    {
                         horizontalVelocity -= 1;
                     }
-                } else if (horizontalVelocity < 0) {
+                }
+                else if (horizontalVelocity < 0)
+                {
                     horizontalVelocity += 1;
                 }
             }
 
-            if (!canMoveSideways) {
-                if (horizontalVelocity > 0) {
+            if (!canMoveSideways)
+            {
+                if (horizontalVelocity > 0)
+                {
                     horizontalVelocity -= 2;
-                } else if (horizontalVelocity < 0) {
+                }
+                else if (horizontalVelocity < 0)
+                {
                     horizontalVelocity += 2;
                 }
 
-                if (horizontalVelocity >= -1 || horizontalVelocity <= 1) {
+                if (horizontalVelocity >= -1 || horizontalVelocity <= 1)
+                {
                     horizontalVelocity = 0;
                 }
             }
-            if (horizontalVelocity != (int) horizontalVelocity) {
+            if (horizontalVelocity != (int) horizontalVelocity)
+            {
                 horizontalVelocity = (int) horizontalVelocity;
-            } else if (horizontalVelocity > sidewaysSpeedLimit) {
+            }
+            else if (horizontalVelocity > sidewaysSpeedLimit)
+            {
                 horizontalVelocity = sidewaysSpeedLimit;
-            } else if (horizontalVelocity < -sidewaysSpeedLimit) {
+            }
+            else if (horizontalVelocity < -sidewaysSpeedLimit)
+            {
                 horizontalVelocity = -sidewaysSpeedLimit;
             }
-            if (forwardVelocity < 1 && forwardVelocity > -1) {
+            if (forwardVelocity < 1 && forwardVelocity > -1)
+            {
                 forwardVelocity = 0.0D;
-            } else if (forwardVelocity < -reversingSpeedLimit) {
+            }
+            else if (forwardVelocity < -reversingSpeedLimit)
+            {
                 forwardVelocity = -reversingSpeedLimit;
-            } else if (forwardVelocity >= currentSpeedLimit) {
+            }
+            else if (forwardVelocity >= currentSpeedLimit)
+            {
                 forwardVelocity -= 1;
             }
 
-            if (!canDriveOffroad) {
+            if (!canDriveOffroad)
+            {
                 Material[] offroadMaterials = {cactus, cake, clay, coral, craftedSnow, gourd, ground, ice, leaves, packedIce, plants, sand, snow, sponge, vine, web};
                 Block block = player.worldObj.getBlockState(new BlockPos((int) player.posX, (int) player.posY - 2, (int) player.posZ - 1)).getBlock();
                 boolean isDrivingOffroad = false;
 
-                for (Material mat : offroadMaterials) {
-                    if (block.getMaterial().equals(mat)) {
+                for (Material mat : offroadMaterials)
+                {
+                    if (block.getMaterial().equals(mat))
+                    {
                         isDrivingOffroad = true;
                     }
                 }
 
-                if (isDrivingOffroad && (forwardVelocity > 5 || forwardVelocity < -5 || horizontalVelocity > 5 || horizontalVelocity < -5)) {
+                if (isDrivingOffroad && (forwardVelocity > 5 || forwardVelocity < -5 || horizontalVelocity > 5 || horizontalVelocity < -5))
+                {
                     double multiplier = (double) (forwardVelocity) / 20;
                     drift(player, forwardVelocity, (rand.nextDouble() - 0.5D) * multiplier, false);
                     forwardVelocity *= 0.95D;
                 }
             }
 
-            if (canDrift && driftPressed && player.onGround && forwardVelocity > 10 && !inStealthMode) {
+            if (canDrift && driftPressed && player.onGround && forwardVelocity > 10 && !inStealthMode)
+            {
                 ModelBipedTF modelBipedMain = (ModelBipedTF) TFModelHelper.modelBipedMain;
                 float f = modelBipedMain.bipedHead.rotateAngleY - (modelBipedMain.bipedBody.rotateAngleY - modelBipedMain.bipedHead.rotateAngleY);
 
                 drift(player, forwardVelocity, f, true);
                 forwardVelocity -= 3;
-            } else {
+            }
+            else
+            {
                 TFMotionManager.moveWithVelocity(player, forwardVelocity, horizontalVelocity);
 
-                if (faceForward || forwardVelocity < 0) {
+                if (faceForward || forwardVelocity < 0)
+                {
                     player.renderYawOffset = player.rotationYawHead; // Makes sure the vehicle always faces forward, even when reversing.
                 }
             }
@@ -175,7 +217,8 @@ public class TFMotionManager //TODO-TF Clean this up
      * @param nitroSpeedLimit  How many km/h the jet can go while using nitro
      * @param idlingSpeedLimit How many km/h the jet goes while idling
      */
-    public static void motionJet(EntityPlayer player, double speedLimit, double nitroSpeedLimit, double idlingSpeedLimit) {
+    public static void motionJet(EntityPlayer player, double speedLimit, double nitroSpeedLimit, double idlingSpeedLimit)
+    {
         Minecraft mc = Minecraft.getMinecraft();
         Random rand = new Random();
 
@@ -190,26 +233,35 @@ public class TFMotionManager //TODO-TF Clean this up
 
         VehicleMotion transformedPlayer = TFMotionManager.getTransformerPlayer(player);
 
-        if (transformedPlayer != null) {
+        if (transformedPlayer != null)
+        {
             nitro = transformedPlayer.getNitro();
             forwardVelocity = transformedPlayer.getForwardVelocity();
             currentSpeedLimit = nitroPressed && nitro > 0 ? nitroSpeedLimit : speedLimit;
 
-            if (moveForward) {
-                if (forwardVelocity < currentSpeedLimit) {
+            if (moveForward)
+            {
+                if (forwardVelocity < currentSpeedLimit)
+                {
                     forwardVelocity += (currentSpeedLimit - forwardVelocity) / 10;
                 }
-            } else if (forwardVelocity > 0) {
+            }
+            else if (forwardVelocity > 0)
+            {
                 forwardVelocity -= 1;
             }
 
-            if (forwardVelocity >= currentSpeedLimit) {
+            if (forwardVelocity >= currentSpeedLimit)
+            {
                 forwardVelocity -= 1;
-            } else if (forwardVelocity < idlingSpeedLimit) {
+            }
+            else if (forwardVelocity < idlingSpeedLimit)
+            {
                 forwardVelocity = idlingSpeedLimit;
             }
 
-            if ((player.worldObj.getBlockState(new BlockPos((int) player.posX, (int) player.posY - 1, (int) player.posZ)).getBlock() != Blocks.air || player.worldObj.getBlockState(new BlockPos((int) player.posX, (int) player.posY - 2, (int) player.posZ)).getBlock() != Blocks.air || player.worldObj.getBlockState(new BlockPos((int) player.posX, (int) player.posY - 3, (int) player.posZ)).getBlock() != Blocks.air)) {
+            if ((player.worldObj.getBlockState(new BlockPos((int) player.posX, (int) player.posY - 1, (int) player.posZ)).getBlock() != Blocks.air || player.worldObj.getBlockState(new BlockPos((int) player.posX, (int) player.posY - 2, (int) player.posZ)).getBlock() != Blocks.air || player.worldObj.getBlockState(new BlockPos((int) player.posX, (int) player.posY - 3, (int) player.posZ)).getBlock() != Blocks.air))
+            {
                 player.setPosition(player.posX, player.posY + 0.8, player.posZ);
             }
 
@@ -220,25 +272,31 @@ public class TFMotionManager //TODO-TF Clean this up
         }
     }
 
-    public static void drift(EntityPlayer player, double forwardVelocity, double driftAmount, boolean tireParticles) {
+    public static void drift(EntityPlayer player, double forwardVelocity, double driftAmount, boolean tireParticles)
+    {
         TFMotionManager.moveWithVelocity(player, forwardVelocity, -driftAmount * 10);
 
-        if (tireParticles) {
-            for (int i = 0; i < 10; ++i) {
+        if (tireParticles)
+        {
+            for (int i = 0; i < 10; ++i)
+            {
                 Vec3 side = NitroParticleHandler.getBackSideCoords(player, 0.15F, i <= 5, -0.5F, false);
                 player.worldObj.spawnParticle(EnumParticleTypes.REDSTONE, side.xCoord, player.posY - 1.5F, side.zCoord, -1, 0, 0);
             }
         }
 
-        if (driftAmount > 0.2F) {
+        if (driftAmount > 0.2F)
+        {
             player.rotationYaw += driftAmount * 2;
         }
-        if (driftAmount < -0.2F) {
+        if (driftAmount < -0.2F)
+        {
             player.rotationYaw -= -driftAmount * 2;
         }
     }
 
-    public static void moveWithVelocity(EntityPlayer player, double forwardVel, double horizontalVel) {
+    public static void moveWithVelocity(EntityPlayer player, double forwardVel, double horizontalVel)
+    {
         double d = forwardVel / 100 * 1.3898888673066752967899576429878D;
         double d1 = horizontalVel / 100 * 1.3898888673066752967899576429878D;
         Vec3 frontCoords = TFMotionManager.getBackSideCoords(player, d1, false, d, false);
@@ -246,24 +304,28 @@ public class TFMotionManager //TODO-TF Clean this up
         player.motionZ = (frontCoords.zCoord - player.posZ);
     }
 
-    public static void moveForward(EntityPlayer player, double vel, boolean pitch) {
+    public static void moveForward(EntityPlayer player, double vel, boolean pitch)
+    {
         double d = vel / 100 * 1.3898888673066752967899576429878D;
         Vec3 frontCoords = TFMotionManager.getFrontCoords(player, d, pitch);
         player.motionX = (frontCoords.xCoord - player.posX);
 
-        if (pitch) {
+        if (pitch)
+        {
             player.motionY = (frontCoords.yCoord - player.posY);
         }
 
         player.motionZ = (frontCoords.zCoord - player.posZ);
     }
 
-    public static Vec3 getBackSideCoords(EntityPlayer player, double amount, boolean side, double backAmount, boolean pitch) {
+    public static Vec3 getBackSideCoords(EntityPlayer player, double amount, boolean side, double backAmount, boolean pitch)
+    {
         Vec3 front = getFrontCoords(player, backAmount, pitch).addVector(-player.posX, -player.posY, -player.posZ);
         return getSideCoords(player, amount, side).addVector(front.xCoord, front.yCoord, front.zCoord);
     }
 
-    public static Vec3 getSideCoords(EntityPlayer player, double amount, int side) {
+    public static Vec3 getSideCoords(EntityPlayer player, double amount, int side)
+    {
         float f = 1.0F;
         float f1 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * f;
         float f2 = (player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) + side);
@@ -280,7 +342,8 @@ public class TFMotionManager //TODO-TF Clean this up
         return vec3.addVector(f7 * amount, f6 * amount, f8 * amount);
     }
 
-    public static Vec3 getSideCoords(EntityPlayer player, double amount, boolean side) {
+    public static Vec3 getSideCoords(EntityPlayer player, double amount, boolean side)
+    {
         float f = 1.0F;
         float f1 = 0;
         float f2 = (player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) + (side ? -90 : 90));
@@ -297,12 +360,14 @@ public class TFMotionManager //TODO-TF Clean this up
         return vec3.addVector(f7 * amount, f6 * amount, f8 * amount);
     }
 
-    public static Vec3 getFrontCoords(EntityPlayer player, double amount, boolean pitch) {
+    public static Vec3 getFrontCoords(EntityPlayer player, double amount, boolean pitch)
+    {
         float f = 1.0F;
         float f1 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * f;
         float f2 = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * f;
 
-        if (!pitch) {
+        if (!pitch)
+        {
             f1 = 0;
         }
 
@@ -319,7 +384,8 @@ public class TFMotionManager //TODO-TF Clean this up
         return vec3.addVector(f7 * amount, f6 * amount, f8 * amount);
     }
 
-    public static Vec3 getFrontCoords(EntityPlayer player, float angle, double amount) {
+    public static Vec3 getFrontCoords(EntityPlayer player, float angle, double amount)
+    {
         float f = 1.0F;
         float f1 = angle * f;
         float f2 = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * f;
@@ -336,7 +402,8 @@ public class TFMotionManager //TODO-TF Clean this up
         return vec3.addVector(f7 * amount, f6 * amount, f8 * amount);
     }
 
-    public static Vec3 getAboveCoords(EntityPlayer player, float angle, double amount) {
+    public static Vec3 getAboveCoords(EntityPlayer player, float angle, double amount)
+    {
         float f = 1.0F;
         float f1 = angle * f;
         float f2 = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * f;
@@ -353,7 +420,8 @@ public class TFMotionManager //TODO-TF Clean this up
         return vec3.addVector(f7 * amount, f6 * amount, f8 * amount);
     }
 
-    public static Vec3 getVerticalCoords(EntityPlayer player, float angle, double amount) {
+    public static Vec3 getVerticalCoords(EntityPlayer player, float angle, double amount)
+    {
         float f = 1.0F;
         float f1 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * f - angle;
         float f2 = angle * f;
@@ -370,40 +438,54 @@ public class TFMotionManager //TODO-TF Clean this up
         return vec3.addVector(f7 * amount, f6 * amount, f8 * amount);
     }
 
-    public static void setForwardVelocity(EntityPlayer player, double vel) {
+    public static void setForwardVelocity(EntityPlayer player, double vel)
+    {
         VehicleMotion transformedPlayer = transformedPlayerMap.get(player);
 
-        if (transformedPlayer != null) {
+        if (transformedPlayer != null)
+        {
             transformedPlayer.setForwardVelocity(vel);
-        } else {
+        }
+        else
+        {
             transformedPlayerMap.put(player, new VehicleMotion().setHorizontalVelocity(vel));
         }
     }
 
-    public static void setNitro(EntityPlayer player, int nitro) {
+    public static void setNitro(EntityPlayer player, int nitro)
+    {
         VehicleMotion transformedPlayer = transformedPlayerMap.get(player);
 
-        if (transformedPlayer != null) {
+        if (transformedPlayer != null)
+        {
             transformedPlayer.setNitro(nitro);
-        } else {
+        }
+        else
+        {
             transformedPlayerMap.put(player, new VehicleMotion().setNitro(nitro));
         }
     }
 
-    public static void setHorizontalVelocity(EntityPlayer player, double vel) {
+    public static void setHorizontalVelocity(EntityPlayer player, double vel)
+    {
         VehicleMotion transformedPlayer = transformedPlayerMap.get(player);
 
-        if (transformedPlayer != null) {
+        if (transformedPlayer != null)
+        {
             transformedPlayer.setHorizontalVelocity(vel);
-        } else {
+        }
+        else
+        {
             transformedPlayerMap.put(player, new VehicleMotion().setHorizontalVelocity(vel));
         }
     }
 
-    public static VehicleMotion getTransformerPlayer(EntityPlayer player) {
+    public static VehicleMotion getTransformerPlayer(EntityPlayer player)
+    {
         VehicleMotion vehicleMotion = transformedPlayerMap.get(player);
 
-        if (vehicleMotion == null) {
+        if (vehicleMotion == null)
+        {
             vehicleMotion = new VehicleMotion();
             transformedPlayerMap.put(player, vehicleMotion);
         }

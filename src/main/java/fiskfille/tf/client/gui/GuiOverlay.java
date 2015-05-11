@@ -28,25 +28,30 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
-public class GuiOverlay extends Gui {
+public class GuiOverlay extends Gui
+{
     public static final ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/gui/mod_icons.png");
     public static double speed;
     private Minecraft mc;
 
-    public GuiOverlay(Minecraft mc) {
+    public GuiOverlay(Minecraft mc)
+    {
         super();
         this.mc = mc;
     }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
-    public void onRender(RenderGameOverlayEvent.Pre event) {
-        if (!event.isCanceled()) {
+    public void onRender(RenderGameOverlayEvent.Pre event)
+    {
+        if (!event.isCanceled())
+        {
             int width = event.resolution.getScaledWidth();
             int height = event.resolution.getScaledHeight();
             EntityPlayer player = mc.thePlayer;
 
-            if (event.type == ElementType.HOTBAR) {
+            if (event.type == ElementType.HOTBAR)
+            {
                 renderNitroAndSpeed(event, width, height, player);
                 renderKatanaDash(event, width, height, player);
                 renderShotsLeft(event, width, height, player);
@@ -56,14 +61,16 @@ public class GuiOverlay extends Gui {
         }
     }
 
-    public void renderLaserCharge(RenderGameOverlayEvent.Pre event, int width, int height, EntityPlayer player) {
+    public void renderLaserCharge(RenderGameOverlayEvent.Pre event, int width, int height, EntityPlayer player)
+    {
         ItemStack heldItem = player.getHeldItem();
 
         Transformer transformer = TFHelper.getTransformer(player);
 
         boolean hasSniper = heldItem != null && heldItem.getItem() instanceof ItemVurpsSniper && TFDataManager.getTransformationTimer(player) == 20;
 
-        if (transformer instanceof TransformerVurp && (hasSniper || transformer.canShoot(player))) {
+        if (transformer instanceof TransformerVurp && (hasSniper || transformer.canShoot(player)))
+        {
             int stealthModeTimer = TFDataManager.getStealthModeTimer(player);
 
             GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -73,22 +80,27 @@ public class GuiOverlay extends Gui {
 
             int x = ((5 - stealthModeTimer) * 20) - 94;
 
-            if (hasSniper) {
+            if (hasSniper)
+            {
                 x = 6;
             }
 
             int y = 3;
 
-            if (!hasSniper) {
+            if (!hasSniper)
+            {
                 y = 30;
             }
 
             //Charge Outline
             drawTexturedModalRect(x - 1, y, 0, 0, 102, 12);
 
-            if (hasSniper) {
+            if (hasSniper)
+            {
                 GL11.glColor4f(0.0F, 1.0F, 1.0F, 0.5F);
-            } else {
+            }
+            else
+            {
                 GL11.glColor4f(1F, 0F, 0F, 0.5F);
             }
 
@@ -101,16 +113,19 @@ public class GuiOverlay extends Gui {
         }
     }
 
-    public void renderNitroAndSpeed(RenderGameOverlayEvent.Pre event, int width, int height, EntityPlayer player) {
+    public void renderNitroAndSpeed(RenderGameOverlayEvent.Pre event, int width, int height, EntityPlayer player)
+    {
         VehicleMotion transformedPlayer = TFMotionManager.getTransformerPlayer(player);
 
         int transformationTimer = TFDataManager.getTransformationTimer(player);
 
-        if (transformedPlayer != null && transformationTimer <= 20) {
+        if (transformedPlayer != null && transformationTimer <= 20)
+        {
             int nitro = transformedPlayer.getNitro();
 
             int i = transformationTimer * 10;
-            if (transformationTimer <= 19) {
+            if (transformationTimer <= 19)
+            {
                 GL11.glDisable(GL11.GL_TEXTURE_2D);
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -134,20 +149,26 @@ public class GuiOverlay extends Gui {
         }
     }
 
-    public void renderShotsLeft(RenderGameOverlayEvent.Pre event, int width, int height, EntityPlayer player) {
+    public void renderShotsLeft(RenderGameOverlayEvent.Pre event, int width, int height, EntityPlayer player)
+    {
         Transformer transformer = TFHelper.getTransformer(player);
 
-        if (transformer != null && !(transformer instanceof TransformerVurp)) {
+        if (transformer != null && !(transformer instanceof TransformerVurp))
+        {
             int transformationTimer = TFDataManager.getTransformationTimer(player);
 
             int stealthModeTimer = TFDataManager.getStealthModeTimer(player);
 
-            if (transformationTimer <= 20 && (transformer.canShoot(player))) {
+            if (transformationTimer <= 20 && (transformer.canShoot(player)))
+            {
                 int transformationOffsetX = 0;
 
-                if (transformer.hasStealthForce(player) && stealthModeTimer <= 5) {
+                if (transformer.hasStealthForce(player) && stealthModeTimer <= 5)
+                {
                     transformationOffsetX = stealthModeTimer * 25;
-                } else {
+                }
+                else
+                {
                     transformationOffsetX = (int) (transformationTimer * 7.5F);
                 }
 
@@ -159,7 +180,8 @@ public class GuiOverlay extends Gui {
 
                 String shotsLeft = "" + TFShootManager.shotsLeft;
 
-                if (TFShootManager.shotsLeft <= 0) {
+                if (TFShootManager.shotsLeft <= 0)
+                {
                     shotsLeft = EnumChatFormatting.RED + shotsLeft;
                 }
 
@@ -177,18 +199,23 @@ public class GuiOverlay extends Gui {
 
                 GL11.glEnable(GL11.GL_TEXTURE_2D);
             }
-        } else if (transformer instanceof TransformerVurp) {
+        }
+        else if (transformer instanceof TransformerVurp)
+        {
             ItemStack heldItem = player.getHeldItem();
 
-            if (heldItem != null) {
+            if (heldItem != null)
+            {
                 int transformationTimer = TFDataManager.getTransformationTimer(player);
 
-                if (transformationTimer == 20 && (heldItem.getItem() == TFItems.vurpsSniper && TFHelper.isPlayerVurp(player))) {
+                if (transformationTimer == 20 && (heldItem.getItem() == TFItems.vurpsSniper && TFHelper.isPlayerVurp(player)))
+                {
                     GL11.glEnable(GL11.GL_BLEND);
                     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
                     GL11.glColor4f(0F, 0F, 0F, 0.15F);
 
-                    if (this.mc.gameSettings.thirdPersonView == 0 && heldItem != null && heldItem.getItem() == TFItems.vurpsSniper && TFDataManager.getZoomTimer(player) > 7) {
+                    if (this.mc.gameSettings.thirdPersonView == 0 && heldItem != null && heldItem.getItem() == TFItems.vurpsSniper && TFDataManager.getZoomTimer(player) > 7)
+                    {
                         GL11.glDisable(GL11.GL_DEPTH_TEST);
                         GL11.glDepthMask(false);
                         OpenGlHelper.glBlendFunc(770, 771, 1, 0);
@@ -212,13 +239,16 @@ public class GuiOverlay extends Gui {
         }
     }
 
-    public void renderKatanaDash(RenderGameOverlayEvent.Pre event, int width, int height, EntityPlayer player) {
-        if (player.getHeldItem() != null && player.getHeldItem().getItem() == TFItems.purgesKatana && !TFDataManager.isInVehicleMode(player) && TFHelper.isPlayerPurge(player)) {
+    public void renderKatanaDash(RenderGameOverlayEvent.Pre event, int width, int height, EntityPlayer player)
+    {
+        if (player.getHeldItem() != null && player.getHeldItem().getItem() == TFItems.purgesKatana && !TFDataManager.isInVehicleMode(player) && TFHelper.isPlayerPurge(player))
+        {
             int x = width / 2 - 26;
             int j = TFItems.purgesKatana.getMaxItemUseDuration(player.getHeldItem()) - player.getItemInUseCount();
             double d = (double) j / 10;
 
-            if (d > 2.0D) {
+            if (d > 2.0D)
+            {
                 d = 2.0D;
             }
 
@@ -242,7 +272,8 @@ public class GuiOverlay extends Gui {
         }
     }
 
-    public void renderCrossbowAmmo(RenderGameOverlayEvent.Pre event, int width, int height, EntityPlayer player) {
+    public void renderCrossbowAmmo(RenderGameOverlayEvent.Pre event, int width, int height, EntityPlayer player)
+    {
 
     }
 }

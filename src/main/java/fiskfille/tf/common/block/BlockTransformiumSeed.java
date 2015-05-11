@@ -17,8 +17,10 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockTransformiumSeed extends BlockBasic implements ITileEntityProvider {
-    public BlockTransformiumSeed() {
+public class BlockTransformiumSeed extends BlockBasic implements ITileEntityProvider
+{
+    public BlockTransformiumSeed()
+    {
         super(Material.circuits);
         this.setResistance(-1f);
     }
@@ -39,44 +41,53 @@ public class BlockTransformiumSeed extends BlockBasic implements ITileEntityProv
         }
     }*/
 
-    public int quantityDropped(Random p_149745_1_) {
+    public int quantityDropped(Random p_149745_1_)
+    {
         return 1;
     }
 
-    public void ignite(World world, int x, int y, int z, EntityLivingBase entity) {
-        if (!world.isRemote) {
+    public void ignite(World world, int x, int y, int z, EntityLivingBase entity)
+    {
+        if (!world.isRemote)
+        {
             EntityTransformiumSeed seed = new EntityTransformiumSeed(world, (double) ((float) x + 0.5F), (double) ((float) y + 0.5F), (double) ((float) z + 0.5F), entity);
             world.spawnEntityInWorld(seed);
             world.playSoundAtEntity(seed, "note.pling", 1.0F, 0.5F);
         }
 
-        if (entity instanceof EntityPlayer) {
+        if (entity instanceof EntityPlayer)
+        {
             ((EntityPlayer) entity).addStat(TFAchievements.detonateSeed, 1);
         }
     }
 
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
+    {
         this.ignite(world, pos.getX(), pos.getY(), pos.getZ(), player);
         world.setBlockToAir(pos);
         return true;
     }
 
-    public MovingObjectPosition collisionRayTrace(World world, BlockPos pos, Vec3 start, Vec3 end) {
+    public MovingObjectPosition collisionRayTrace(World world, BlockPos pos, Vec3 start, Vec3 end)
+    {
         float f = 0.2F;
         this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 1.0F, 0.5F + f);
 
         return super.collisionRayTrace(world, pos, start, end);
     }
 
-    public int getRenderType() {
+    public int getRenderType()
+    {
         return -1;
     }
 
-    public boolean isOpaqueCube() {
+    public boolean isOpaqueCube()
+    {
         return false;
     }
 
-    public TileEntity createNewTileEntity(World world, int metadata) {
+    public TileEntity createNewTileEntity(World world, int metadata)
+    {
         return new TileEntityTransformiumSeed();
     }
 }

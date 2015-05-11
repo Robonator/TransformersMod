@@ -7,7 +7,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelVurpsSniper extends ModelBase {
+public class ModelVurpsSniper extends ModelBase
+{
     public ModelRenderer middlePiece;
     public ModelRenderer handle;
     public ModelRenderer backPiece1;
@@ -26,7 +27,8 @@ public class ModelVurpsSniper extends ModelBase {
     public ModelRenderer scopeholdB;
     public ModelRenderer ammo;
 
-    public ModelVurpsSniper() {
+    public ModelVurpsSniper()
+    {
         this.textureWidth = 64;
         this.textureHeight = 32;
         this.backPiece2 = new ModelRenderer(this, 11, 0);
@@ -92,7 +94,8 @@ public class ModelVurpsSniper extends ModelBase {
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    {
         this.backPiece2.render(f5);
         this.bodypart2.render(f5);
         this.monitorA.render(f5);
@@ -112,7 +115,8 @@ public class ModelVurpsSniper extends ModelBase {
         this.backPiece1.render(f5);
     }
 
-    public void render() {
+    public void render()
+    {
         float f5 = 0.0625F;
 
         this.backPiece2.render(f5);
@@ -137,7 +141,8 @@ public class ModelVurpsSniper extends ModelBase {
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
+    {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

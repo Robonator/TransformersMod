@@ -5,7 +5,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelPurgeVehicle extends ModelBaseVehicle {
+public class ModelPurgeVehicle extends ModelBaseVehicle
+{
     public ModelRenderer vehicleTread1;
     public ModelRenderer vehicleTread2;
     public ModelRenderer vehicleFoot1;
@@ -25,7 +26,8 @@ public class ModelPurgeVehicle extends ModelBaseVehicle {
     public ModelRenderer vehicleTurretRear;
     public ModelRenderer vehicleMissileLauncher;
 
-    public ModelPurgeVehicle() {
+    public ModelPurgeVehicle()
+    {
         textureWidth = 128;
         textureHeight = 128;
 
@@ -111,12 +113,14 @@ public class ModelPurgeVehicle extends ModelBaseVehicle {
         this.vehicleTurret.addChild(this.vehicleGun);
     }
 
-    public void render() {
+    public void render()
+    {
         this.vehicleTurret.rotationPointZ = -2;
         this.vehicleBody.render(0.0625F);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z) {
+    private void setRotation(ModelRenderer model, float x, float y, float z)
+    {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

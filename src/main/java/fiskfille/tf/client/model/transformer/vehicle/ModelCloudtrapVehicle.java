@@ -5,7 +5,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelCloudtrapVehicle extends ModelBaseVehicle {
+public class ModelCloudtrapVehicle extends ModelBaseVehicle
+{
     ModelRenderer vehicleBody;
     ModelRenderer vehicleFrontPiece2;
     ModelRenderer vehicleFrontPiece3;
@@ -26,7 +27,8 @@ public class ModelCloudtrapVehicle extends ModelBaseVehicle {
     ModelRenderer vehicleCockpit;
     ModelRenderer vehicleFrontPiece1;
 
-    public ModelCloudtrapVehicle() {
+    public ModelCloudtrapVehicle()
+    {
         textureWidth = 64;
         textureHeight = 128;
 
@@ -117,12 +119,14 @@ public class ModelCloudtrapVehicle extends ModelBaseVehicle {
         vehicleBody.offsetY = 1.25F;
     }
 
-    public void render() {
+    public void render()
+    {
         vehicleBody.render(0.0625F);
         vehicleBody.offsetY = 1.25F;
     }
 
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
+    {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

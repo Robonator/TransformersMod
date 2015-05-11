@@ -18,7 +18,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelPurge extends MowzieModelBase {
+public class ModelPurge extends MowzieModelBase
+{
     public MowzieModelRenderer upperLegR;
     public MowzieModelRenderer upperLegPanel1;
     public MowzieModelRenderer lowerLegRight;
@@ -85,7 +86,8 @@ public class ModelPurge extends MowzieModelBase {
     public ModelRenderer vehicleTurretRear;
     public ModelRenderer vehicleMissileLauncher;
 
-    public ModelPurge() {
+    public ModelPurge()
+    {
         textureWidth = 128;
         textureHeight = 128;
 
@@ -404,46 +406,59 @@ public class ModelPurge extends MowzieModelBase {
         setInitPose();
     }
 
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    {
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
-        if (entity instanceof EntityPlayer) {
+        if (entity instanceof EntityPlayer)
+        {
             EntityPlayer player = (EntityPlayer) entity;
 
             boolean wearingHead = TFHelper.getTransformerFromArmor(player, 3) instanceof TransformerPurge;
             boolean wearingChest = TFHelper.getTransformerFromArmor(player, 2) instanceof TransformerPurge;
             boolean wearingLegs = TFHelper.getTransformerFromArmor(player, 1) instanceof TransformerPurge;
 
-            if (TFDataManager.getTransformationTimer(player) == 0) {
+            if (TFDataManager.getTransformationTimer(player) == 0)
+            {
                 vehicleBody.render(f5);
-            } else {
-                if (!wearingChest) {
-                    if (wearingHead) {
+            }
+            else
+            {
+                if (!wearingChest)
+                {
+                    if (wearingHead)
+                    {
                         head.render(f5);
                     }
 
-                    if (wearingLegs) {
+                    if (wearingLegs)
+                    {
                         upperLegL.render(f5);
                         upperLegR.render(f5);
                     }
-                } else {
+                }
+                else
+                {
                     waist.render(f5);
                 }
             }
         }
     }
 
-    private void setRotation(MowzieModelRenderer model, float x, float y, float z) {
+    private void setRotation(MowzieModelRenderer model, float x, float y, float z)
+    {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
 
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity) {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity)
+    {
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, entity);
         vehicleTurret.rotationPointZ = -2;
 
-        if (entity instanceof EntityPlayer) {
+        if (entity instanceof EntityPlayer)
+        {
             EntityPlayer player = (EntityPlayer) entity;
 
             setToInitPose();
@@ -462,13 +477,16 @@ public class ModelPurge extends MowzieModelBase {
             float globalSpeed = 1;
             float globalDegree = 0.8F;
 
-            if (wearingChest || wearingHead && !wearingLegs) {
+            if (wearingChest || wearingHead && !wearingLegs)
+            {
                 this.upperLegR.rotationPointY = 0;
                 this.upperLegL.rotationPointY = 0;
             }
 
-            if (!wearingChest && wearingHead) {
-                if (transformerChest instanceof TransformerSkystrike) {
+            if (!wearingChest && wearingHead)
+            {
+                if (transformerChest instanceof TransformerSkystrike)
+                {
                     head.rotationPointY -= 1;
                 }
             }
@@ -491,22 +509,26 @@ public class ModelPurge extends MowzieModelBase {
 
             boolean sneaking = entity.isSneaking();
 
-            if (sneaking) {
+            if (sneaking)
+            {
                 globalDegree = 1.5F;
                 globalSpeed = 1.5F;
             }
 
             head.rotationPointY -= 5.5F;
-            if (!wearingChest) {
+            if (!wearingChest)
+            {
                 head.rotationPointY += 5.5F;
             }
 
-            if (wearingHead) {
+            if (wearingHead)
+            {
                 faceTarget(head, 1, par4, par5);
             }
 
             int backwardInverter = 1;
-            if (((EntityPlayer) entity).moveForward < 0) {
+            if (((EntityPlayer) entity).moveForward < 0)
+            {
                 backwardInverter = -1;
                 globalDegree = 0.5F;
             }
@@ -516,7 +538,8 @@ public class ModelPurge extends MowzieModelBase {
             applyDefaultHoldingAnimation(upperArmR, upperArmL, lowerArm1, lowerArm2);
             applyDefaultHittingAnimation(upperArmR, upperArmL, head, chest, lowerArm1, lowerArm2);
 
-            if (this.aimedBow) {
+            if (this.aimedBow)
+            {
                 this.upperArmR.rotateAngleY += -0.1F + this.head.rotateAngleY;
                 this.upperArmL.rotateAngleY += 0.1F + this.head.rotateAngleY + 0.4F;
                 this.upperArmR.rotateAngleX += -((float) Math.PI / 2F) + this.head.rotateAngleX;
@@ -527,7 +550,8 @@ public class ModelPurge extends MowzieModelBase {
                 this.upperArmL.rotateAngleX -= MathHelper.sin(par3 * 0.067F) * 0.05F;
             }
 
-            if (this.isRiding) {
+            if (this.isRiding)
+            {
                 this.upperArmR.rotateAngleX -= (float) Math.PI / 5F;
                 this.upperArmL.rotateAngleX -= (float) Math.PI / 5F;
                 this.upperLegR.rotateAngleX -= (float) Math.PI * 2F / 5F;
@@ -537,10 +561,12 @@ public class ModelPurge extends MowzieModelBase {
                 this.upperLegL.rotateAngleY -= (float) Math.PI / 10F;
             }
 
-            if (fullSuit) {
+            if (fullSuit)
+            {
                 boolean playerOnGround = onGround(player);
 
-                if (playerOnGround || player.capabilities.isFlying) {
+                if (playerOnGround || player.capabilities.isFlying)
+                {
                     //New pose!
                     upperLegR.rotateAngleY += 0.2;
                     upperLegL.rotateAngleY -= 0.2;
@@ -595,7 +621,8 @@ public class ModelPurge extends MowzieModelBase {
                     walk(lowerArm1, 0.08F, 0.1F, true, 1, 0, ticksExisted, 1F);
                     walk(lowerArm2, 0.08F, 0.1F, true, 1, 0, ticksExisted, 1F);
 
-                    if (sneaking) {
+                    if (sneaking)
+                    {
                         waist.rotateAngleX -= 0.1F;
                         stomach.rotateAngleX += 0.5;
                         head.rotateAngleX -= 0.5;
@@ -616,7 +643,9 @@ public class ModelPurge extends MowzieModelBase {
                         lowerArm1.rotateAngleZ -= 0.5;
                         lowerArm2.rotateAngleZ += 0.5;
                     }
-                } else {
+                }
+                else
+                {
                     double motionY = entity.posY - entity.prevPosY;
                     float upwardPose = (float) (1 / (1 + Math.exp(-20 * (motionY + 0.2))));
                     float downwardPose = (float) (1 / (1 + Math.exp(10 * (motionY + 0.2))));
@@ -656,7 +685,9 @@ public class ModelPurge extends MowzieModelBase {
                     lowerArm1.rotateAngleX -= 1 * downwardPose;
                     lowerArm2.rotateAngleX -= 1 * downwardPose;
                 }
-            } else {
+            }
+            else
+            {
                 this.upperArmL.rotateAngleX += (MathHelper.cos(par1 * 0.6662F) * 1.4F * par2) / 2;
                 this.upperArmR.rotateAngleX += (MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2) / 2;
 
@@ -668,7 +699,8 @@ public class ModelPurge extends MowzieModelBase {
 
                 this.waist.rotationPointY -= 0.8F;
 
-                if (this.isSneak) {
+                if (this.isSneak)
+                {
                     this.waist.rotateAngleX += 0.4F;
                     this.waist.rotationPointZ += 4F;
                     this.waist.rotationPointY -= 1;
@@ -676,11 +708,14 @@ public class ModelPurge extends MowzieModelBase {
                     this.upperArmR.rotateAngleX -= 0.1F;
                     this.upperArmL.rotateAngleX -= 0.1F;
 
-                    if (wearingChest) {
+                    if (wearingChest)
+                    {
                         this.head.rotateAngleX -= 0.4F;
                         this.upperLegR.rotateAngleX -= 0.4F;
                         this.upperLegL.rotateAngleX -= 0.4F;
-                    } else {
+                    }
+                    else
+                    {
                         this.upperLegL.rotationPointZ += 5F;
                         this.upperLegL.rotationPointY -= 0.8F;
                         this.upperLegR.rotationPointZ += 5F;
@@ -720,12 +755,15 @@ public class ModelPurge extends MowzieModelBase {
             hipPanelRight.rotateAngleZ -= Math.PI / 2 * transformProgressSin;
             hipPanelLeft.rotateAngleZ += Math.PI / 2 * transformProgressSin;
 
-            if (TFDataManager.getTransformationTimer(player) == 0) {
+            if (TFDataManager.getTransformationTimer(player) == 0)
+            {
                 float xRotation = par5 / (180F / (float) Math.PI);
 
                 this.vehicleGun.rotateAngleX = par5 < 0 ? xRotation : 0;
                 this.vehicleTurret.rotateAngleY = par4 / (180F / (float) Math.PI);
-            } else {
+            }
+            else
+            {
                 treadRight.showModel = !(wearingChest && player.getHeldItem() != null && player.getHeldItem().getItem() == TFItems.purgesKatana);
             }
         }

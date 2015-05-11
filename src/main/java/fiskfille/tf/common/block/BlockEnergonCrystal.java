@@ -17,10 +17,12 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvider {
+public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvider
+{
     private Random rand = new Random();
 
-    public BlockEnergonCrystal() {
+    public BlockEnergonCrystal()
+    {
         super(Material.glass);
         this.setHarvestLvl("pickaxe", 1);
         this.setStepSound(Block.soundTypeGlass);
@@ -29,38 +31,49 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
         this.setLightLevel(0.75F);
     }
 
-    protected boolean canSilkHarvest() {
+    protected boolean canSilkHarvest()
+    {
         return true;
     }
 
-    public int quantityDropped(Random random) {
+    public int quantityDropped(Random random)
+    {
         return random.nextInt(3) + 2;
     }
 
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune)
+    {
         return TFItems.energonCrystalPiece;
     }
 
-    public int getExpDrop(IBlockAccess world, BlockPos pos, int fortune) {
+    public int getExpDrop(IBlockAccess world, BlockPos pos, int fortune)
+    {
         return MathHelper.getRandomIntegerInRange(rand, 0, 2);
     }
 
-    public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state) {
+    public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+    {
         return null;
     }
 
-    public int getRenderType() {
+    public int getRenderType()
+    {
         return -1;
     }
 
-    public boolean isOpaqueCube() {
+    public boolean isOpaqueCube()
+    {
         return false;
     }
 
-    public boolean isBlockSolid(IBlockAccess world, BlockPos pos, EnumFacing side) {
-        if (World.doesBlockHaveSolidTopSurface(world, pos)) {
+    public boolean isBlockSolid(IBlockAccess world, BlockPos pos, EnumFacing side)
+    {
+        if (World.doesBlockHaveSolidTopSurface(world, pos))
+        {
             return true;
-        } else {
+        }
+        else
+        {
             Block block = world.getBlockState(pos).getBlock();
             return block.canPlaceTorchOnTop(world, pos);
         }
@@ -69,7 +82,8 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
-    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+    public boolean canPlaceBlockAt(World world, BlockPos pos)
+    {
         return world.isSideSolid(pos.west(), EnumFacing.EAST, true) || world.isSideSolid(pos.east(), EnumFacing.WEST, true) || world.isSideSolid(pos.north(), EnumFacing.SOUTH, true) || world.isSideSolid(pos.south(), EnumFacing.NORTH, true) || isBlockSolid(world, pos.down(), EnumFacing.DOWN) || isBlockSolid(world, pos.up(), EnumFacing.UP);
     }
 
@@ -233,8 +247,8 @@ public class BlockEnergonCrystal extends BlockBasic implements ITileEntityProvid
 
         return super.collisionRayTrace(p_149731_1_, p_149731_2_, p_149731_3_, p_149731_4_, p_149731_5_, p_149731_6_);
     }*/
-
-    public TileEntity createNewTileEntity(World world, int metadata) {
+    public TileEntity createNewTileEntity(World world, int metadata)
+    {
         return new TileEntityCrystal();
     }
 }

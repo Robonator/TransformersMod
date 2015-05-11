@@ -5,7 +5,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelSkystrikeVehicle extends ModelBaseVehicle {
+public class ModelSkystrikeVehicle extends ModelBaseVehicle
+{
     public ModelRenderer shape131;
     public ModelRenderer shape132;
     public ModelRenderer shape133;
@@ -55,7 +56,8 @@ public class ModelSkystrikeVehicle extends ModelBaseVehicle {
     public ModelRenderer shape78;
     public ModelRenderer vehicleBody;
 
-    public ModelSkystrikeVehicle() {
+    public ModelSkystrikeVehicle()
+    {
         textureWidth = 128;
         textureHeight = 128;
 
@@ -367,12 +369,14 @@ public class ModelSkystrikeVehicle extends ModelBaseVehicle {
         vehicleBody.offsetY = 1.2F;
     }
 
-    public void render() {
+    public void render()
+    {
         vehicleBody.render(0.0625F);
         vehicleBody.offsetY = 1.2F;
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z) {
+    private void setRotation(ModelRenderer model, float x, float y, float z)
+    {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

@@ -1,9 +1,11 @@
 package fiskfille.tf.web.update;
 
-public class Version implements Comparable<Version> {
+public class Version implements Comparable<Version>
+{
     private String version;
 
-    public Version(String version) {
+    public Version(String version)
+    {
         if (version == null)
             throw new IllegalArgumentException("Version can not be null");
         if (!version.matches("[0-9]+(\\.[0-9]+)*"))
@@ -12,12 +14,14 @@ public class Version implements Comparable<Version> {
         this.version = version;
     }
 
-    public final String get() {
+    public final String get()
+    {
         return this.version;
     }
 
     @Override
-    public int compareTo(Version version) {
+    public int compareTo(Version version)
+    {
         if (version == null)
             return 1;
 
@@ -26,7 +30,8 @@ public class Version implements Comparable<Version> {
 
         int length = Math.max(thisParts.length, thatParts.length);
 
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < length; i++)
+        {
             int thisPart = i < thisParts.length ? Integer.parseInt(thisParts[i]) : 0;
             int thatPart = i < thatParts.length ? Integer.parseInt(thatParts[i]) : 0;
 
@@ -40,7 +45,8 @@ public class Version implements Comparable<Version> {
     }
 
     @Override
-    public boolean equals(Object version) {
+    public boolean equals(Object version)
+    {
         if (this == version)
             return true;
         if (version == null)

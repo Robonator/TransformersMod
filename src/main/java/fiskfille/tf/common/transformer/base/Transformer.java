@@ -11,10 +11,12 @@ import net.minecraft.item.Item;
 /**
  * @author gegy1000, FiskFille
  */
-public abstract class Transformer {
+public abstract class Transformer
+{
     private String name;
 
-    public Transformer(String name) {
+    public Transformer(String name)
+    {
         this.name = name;
     }
 
@@ -32,21 +34,24 @@ public abstract class Transformer {
      * @param player The player trying to use nitro.
      * @returns whether the player can use nitro.
      */
-    public boolean canUseNitro(EntityPlayer player) {
+    public boolean canUseNitro(EntityPlayer player)
+    {
         return true;
     }
 
     /**
      * @returns the model to use for this Transformer.
      */
-    public TransformerModel getModel() {
+    public TransformerModel getModel()
+    {
         return TFModelRegistry.getModel(this);
     }
 
     /**
      * @returns the name of this Transformer.
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -56,67 +61,83 @@ public abstract class Transformer {
      * @param player The player wearing the armor.
      * @param timer  The transformation timer.
      */
-    public void tick(EntityPlayer player, int timer) {
+    public void tick(EntityPlayer player, int timer)
+    {
     }
 
-    public boolean canZoom(EntityPlayer player) {
+    public boolean canZoom(EntityPlayer player)
+    {
         return false;
     }
 
-    public float getZoomAmount(EntityPlayer player) {
+    public float getZoomAmount(EntityPlayer player)
+    {
         return 0.1F;
     }
 
-    public float getCameraYOffset(EntityPlayer player) {
+    public float getCameraYOffset(EntityPlayer player)
+    {
         return -1;
     }
 
-    public float getVehicleCameraYOffset(EntityPlayer player) {
+    public float getVehicleCameraYOffset(EntityPlayer player)
+    {
         return -1;
     }
 
-    public boolean canJumpAsVehicle(EntityPlayer player) {
+    public boolean canJumpAsVehicle(EntityPlayer player)
+    {
         return false;
     }
 
-    public boolean canTransform(EntityPlayer player) {
+    public boolean canTransform(EntityPlayer player)
+    {
         return TFConfig.canTransform(this);
     }
 
-    public boolean hasStealthForce(EntityPlayer player) {
+    public boolean hasStealthForce(EntityPlayer player)
+    {
         return false;
     }
 
     public abstract void updateMovement(EntityPlayer player);
 
-    public Item getShootItem() {
+    public Item getShootItem()
+    {
         return null;
     }
 
-    public Entity getShootEntity(EntityPlayer player) {
+    public Entity getShootEntity(EntityPlayer player)
+    {
         return null;
     }
 
-    public String getShootSound() {
+    public String getShootSound()
+    {
         return null;
     }
 
-    public float getShootVolume() {
+    public float getShootVolume()
+    {
         return 1;
     }
 
-    public int getShots() {
+    public int getShots()
+    {
         return 4;
     }
 
-    public boolean canShoot(EntityPlayer player) {
+    public boolean canShoot(EntityPlayer player)
+    {
         return false;
     }
 
-    public void onJump(EntityPlayer player) {
+    public void onJump(EntityPlayer player)
+    {
     }
 
-    public float getThirdPersonDistance(EntityPlayer player) {
+    public float getThirdPersonDistance(EntityPlayer player)
+    {
         return 2.0F - (-(float) TFDataManager.getTransformationTimer(player) / 10);
     }
 
@@ -125,7 +146,8 @@ public abstract class Transformer {
      *
      * @param player The player making the particles
      */
-    public void doNitroParticles(EntityPlayer player) {
+    public void doNitroParticles(EntityPlayer player)
+    {
     }
 
     /**
@@ -135,11 +157,13 @@ public abstract class Transformer {
      * @param distance The distance fell.
      * @return The damage to take.
      */
-    public float fall(EntityPlayer player, float distance) {
+    public float fall(EntityPlayer player, float distance)
+    {
         return distance;
     }
 
-    public boolean hasRapidFire() {
+    public boolean hasRapidFire()
+    {
         return false;
     }
 }

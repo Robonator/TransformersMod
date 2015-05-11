@@ -8,21 +8,26 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
-public class RenderItemPurgesKatana implements IItemRenderer {
+public class RenderItemPurgesKatana implements IItemRenderer
+{
     private ModelPurgesKatana model = new ModelPurgesKatana();
 
-    public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+    public boolean handleRenderType(ItemStack item, ItemRenderType type)
+    {
         return type != ItemRenderType.ENTITY && type != ItemRenderType.INVENTORY;
     }
 
-    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
+    {
         return false;
     }
 
-    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data)
+    {
         Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/weapons/purges_katana.png"));
 
-        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.FIRST_PERSON_MAP) {
+        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.FIRST_PERSON_MAP)
+        {
             GL11.glPushMatrix();
             GL11.glRotatef(0, 1.0F, 0.0F, 0.0F);
             GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);
@@ -38,7 +43,9 @@ public class RenderItemPurgesKatana implements IItemRenderer {
             GL11.glScalef(f, f, f2);
             model.renderWheels(0.0625F);
             GL11.glPopMatrix();
-        } else if (type == ItemRenderType.EQUIPPED) {
+        }
+        else if (type == ItemRenderType.EQUIPPED)
+        {
             GL11.glPushMatrix();
             GL11.glRotatef(10, 1.0F, 0.0F, 0.0F);
             GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);

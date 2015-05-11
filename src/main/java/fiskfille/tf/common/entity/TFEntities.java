@@ -4,8 +4,10 @@ import fiskfille.tf.TransformersMod;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
-public class TFEntities {
-    public static void registerEntities() {
+public class TFEntities
+{
+    public static void registerEntities()
+    {
         registerEntity(EntityTankShell.class, "tank_shell", 20, 10, true);
         registerEntity(EntityMissile.class, "missile", 20, 10, true);
         registerEntity(EntityLaser.class, "laser", 20, 10, true);
@@ -16,7 +18,8 @@ public class TFEntities {
         //		registerEntityWithEgg(EntityTransformer.class, "transformer", 80, 1, true, 0, 0);
     }
 
-    private static void registerEntityWithEgg(Class<? extends Entity> entityClass, String name, int trackingRange, int updateFrequency, boolean sendVelocityUpdates, int primary, int secondary) {
+    private static void registerEntityWithEgg(Class<? extends Entity> entityClass, String name, int trackingRange, int updateFrequency, boolean sendVelocityUpdates, int primary, int secondary)
+    {
         name = "tf_" + name;
 
         int id = EntityRegistry.findGlobalUniqueEntityId();
@@ -24,7 +27,8 @@ public class TFEntities {
         EntityRegistry.registerModEntity(entityClass, name, id, TransformersMod.instance, trackingRange, updateFrequency, sendVelocityUpdates);
     }
 
-    private static void registerEntity(Class<? extends Entity> entityClass, String name, int trackingRange, int updateFrequency, boolean sendVelocityUpdates) {
+    private static void registerEntity(Class<? extends Entity> entityClass, String name, int trackingRange, int updateFrequency, boolean sendVelocityUpdates)
+    {
         name = "tf_" + name;
 
         int id = EntityRegistry.findGlobalUniqueEntityId();

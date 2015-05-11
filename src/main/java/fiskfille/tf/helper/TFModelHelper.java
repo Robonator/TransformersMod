@@ -12,7 +12,8 @@ import java.util.Map;
  * @author gegy1000
  */
 @SideOnly(Side.CLIENT)
-public class TFModelHelper {
+public class TFModelHelper
+{
     /**
      * The main client player's model.
      */
@@ -23,10 +24,12 @@ public class TFModelHelper {
     /**
      * @returns the model offsets for the specified player.
      */
-    public static ModelOffset getOffsets(EntityPlayer player) {
+    public static ModelOffset getOffsets(EntityPlayer player)
+    {
         ModelOffset modelOffset = offsets.get(player);
 
-        if (modelOffset == null) {
+        if (modelOffset == null)
+        {
             modelOffset = new ModelOffset();
             offsets.put(player, modelOffset);
         }

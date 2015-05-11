@@ -12,17 +12,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class ModelBipedTF extends ModelChildBase.Biped {
-    public ModelBipedTF() {
+public class ModelBipedTF extends ModelChildBase.Biped
+{
+    public ModelBipedTF()
+    {
         super();
     }
 
-    public void render(Entity entity, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float partialTicks) {
+    public void render(Entity entity, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float partialTicks)
+    {
         TFModelHelper.modelBipedMain = this;
 
         this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, partialTicks, entity);
 
-        if (entity instanceof EntityPlayer) {
+        if (entity instanceof EntityPlayer)
+        {
             EntityPlayer player = (EntityPlayer) entity;
 
             ModelOffset offsets = TFModelHelper.getOffsets(player);
@@ -51,7 +55,8 @@ public class ModelBipedTF extends ModelChildBase.Biped {
             bipedLeftLeg.showModel = !wearingTransformerPants;
             bipedRightLeg.showModel = !wearingTransformerPants;
 
-            if (this.isChild) {
+            if (this.isChild)
+            {
                 float f6 = 2.0F;
                 GL11.glPushMatrix();
                 GL11.glScalef(1.5F / f6, 1.5F / f6, 1.5F / f6);
@@ -67,7 +72,9 @@ public class ModelBipedTF extends ModelChildBase.Biped {
                 this.bipedLeftLeg.render(partialTicks);
                 this.bipedHeadwear.render(partialTicks);
                 GL11.glPopMatrix();
-            } else {
+            }
+            else
+            {
                 this.bipedHead.render(partialTicks);
                 this.bipedBody.render(partialTicks);
                 this.bipedRightArm.render(partialTicks);

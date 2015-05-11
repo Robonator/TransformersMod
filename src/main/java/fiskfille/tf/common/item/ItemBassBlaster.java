@@ -8,30 +8,39 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 
-public class ItemBassBlaster extends ItemSword {
-    public ItemBassBlaster(ToolMaterial material) {
+public class ItemBassBlaster extends ItemSword
+{
+    public ItemBassBlaster(ToolMaterial material)
+    {
         super(material);
         this.setMaxDamage(1500);
     }
 
-    public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int time) {
-        if (TFHelper.isPlayerSubwoofer(player) && !world.isRemote && (player.inventory.hasItem(TFItems.energonCrystalPiece) || player.capabilities.isCreativeMode)) {
+    public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int time)
+    {
+        if (TFHelper.isPlayerSubwoofer(player) && !world.isRemote && (player.inventory.hasItem(TFItems.energonCrystalPiece) || player.capabilities.isCreativeMode))
+        {
             stack.damageItem(1, player);
 
-            if (!player.capabilities.isCreativeMode) {
+            if (!player.capabilities.isCreativeMode)
+            {
                 player.inventory.consumeInventoryItem(TFItems.energonCrystalPiece);
             }
         }
     }
 
-    public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
+    public void onUsingTick(ItemStack stack, EntityPlayer player, int count)
+    {
         int duration = this.getMaxItemUseDuration(stack) - count;
 
-        if (duration < 80) {
-            if (player.inventory.hasItem(TFItems.energonCrystalPiece) || player.capabilities.isCreativeMode) {
+        if (duration < 80)
+        {
+            if (player.inventory.hasItem(TFItems.energonCrystalPiece) || player.capabilities.isCreativeMode)
+            {
                 World world = player.worldObj;
 
-                if (!world.isRemote) {
+                if (!world.isRemote)
+                {
                     EntityBassCharge entity = new EntityBassCharge(world, player);
                     world.spawnEntityInWorld(entity);
                 }
@@ -39,19 +48,23 @@ public class ItemBassBlaster extends ItemSword {
         }
     }
 
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        if (TFHelper.isPlayerSubwoofer(player) && (player.inventory.hasItem(TFItems.energonCrystalPiece) || player.capabilities.isCreativeMode)) {
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+    {
+        if (TFHelper.isPlayerSubwoofer(player) && (player.inventory.hasItem(TFItems.energonCrystalPiece) || player.capabilities.isCreativeMode))
+        {
             player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
         }
 
         return stack;
     }
 
-    public int getMaxItemUseDuration(ItemStack stack) {
+    public int getMaxItemUseDuration(ItemStack stack)
+    {
         return 72000;
     }
 
-    public EnumAction getItemUseAction(ItemStack stack) {
+    public EnumAction getItemUseAction(ItemStack stack)
+    {
         return EnumAction.NONE;
     }
 }

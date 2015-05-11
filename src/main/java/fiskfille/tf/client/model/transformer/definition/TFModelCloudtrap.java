@@ -11,47 +11,56 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class TFModelCloudtrap extends TransformerModel {
+public class TFModelCloudtrap extends TransformerModel
+{
     private ModelCloudtrap model;
     private ModelCloudtrapVehicle vehicle;
 
-    public TFModelCloudtrap() {
+    public TFModelCloudtrap()
+    {
         this.model = new ModelCloudtrap();
         this.vehicle = new ModelCloudtrapVehicle();
     }
 
     @Override
-    public Biped getMainModel() {
+    public Biped getMainModel()
+    {
         return model;
     }
 
     @Override
-    public ModelBaseVehicle getVehicleModel() {
+    public ModelBaseVehicle getVehicleModel()
+    {
         return vehicle;
     }
 
     @Override
-    public ModelRenderer getLowerArm() {
+    public ModelRenderer getLowerArm()
+    {
         return null;
     }
 
     @Override
-    public ModelRenderer getUpperArm() {
+    public ModelRenderer getUpperArm()
+    {
         return null;
     }
 
     @Override
-    public ModelRenderer getBody() {
+    public ModelRenderer getBody()
+    {
         return null;
     }
 
     @Override
-    public ModelRenderer getHead() {
+    public ModelRenderer getHead()
+    {
         return null;
     }
 
     @Override
-    public ResourceLocation getTexture() {
+    public ResourceLocation getTexture()
+    {
         return new ResourceLocation(TransformersMod.modid, "textures/models/cloudtrap/cloudtrap.png");
     }
 }

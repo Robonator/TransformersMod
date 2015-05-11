@@ -17,15 +17,18 @@ import java.util.Random;
  * @author BobMowzie, gegy1000
  */
 @SideOnly(Side.CLIENT)
-public class MowzieModelBase extends ModelChildBase.Biped {
+public class MowzieModelBase extends ModelChildBase.Biped
+{
     /**
      * Store every MowzieModelRenderer in this array
      */
     protected List<MowzieModelRenderer> parts;
 
     @Override
-    public ModelRenderer getRandomModelBox(Random rand) {
-        if (parts.size() > 0) {
+    public ModelRenderer getRandomModelBox(Random rand)
+    {
+        if (parts.size() > 0)
+        {
             return parts.get(rand.nextInt(parts.size()));
         }
 
@@ -36,7 +39,8 @@ public class MowzieModelBase extends ModelChildBase.Biped {
      * Saves the initial rotate angles and initial rotation points.
      * Note: Call this at the end of the constructor.
      */
-    protected void setInitPose() {
+    protected void setInitPose()
+    {
         for (int i = 0; i < this.parts.size(); i++)
             this.parts.get(i).setInitValuesToCurrentPose();
     }
@@ -47,7 +51,8 @@ public class MowzieModelBase extends ModelChildBase.Biped {
      *
      * @see #setInitPose() method in MowzieModelBase class.
      */
-    public void setToInitPose() {
+    public void setToInitPose()
+    {
         for (int i = 0; i < this.parts.size(); i++)
             parts.get(i).setCurrentPoseToInitValues();
     }
@@ -64,7 +69,8 @@ public class MowzieModelBase extends ModelChildBase.Biped {
      * @param child  is the child box;
      * @param parent is the parent box.
      */
-    protected void addChildTo(ModelRenderer child, ModelRenderer parent) {
+    protected void addChildTo(ModelRenderer child, ModelRenderer parent)
+    {
         float distance = (float) Math.sqrt(Math.pow((child.rotationPointZ - parent.rotationPointZ), 2) + Math.pow((child.rotationPointY - parent.rotationPointY), 2));
         float oldRotateAngleX = parent.rotateAngleX;
         float parentToChildAngle = (float) Math.atan((child.rotationPointZ - parent.rotationPointZ) / (child.rotationPointY - parent.rotationPointY));
@@ -83,7 +89,8 @@ public class MowzieModelBase extends ModelChildBase.Biped {
     /**
      * Don't use this yet. I'm trying to refine the parenting method, but it's not ready yet.
      */
-    protected void newAddChildTo(ModelRenderer child, ModelRenderer parent) {
+    protected void newAddChildTo(ModelRenderer child, ModelRenderer parent)
+    {
         float distance = (float) Math.sqrt(Math.pow((child.rotationPointZ - parent.rotationPointZ), 2) + Math.pow((child.rotationPointY - parent.rotationPointY), 2));
         float angle = (float) Math.atan2(child.rotationPointY - parent.rotationPointY, child.rotationPointZ - parent.rotationPointZ);
         float newRotationPointZ = (float) (distance * (Math.cos(angle)));
@@ -104,7 +111,8 @@ public class MowzieModelBase extends ModelChildBase.Biped {
      * @param f3 is the rotationYaw of the EntityLivingBase;
      * @param f4 is the rotationPitch of the EntityLivingBase.
      */
-    public void faceTarget(MowzieModelRenderer box, float f, float f3, float f4) {
+    public void faceTarget(MowzieModelRenderer box, float f, float f3, float f4)
+    {
         box.rotateAngleY += (f3 / (180f / (float) Math.PI)) / f;
         box.rotateAngleX += (f4 / (180f / (float) Math.PI)) / f;
     }
@@ -123,7 +131,8 @@ public class MowzieModelBase extends ModelChildBase.Biped {
      * @param f      is the walked distance;
      * @param f1     is the walk speed.
      */
-    public float rotateBox(float speed, float degree, boolean invert, float offset, float weight, float f, float f1) {
+    public float rotateBox(float speed, float degree, boolean invert, float offset, float weight, float f, float f1)
+    {
         if (invert)
             return -MathHelper.cos(f * speed + offset) * degree * f1 + weight * f1;
         else
@@ -141,7 +150,8 @@ public class MowzieModelBase extends ModelChildBase.Biped {
      * @param f      is the walked distance;
      * @param f1     is the walk speed.
      */
-    public float moveBox(float speed, float degree, boolean bounce, float f, float f1) {
+    public float moveBox(float speed, float degree, boolean bounce, float f, float f1)
+    {
         if (bounce)
             return -MathHelper.abs((MathHelper.sin(f * speed) * f1 * degree));
         else
@@ -163,7 +173,8 @@ public class MowzieModelBase extends ModelChildBase.Biped {
      * @param f      is the walked distance;
      * @param f1     is the walk speed.
      */
-    public void walk(MowzieModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float f, float f1) {
+    public void walk(MowzieModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float f, float f1)
+    {
         int inverted = 1;
         if (invert)
             inverted = -1;
@@ -185,7 +196,8 @@ public class MowzieModelBase extends ModelChildBase.Biped {
      * @param f      is the walked distance;
      * @param f1     is the walk speed.
      */
-    public void flap(MowzieModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float f, float f1) {
+    public void flap(MowzieModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float f, float f1)
+    {
         int inverted = 1;
         if (invert)
             inverted = -1;
@@ -207,7 +219,8 @@ public class MowzieModelBase extends ModelChildBase.Biped {
      * @param f      is the walked distance;
      * @param f1     is the walk speed.
      */
-    public void swing(MowzieModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float f, float f1) {
+    public void swing(MowzieModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float f, float f1)
+    {
         int inverted = 1;
         if (invert)
             inverted = -1;
@@ -226,7 +239,8 @@ public class MowzieModelBase extends ModelChildBase.Biped {
      * @param f      is the walked distance;
      * @param f1     is the walk speed.
      */
-    public void bob(MowzieModelRenderer box, float speed, float degree, boolean bounce, float f, float f1) {
+    public void bob(MowzieModelRenderer box, float speed, float degree, boolean bounce, float f, float f1)
+    {
         float bob = (float) (Math.sin(f * speed) * f1 * degree - f1 * degree);
         if (bounce)
             bob = (float) -Math.abs((Math.sin(f * speed) * f1 * degree));
@@ -246,7 +260,8 @@ public class MowzieModelBase extends ModelChildBase.Biped {
      * @param f          is the walked distance;
      * @param f1         is the walk speed.
      */
-    public void chainSwing(MowzieModelRenderer[] boxes, float speed, float degree, double rootOffset, float f, float f1) {
+    public void chainSwing(MowzieModelRenderer[] boxes, float speed, float degree, double rootOffset, float f, float f1)
+    {
         int numberOfSegments = boxes.length;
         float offset = (float) ((rootOffset * Math.PI) / (2 * numberOfSegments));
         for (int i = 0; i < numberOfSegments; i++)
@@ -266,7 +281,8 @@ public class MowzieModelBase extends ModelChildBase.Biped {
      * @param f          is the walked distance;
      * @param f1         is the walk speed.
      */
-    public void chainWave(MowzieModelRenderer[] boxes, float speed, float degree, double rootOffset, float f, float f1) {
+    public void chainWave(MowzieModelRenderer[] boxes, float speed, float degree, double rootOffset, float f, float f1)
+    {
         int numberOfSegments = boxes.length;
         float offset = (float) ((rootOffset * Math.PI) / (2 * numberOfSegments));
         for (int i = 0; i < numberOfSegments; i++)
@@ -286,7 +302,8 @@ public class MowzieModelBase extends ModelChildBase.Biped {
      * @param f          is the walked distance;
      * @param f1         is the walk speed.
      */
-    public void chainFlap(MowzieModelRenderer[] boxes, float speed, float degree, double rootOffset, float f, float f1) {
+    public void chainFlap(MowzieModelRenderer[] boxes, float speed, float degree, double rootOffset, float f, float f1)
+    {
         int numberOfSegments = boxes.length;
         float offset = (float) ((rootOffset * Math.PI) / (2 * numberOfSegments));
         for (int i = 0; i < numberOfSegments; i++)
@@ -296,10 +313,12 @@ public class MowzieModelBase extends ModelChildBase.Biped {
     /**
      * Checks whether specified entity is on the ground.
      */
-    public boolean onGround(Entity entity) {
+    public boolean onGround(Entity entity)
+    {
         boolean onGround = entity.onGround;
 
-        if (entity != Minecraft.getMinecraft().thePlayer) {
+        if (entity != Minecraft.getMinecraft().thePlayer)
+        {
             double moveY = -0.2;
 
             entity.height *= 0.4F;
@@ -308,7 +327,8 @@ public class MowzieModelBase extends ModelChildBase.Biped {
 
             List collidingEntities = entity.worldObj.getCollidingBoundingBoxes(entity, entity.getBoundingBox().addCoord(0, moveY, 0));
 
-            for (Object collidingEntity : collidingEntities) {
+            for (Object collidingEntity : collidingEntities)
+            {
                 moveY = ((AxisAlignedBB) collidingEntity).calculateYOffset(entity.getBoundingBox(), moveY);
             }
 
@@ -323,7 +343,8 @@ public class MowzieModelBase extends ModelChildBase.Biped {
      * @param to       The ModelRenderer you are moving to
      * @param t        The timer (20-0)
      */
-    protected void rotateTo(ModelRenderer rotating, ModelRenderer to, float t) {
+    protected void rotateTo(ModelRenderer rotating, ModelRenderer to, float t)
+    {
         float rotXDif = to.rotateAngleX - rotating.rotateAngleX;
         float rotYDif = to.rotateAngleY - rotating.rotateAngleY;
         float rotZDif = to.rotateAngleZ - rotating.rotateAngleZ;
@@ -349,7 +370,8 @@ public class MowzieModelBase extends ModelChildBase.Biped {
         rotating.rotationPointZ += (posZDif / 20) * t;
     }
 
-    public void addPart(MowzieModelRenderer mowzieModelRenderer) {
+    public void addPart(MowzieModelRenderer mowzieModelRenderer)
+    {
         if (parts == null)
             parts = new ArrayList<MowzieModelRenderer>();
 

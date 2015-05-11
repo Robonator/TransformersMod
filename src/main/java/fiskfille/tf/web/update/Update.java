@@ -1,29 +1,35 @@
 package fiskfille.tf.web.update;
 
-public class Update {
+public class Update
+{
     private boolean isAvailable;
     private String version;
     private String updateLog;
 
-    public Update(boolean isAvailable, String version, String update) {
+    public Update(boolean isAvailable, String version, String update)
+    {
         this.isAvailable = isAvailable;
         this.version = version;
         this.updateLog = update;
     }
 
-    public Update() {
+    public Update()
+    {
         this.isAvailable = false;
     }
 
-    public boolean isAvailable() {
+    public boolean isAvailable()
+    {
         return isAvailable;
     }
 
-    public String getVersion() {
+    public String getVersion()
+    {
         return version;
     }
 
-    public String getUpdateLog() {
+    public String getUpdateLog()
+    {
         return updateLog;
     }
 }

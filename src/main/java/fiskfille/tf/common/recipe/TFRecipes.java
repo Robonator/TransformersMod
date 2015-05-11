@@ -7,8 +7,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class TFRecipes {
-    public static void registerRecipes() {
+public class TFRecipes
+{
+    public static void registerRecipes()
+    {
         addSmelting();
         addDisplayRecipes();
         addWeaponRecipes();
@@ -21,19 +23,22 @@ public class TFRecipes {
         GameRegistry.addRecipe(new ItemStack(TFBlocks.transformiumSeed, 1), "TET", "TNT", "DND", 'T', TFItems.transformium, 'E', TFBlocks.energonCube, 'N', Items.nether_star, 'D', Blocks.diamond_block);
     }
 
-    private static void addSmelting() {
+    private static void addSmelting()
+    {
         GameRegistry.addSmelting(TFBlocks.transformiumOre, new ItemStack(TFItems.transformium, 1), 5.0F);
         GameRegistry.addSmelting(TFBlocks.transformiumStone, new ItemStack(TFItems.transformium, 1), 5.0F);
     }
 
-    private static void addWeaponRecipes() {
+    private static void addWeaponRecipes()
+    {
         GameRegistry.addRecipe(new ItemStack(TFItems.skystrikesCrossbow, 1), "EII", "ITC", "ICT", 'E', TFBlocks.energonCrystal, 'I', Items.iron_ingot, 'T', TFItems.transformium, 'C', TFItems.energonCrystalPiece);
         GameRegistry.addRecipe(new ItemStack(TFItems.purgesKatana, 1), "CtC", "TET", "CIC", 'E', TFBlocks.energonCrystal, 'I', Items.iron_ingot, 'T', TFItems.transformium, 'C', TFItems.energonCrystalPiece, 't', TFItems.tankTracks);
         GameRegistry.addRecipe(new ItemStack(TFItems.vurpsSniper, 1), "EI ", "CTG", "CIT", 'E', TFBlocks.energonCrystal, 'I', Items.iron_ingot, 'T', TFItems.transformium, 'C', TFItems.energonCrystalPiece, 'G', new ItemStack(Blocks.stained_glass, 1, 5));
         GameRegistry.addRecipe(new ItemStack(TFItems.subwoofersBassBlaster, 1), "TIC", " EB", "TIC", 'E', TFBlocks.energonCrystal, 'I', Items.iron_ingot, 'T', TFItems.transformium, 'C', TFItems.energonCrystalPiece, 'B', Blocks.iron_block);
     }
 
-    private static void addCraftingComponentRecipes() {
+    private static void addCraftingComponentRecipes()
+    {
         GameRegistry.addRecipe(new ItemStack(TFItems.transformiumArmorMolds, 1, 0), "TTT", "T T", 'T', TFItems.transformium);
         GameRegistry.addRecipe(new ItemStack(TFItems.transformiumArmorMolds, 1, 1), "T T", "TTT", "TTT", 'T', TFItems.transformium);
         GameRegistry.addRecipe(new ItemStack(TFItems.transformiumArmorMolds, 1, 2), "TTT", "T T", "T T", 'T', TFItems.transformium);
@@ -51,17 +56,20 @@ public class TFRecipes {
         GameRegistry.addRecipe(new ItemStack(TFItems.smallThruster, 1), "III", " JR", "III", 'I', Items.iron_ingot, 'J', Blocks.iron_bars, 'R', Items.redstone);
     }
 
-    private static void addDisplayRecipes() {
+    private static void addDisplayRecipes()
+    {
         GameRegistry.addRecipe(new ItemStack(TFBlocks.displayPillar, 1), " - ", "SWS", '-', Blocks.stone_slab, 'S', Blocks.stone, 'W', Blocks.cobblestone_wall);
         GameRegistry.addRecipe(new RecipesDisplayItems());
     }
 
-    private static void addProjectileRecipes() {
+    private static void addProjectileRecipes()
+    {
         GameRegistry.addRecipe(new ItemStack(TFItems.missile, 4), "T  ", " I ", "  E", 'I', Items.iron_ingot, 'T', Blocks.tnt, 'E', TFItems.smallThruster);
         GameRegistry.addRecipe(new ItemStack(TFItems.tankShell, 4), "IIT", 'I', Items.iron_ingot, 'T', Items.gunpowder);
     }
 
-    private static void addArmorRecipes() {
+    private static void addArmorRecipes()
+    {
         GameRegistry.addRecipe(new ItemStack(TFItems.skystrikeHelmet, 1), "III", "b*b", '*', new ItemStack(TFItems.transformiumArmorMolds, 1, 0), 'I', Items.iron_ingot, 'b', new ItemStack(Items.dye, 1, 0));
         GameRegistry.addRecipe(new ItemStack(TFItems.skystrikeChestplate, 1), "WCW", "w*w", "TrT", '*', new ItemStack(TFItems.transformiumArmorMolds, 1, 1), 'C', TFItems.ahd2JetCockpit, 'W', TFItems.ahd2JetWing, 'r', new ItemStack(Items.dye, 1, 1), 'w', new ItemStack(Items.dye, 1, 15), 'I', Items.iron_ingot, 'T', TFItems.jetTurbine);
         GameRegistry.addRecipe(new ItemStack(TFItems.skystrikeLeggings, 1), " r ", "w*w", "I I", '*', new ItemStack(TFItems.transformiumArmorMolds, 1, 2), 'w', new ItemStack(Items.dye, 1, 15), 'r', new ItemStack(Items.dye, 1, 1), 'I', Items.iron_ingot);

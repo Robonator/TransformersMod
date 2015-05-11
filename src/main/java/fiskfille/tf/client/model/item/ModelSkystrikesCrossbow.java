@@ -9,7 +9,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelSkystrikesCrossbow extends ModelChildBase.Base {
+public class ModelSkystrikesCrossbow extends ModelChildBase.Base
+{
     ModelRenderer handle;
     ModelRenderer bottomEdge1;
     ModelRenderer bottomEdge2;
@@ -23,7 +24,8 @@ public class ModelSkystrikesCrossbow extends ModelChildBase.Base {
     ModelRenderer missile6;
     ModelRenderer missile7;
 
-    public ModelSkystrikesCrossbow() {
+    public ModelSkystrikesCrossbow()
+    {
         textureWidth = 64;
         textureHeight = 64;
 
@@ -113,31 +115,38 @@ public class ModelSkystrikesCrossbow extends ModelChildBase.Base {
         this.addChildTo(missile7, handle);
     }
 
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    {
         super.render(entity, f, f1, f2, f3, f4, f5);
         setRotationAngles(entity, f, f1, f2, f3, f4, f5);
         handle.render(f5);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z) {
+    private void setRotation(ModelRenderer model, float x, float y, float z)
+    {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
 
-    public void setRotationAngles(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        if (entity instanceof EntityPlayer) {
+    public void setRotationAngles(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    {
+        if (entity instanceof EntityPlayer)
+        {
             EntityPlayer player = (EntityPlayer) entity;
             ItemStack itemstack = player.getHeldItem();
 
-            if (itemstack != null) {
+            if (itemstack != null)
+            {
                 //				boolean flag = ItemSkystrikesCrossbow.blueMode.get(entity.getCommandSenderName()) != null ? ItemSkystrikesCrossbow.blueMode.get(entity.getCommandSenderName()) : false;
                 boolean flag = itemstack.hasTagCompound() ? itemstack.getTagCompound().getBoolean("blueMode") : false;
                 float pidb2 = pi / 2;
-                if (!flag && handle.rotateAngleZ > 0.0F) {
+                if (!flag && handle.rotateAngleZ > 0.0F)
+                {
                     handle.rotateAngleZ -= pidb2 / 10;
                 }
-                if (flag && handle.rotateAngleZ < pidb2) {
+                if (flag && handle.rotateAngleZ < pidb2)
+                {
                     handle.rotateAngleZ += pidb2 / 10;
                 }
             }

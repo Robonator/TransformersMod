@@ -9,21 +9,25 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class RenderCrystal extends TileEntitySpecialRenderer {
+public class RenderCrystal extends TileEntitySpecialRenderer
+{
     private ResourceLocation texture = new ResourceLocation("textures/misc/enchanted_item_glint.png");
     private ModelCrystal model;
     private ItemRenderer itemRenderer;
 
-    public RenderCrystal() {
+    public RenderCrystal()
+    {
         model = new ModelCrystal();
         itemRenderer = new ItemRenderer(Minecraft.getMinecraft());
     }
 
-    public void renderTileEntityAt(TileEntity tile, double posX, double posZ, double p_180535_6_, float p_180535_8_, int p_180535_9_) {
+    public void renderTileEntityAt(TileEntity tile, double posX, double posZ, double p_180535_6_, float p_180535_8_, int p_180535_9_)
+    {
         renderAModelAt((TileEntityCrystal) tile, posX, posZ, p_180535_6_, p_180535_8_);
     }
 
-    public void renderAModelAt(TileEntityCrystal tile, double x, double y, double z, float partialTicks) {
+    public void renderAModelAt(TileEntityCrystal tile, double x, double y, double z, float partialTicks)
+    {
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
         GL11.glScalef(1.0F, -1F, -1F);
@@ -39,7 +43,8 @@ public class RenderCrystal extends TileEntitySpecialRenderer {
         GL11.glPopMatrix();
     }
 
-    public void adjustRotation(TileEntityCrystal tile, double x, double y, double z, float partialTicks) {
+    public void adjustRotation(TileEntityCrystal tile, double x, double y, double z, float partialTicks)
+    {
         /*int rot = tile.getWorld().getBlockState(tile.getPos()).getBlock().damageDropped();
         
         if (rot == 1)

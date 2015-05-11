@@ -10,44 +10,57 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class Donators {
+public class Donators
+{
     public static Map<UUID, Money> donators = new HashMap<UUID, Money>();
 
-    public static void loadDonators() {
+    public static void loadDonators()
+    {
         donators.clear();
 
         DonatorLoader loader = new DonatorLoader();
         loader.loadDonators();
     }
 
-    public static boolean isDonator(UUID id) {
+    public static boolean isDonator(UUID id)
+    {
         return donators.containsKey(id);
     }
 
-    public static boolean isDonator(EntityPlayer player) {
+    public static boolean isDonator(EntityPlayer player)
+    {
         return isDonator(player.getUniqueID());
     }
 
-    public static Money getDonationAmount(UUID id) {
+    public static Money getDonationAmount(UUID id)
+    {
         Money money = donators.get(id);
 
-        if (money == null) {
+        if (money == null)
+        {
             money = new Money("$0");
         }
 
         return money;
     }
 
-    public static Money getDonationAmount(EntityPlayer player) {
+    public static Money getDonationAmount(EntityPlayer player)
+    {
         return getDonationAmount(player.getUniqueID());
     }
 
-    public static void doAchievements(Side side) {
-        if (side.isServer()) {
-            for (WorldServer world : MinecraftServer.getServer().worldServers) {
-                for (Object player : world.playerEntities) {
-                    if (player instanceof EntityPlayer) {
-                        if (isDonator((EntityPlayer) player)) {
+    public static void doAchievements(Side side)
+    {
+        if (side.isServer())
+        {
+            for (WorldServer world : MinecraftServer.getServer().worldServers)
+            {
+                for (Object player : world.playerEntities)
+                {
+                    if (player instanceof EntityPlayer)
+                    {
+                        if (isDonator((EntityPlayer) player))
+                        {
                             ((EntityPlayer) player).addStat(TFAchievements.donate, 1);
                         }
                     }

@@ -27,15 +27,18 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.opengl.GL11;
 
-public class ClientEventHandler {
+public class ClientEventHandler
+{
     public static boolean prevViewBobbing;
     private final Minecraft mc = Minecraft.getMinecraft();
     private EntityRenderer renderer, prevRenderer;
     private Item prevHelm, prevChest, prevLegs, prevBoots;
 
     @SubscribeEvent
-    public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-        if (event.modID.equals(TransformersMod.modid)) {
+    public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
+    {
+        if (event.modID.equals(TransformersMod.modid))
+        {
             TransformersMod.config.load(TransformersMod.configFile);
 
             TransformersMod.configFile.save();
@@ -43,38 +46,49 @@ public class ClientEventHandler {
     }
 
     @SubscribeEvent
-    public void onTransform(PlayerTransformEvent event) {
+    public void onTransform(PlayerTransformEvent event)
+    {
         EntityPlayer player = event.entityPlayer;
 
-        if (player == mc.thePlayer) {
-            if (event.transformed) {
+        if (player == mc.thePlayer)
+        {
+            if (event.transformed)
+            {
                 GameSettings gameSettings = mc.gameSettings;
                 prevViewBobbing = gameSettings.viewBobbing;
                 gameSettings.viewBobbing = false;
-            } else {
+            }
+            else
+            {
                 mc.gameSettings.viewBobbing = prevViewBobbing;
             }
         }
     }
 
     @SubscribeEvent
-    public void onPlaySound(PlaySoundAtEntityEvent event) {
-        if (event.entity instanceof EntityPlayer) {
-            if (event.name.startsWith("step.") && TFDataManager.isInVehicleMode((EntityPlayer) event.entity)) {
+    public void onPlaySound(PlaySoundAtEntityEvent event)
+    {
+        if (event.entity instanceof EntityPlayer)
+        {
+            if (event.name.startsWith("step.") && TFDataManager.isInVehicleMode((EntityPlayer) event.entity))
+            {
                 event.setCanceled(true);
             }
         }
     }
 
     @SubscribeEvent
-    public void onRenderPlayerSpecialsPre(RenderPlayerEvent.Specials.Pre event) {
-        if (TFDataManager.getTransformationTimer(event.entityPlayer) < 10) {
+    public void onRenderPlayerSpecialsPre(RenderPlayerEvent.Specials.Pre event)
+    {
+        if (TFDataManager.getTransformationTimer(event.entityPlayer) < 10)
+        {
             event.setCanceled(true);
         }
     }
 
     @SubscribeEvent
-    public void onRenderPlayerPost(RenderPlayerEvent.Specials.Post event) {
+    public void onRenderPlayerPost(RenderPlayerEvent.Specials.Post event)
+    {
         //After rendered everything
 
         EntityPlayer player = mc.thePlayer;
@@ -93,24 +107,29 @@ public class ClientEventHandler {
 
         boolean armorChanged = false;
 
-        if (boots != prevBoots) {
+        if (boots != prevBoots)
+        {
             prevBoots = boots;
             armorChanged = true;
         }
-        if (chest != prevChest) {
+        if (chest != prevChest)
+        {
             prevChest = chest;
             armorChanged = true;
         }
-        if (legs != prevLegs) {
+        if (legs != prevLegs)
+        {
             prevLegs = legs;
             armorChanged = true;
         }
-        if (helm != prevHelm) {
+        if (helm != prevHelm)
+        {
             prevHelm = helm;
             armorChanged = true;
         }
 
-        if (armorChanged) {
+        if (armorChanged)
+        {
             offsets.headOffsetX = 0;
             offsets.headOffsetY = 0;
             offsets.headOffsetZ = 0;
@@ -118,68 +137,89 @@ public class ClientEventHandler {
     }
 
     @SubscribeEvent
-    public void onRenderPlayerPre(RenderPlayerEvent.Pre event) {
+    public void onRenderPlayerPre(RenderPlayerEvent.Pre event)
+    {
         EntityPlayer player = event.entityPlayer;
         Transformer transformer = TFHelper.getTransformer(player);
         boolean isClientPlayer = mc.thePlayer == player;
         float cameraYOffset = 0;
 
-        if (transformer != null) {
+        if (transformer != null)
+        {
             cameraYOffset = transformer.getCameraYOffset(player);
         }
 
-        if (isClientPlayer && cameraYOffset != 0) {
+        if (isClientPlayer && cameraYOffset != 0)
+        {
             GL11.glPushMatrix();
             GL11.glTranslatef(0, -CustomEntityRenderer.getOffsetY(player), 0);
         }
 
         // This prevents the player from sinking into the ground when sneaking in vehicle mode
-        if (player.isSneaking() && TFDataManager.getTransformationTimer(player) < 20) {
-            if (isClientPlayer) {
+        if (player.isSneaking() && TFDataManager.getTransformationTimer(player) < 20)
+        {
+            if (isClientPlayer)
+            {
                 GL11.glTranslatef(0, 0.08F, 0);
-            } else {
+            }
+            else
+            {
                 GL11.glTranslatef(0, 0.125F, 0);
             }
         }
     }
 
     @SubscribeEvent
-    public void onRenderPlayer(RenderPlayerEvent.Post event) {
+    public void onRenderPlayer(RenderPlayerEvent.Post event)
+    {
         EntityPlayer player = event.entityPlayer;
         Transformer transformer = TFHelper.getTransformer(player);
         boolean isClientPlayer = mc.thePlayer == player;
 
-        if (transformer != null) {
-            if (isClientPlayer && transformer.getCameraYOffset(player) != 0.0F) {
+        if (transformer != null)
+        {
+            if (isClientPlayer && transformer.getCameraYOffset(player) != 0.0F)
+            {
                 GL11.glPopMatrix();
             }
         }
     }
 
     @SubscribeEvent
-    public void renderTick(TickEvent.RenderTickEvent event) {
+    public void renderTick(TickEvent.RenderTickEvent event)
+    {
         Minecraft mc = Minecraft.getMinecraft();
 
-        if (mc.theWorld != null) {
-            if (event.phase == TickEvent.Phase.START) {
+        if (mc.theWorld != null)
+        {
+            if (event.phase == TickEvent.Phase.START)
+            {
                 EntityPlayerSP player = mc.thePlayer;
 
                 Transformer transformer = TFHelper.getTransformer(player);
 
-                if (transformer != null) {
-                    if (transformer.getCameraYOffset(player) != 0.0F) {
-                        if (renderer == null) {
+                if (transformer != null)
+                {
+                    if (transformer.getCameraYOffset(player) != 0.0F)
+                    {
+                        if (renderer == null)
+                        {
                             renderer = new CustomEntityRenderer(mc);
                         }
 
-                        if (mc.entityRenderer != renderer) {
+                        if (mc.entityRenderer != renderer)
+                        {
                             prevRenderer = mc.entityRenderer;
                             mc.entityRenderer = renderer;
                         }
-                    } else if (prevRenderer != null && mc.entityRenderer != prevRenderer) {
+                    }
+                    else if (prevRenderer != null && mc.entityRenderer != prevRenderer)
+                    {
                         mc.entityRenderer = prevRenderer;
                     }
-                } else if (prevRenderer != null && mc.entityRenderer != prevRenderer) {
+                }
+                else if (prevRenderer != null && mc.entityRenderer != prevRenderer)
+                {
                     mc.entityRenderer = prevRenderer;
                 }
             }
@@ -187,7 +227,8 @@ public class ClientEventHandler {
     }
 
     @SubscribeEvent
-    public void onFOVUpdate(FOVUpdateEvent event) {
+    public void onFOVUpdate(FOVUpdateEvent event)
+    {
         EntityPlayerSP player = (EntityPlayerSP) event.entity;
         VehicleMotion transformedPlayer = TFMotionManager.getTransformerPlayer(player);
 
@@ -195,25 +236,32 @@ public class ClientEventHandler {
         boolean moveForward = Minecraft.getMinecraft().gameSettings.keyBindForward.isPressed();
         boolean nitroPressed = TFKeyBinds.keyBindingNitro.isPressed() || Minecraft.getMinecraft().gameSettings.keyBindSprint.isPressed();
 
-        if (TFDataManager.isInVehicleMode(player)) {
-            if (nitro > 0 && moveForward && nitroPressed && !TFDataManager.isInStealthMode(player)) {
+        if (TFDataManager.isInVehicleMode(player))
+        {
+            if (nitro > 0 && moveForward && nitroPressed && !TFDataManager.isInStealthMode(player))
+            {
                 event.newfov = 1.3F;
             }
-        } else {
+        }
+        else
+        {
             ItemStack itemstack = player.getHeldItem();
 
-            if (TFDataManager.getZoomTimer(player) > 0 && TFHelper.isPlayerVurp(player) && itemstack != null && itemstack.getItem() == TFItems.vurpsSniper && this.mc.gameSettings.thirdPersonView == 0) {
+            if (TFDataManager.getZoomTimer(player) > 0 && TFHelper.isPlayerVurp(player) && itemstack != null && itemstack.getItem() == TFItems.vurpsSniper && this.mc.gameSettings.thirdPersonView == 0)
+            {
                 event.newfov = 1.0F - (float) TFDataManager.getZoomTimer(player) / 10;
             }
         }
 
-        if (TFDataManager.getTransformationTimer(player) < 20 && !(nitro > 0 && moveForward && nitroPressed && !TFDataManager.isInStealthMode(player))) {
+        if (TFDataManager.getTransformationTimer(player) < 20 && !(nitro > 0 && moveForward && nitroPressed && !TFDataManager.isInStealthMode(player)))
+        {
             event.newfov = 1.0F;
         }
     }
 
     @SubscribeEvent
-    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+    public void onPlayerTick(TickEvent.PlayerTickEvent event)
+    {
 
     }
     //    TODO: Expand upon and re-implement this for 0.6.0 

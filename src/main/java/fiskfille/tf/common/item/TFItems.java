@@ -8,7 +8,8 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
-public class TFItems {
+public class TFItems
+{
     public static ArmorMaterial TRANSFORMERMATERIAL = EnumHelper.addArmorMaterial("Transformer", "Transformer", 1250 / 16, new int[]{3, 9, 6, 3}, 2);
     public static ArmorMaterial TANKMATERIAL = EnumHelper.addArmorMaterial("Transformer", "Transformer", 1550 / 16, new int[]{4, 9, 7, 3}, 2);
     public static ArmorMaterial SUBWOOFERMATERIAL = EnumHelper.addArmorMaterial("Transformer", "Transformer", 1250 / 16, new int[]{3, 9, 7, 3}, 2);
@@ -62,7 +63,8 @@ public class TFItems {
 
     public static Item transformiumDetector;
 
-    public void register() {
+    public void register()
+    {
         String modId = TransformersMod.modid;
 
         transformium = new Item();

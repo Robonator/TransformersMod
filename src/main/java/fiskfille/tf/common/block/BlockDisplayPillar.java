@@ -18,28 +18,34 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockDisplayPillar extends BlockBasic implements ITileEntityProvider {
+public class BlockDisplayPillar extends BlockBasic implements ITileEntityProvider
+{
     private Random rand = new Random();
 
-    public BlockDisplayPillar() {
+    public BlockDisplayPillar()
+    {
         super(Material.rock);
         this.setHardness(0.5F);
         this.setResistance(1.0F);
     }
 
-    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+    public void breakBlock(World world, BlockPos pos, IBlockState state)
+    {
         TileEntityDisplayPillar tileEntityDisplayPillar = (TileEntityDisplayPillar) world.getTileEntity(pos);
         ItemStack itemstack = tileEntityDisplayPillar.getDisplayItem();
 
-        if (itemstack != null) {
+        if (itemstack != null)
+        {
             float f = this.rand.nextFloat() * 0.8F + 0.1F;
             float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
             float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
 
-            while (itemstack.stackSize > 0) {
+            while (itemstack.stackSize > 0)
+            {
                 int j1 = this.rand.nextInt(21) + 10;
 
-                if (j1 > itemstack.stackSize) {
+                if (j1 > itemstack.stackSize)
+                {
                     j1 = itemstack.stackSize;
                 }
 
@@ -47,7 +53,8 @@ public class BlockDisplayPillar extends BlockBasic implements ITileEntityProvide
 
                 EntityItem entityitem = new EntityItem(world, (double) ((float) pos.getX() + f), (double) ((float) pos.getY() + f1), (double) ((float) pos.getZ() + f2), new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
 
-                if (itemstack.hasTagCompound()) {
+                if (itemstack.hasTagCompound())
+                {
                     entityitem.getEntityItem().setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
                 }
 
@@ -64,20 +71,26 @@ public class BlockDisplayPillar extends BlockBasic implements ITileEntityProvide
         super.breakBlock(world, pos, state);
     }
 
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
+    {
         TileEntityDisplayPillar tileEntityDisplayPillar = (TileEntityDisplayPillar) world.getTileEntity(pos);
 
-        if (tileEntityDisplayPillar != null) {
+        if (tileEntityDisplayPillar != null)
+        {
             ItemStack heldItem = player.getHeldItem();
 
             ItemStack displayItem = tileEntityDisplayPillar.getDisplayItem();
 
-            if (heldItem == null && displayItem != null) {
+            if (heldItem == null && displayItem != null)
+            {
                 player.setCurrentItemOrArmor(0, displayItem);
 
                 tileEntityDisplayPillar.setDisplayItem(null, true);
-            } else if (heldItem != null && heldItem.getItem() instanceof ItemMiniVehicle) {
-                if (displayItem == null) {
+            }
+            else if (heldItem != null && heldItem.getItem() instanceof ItemMiniVehicle)
+            {
+                if (displayItem == null)
+                {
                     tileEntityDisplayPillar.setDisplayItem(heldItem, true);
 
                     //if (!player.capabilities.isCreativeMode)
@@ -91,22 +104,30 @@ public class BlockDisplayPillar extends BlockBasic implements ITileEntityProvide
         return false;
     }
 
-    public MovingObjectPosition collisionRayTrace(World world, BlockPos pos, Vec3 start, Vec3 end) {
+    public MovingObjectPosition collisionRayTrace(World world, BlockPos pos, Vec3 start, Vec3 end)
+    {
         TileEntityDisplayPillar tileEntityDisplayPillar = (TileEntityDisplayPillar) world.getTileEntity(pos);
 
-        if (tileEntityDisplayPillar != null) {
+        if (tileEntityDisplayPillar != null)
+        {
             ItemStack displayItem = tileEntityDisplayPillar.getDisplayItem();
 
-            if (displayItem != null) {
+            if (displayItem != null)
+            {
                 float f = 0.21F;
                 int metadata = displayItem.getItemDamage();
 
-                if (metadata == 0 || metadata == 1 || metadata == 4) {
+                if (metadata == 0 || metadata == 1 || metadata == 4)
+                {
                     this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-                } else if (metadata == 2 || metadata == 3) {
+                }
+                else if (metadata == 2 || metadata == 3)
+                {
                     this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
                 }
-            } else {
+            }
+            else
+            {
                 this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.55F, 1.0F);
             }
         }
@@ -114,19 +135,23 @@ public class BlockDisplayPillar extends BlockBasic implements ITileEntityProvide
         return super.collisionRayTrace(world, pos, start, end);
     }
 
-    public boolean renderAsNormalBlock() {
+    public boolean renderAsNormalBlock()
+    {
         return false;
     }
 
-    public int getRenderType() {
+    public int getRenderType()
+    {
         return -1;
     }
 
-    public boolean isOpaqueCube() {
+    public boolean isOpaqueCube()
+    {
         return false;
     }
 
-    public TileEntity createNewTileEntity(World world, int metadata) {
+    public TileEntity createNewTileEntity(World world, int metadata)
+    {
         return new TileEntityDisplayPillar();
     }
 }

@@ -11,7 +11,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelCloudtrap extends ModelChildBase.Biped {
+public class ModelCloudtrap extends ModelChildBase.Biped
+{
     public MowzieModelRenderer lowerArm1;
     public ModelRenderer vehicleBody;
     MowzieModelRenderer upperLeg1;
@@ -74,7 +75,8 @@ public class ModelCloudtrap extends ModelChildBase.Biped {
     ModelRenderer vehicleCockpit;
     ModelRenderer vehicleFrontPiece1;
 
-    public ModelCloudtrap() {
+    public ModelCloudtrap()
+    {
         textureWidth = 64;
         textureHeight = 128;
 
@@ -374,19 +376,22 @@ public class ModelCloudtrap extends ModelChildBase.Biped {
         this.addChildTo(vehicleMain, vehicleBody);
     }
 
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    {
         super.render(entity, f, f1, f2, f3, f4, f5);
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         this.vehicleBody.render(f5);
     }
 
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
+    {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
     }
 
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity) {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity)
+    {
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, entity);
 
         this.bipedBody.rotationPointY = 0;
@@ -395,11 +400,13 @@ public class ModelCloudtrap extends ModelChildBase.Biped {
         this.upperLeg1.rotationPointY = 0;
         this.upperLeg2.rotationPointY = 0;
 
-        if (entity instanceof EntityPlayer) {
+        if (entity instanceof EntityPlayer)
+        {
             EntityPlayer player = (EntityPlayer) entity;
             int timer = TFDataManager.getTransformationTimer(player);
 
-            if (timer == 0) {
+            if (timer == 0)
+            {
                 this.vehicleBody.rotateAngleX = par5 / (180F / (float) Math.PI);
                 this.vehicleBody.rotateAngleZ = -(this.bipedHead.rotateAngleY);
 
@@ -410,7 +417,9 @@ public class ModelCloudtrap extends ModelChildBase.Biped {
                 bipedRightLeg.offsetY = 256F;
                 bipedLeftLeg.offsetY = 256F;
                 vehicleBody.offsetY = 0F;
-            } else {
+            }
+            else
+            {
                 float f = (float) (20 - timer) / 2;
 
                 ModelOffset offsets = TFModelHelper.getOffsets(player);
@@ -418,7 +427,8 @@ public class ModelCloudtrap extends ModelChildBase.Biped {
                 this.bipedHead.rotationPointY = offsets.headOffsetY;
                 this.bipedHead.rotationPointZ = offsets.headOffsetZ;
 
-                if (bipedHead.rotationPointY != 0) {
+                if (bipedHead.rotationPointY != 0)
+                {
                     bipedHead.rotationPointY -= 1;
                 }
 
@@ -428,7 +438,8 @@ public class ModelCloudtrap extends ModelChildBase.Biped {
                 this.bipedRightArm.rotationPointZ = f * 1.2F;
                 this.bipedLeftArm.rotationPointZ = f * 1.2F;
 
-                if (timer < 20) {
+                if (timer < 20)
+                {
                     this.bipedBody.rotateAngleX = (pi / 20) * f;
                     this.bipedHead.rotateAngleX = (pi / 20) * f;
                     this.bipedRightArm.rotateAngleX = -(pi / 20) * f;

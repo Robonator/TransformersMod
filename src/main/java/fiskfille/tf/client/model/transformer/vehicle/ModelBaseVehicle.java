@@ -5,7 +5,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelBaseVehicle extends ModelChildBase.Base {
-    public void render() {
+public class ModelBaseVehicle extends ModelChildBase.Base
+{
+    public void render()
+    {
     }
 }

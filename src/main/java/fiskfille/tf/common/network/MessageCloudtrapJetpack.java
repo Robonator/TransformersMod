@@ -10,32 +10,40 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageCloudtrapJetpack implements IMessage {
+public class MessageCloudtrapJetpack implements IMessage
+{
     private int id;
     private boolean jetpacking;
 
-    public MessageCloudtrapJetpack() {
+    public MessageCloudtrapJetpack()
+    {
 
     }
 
-    public MessageCloudtrapJetpack(EntityPlayer player, boolean j) {
+    public MessageCloudtrapJetpack(EntityPlayer player, boolean j)
+    {
         id = player.getEntityId();
         jetpacking = j;
     }
 
-    public void fromBytes(ByteBuf buf) {
+    public void fromBytes(ByteBuf buf)
+    {
         id = buf.readInt();
         jetpacking = buf.readBoolean();
     }
 
-    public void toBytes(ByteBuf buf) {
+    public void toBytes(ByteBuf buf)
+    {
         buf.writeInt(id);
         buf.writeBoolean(jetpacking);
     }
 
-    public static class Handler implements IMessageHandler<MessageCloudtrapJetpack, IMessage> {
-        public IMessage onMessage(MessageCloudtrapJetpack message, MessageContext ctx) {
-            if (ctx.side.isClient()) {
+    public static class Handler implements IMessageHandler<MessageCloudtrapJetpack, IMessage>
+    {
+        public IMessage onMessage(MessageCloudtrapJetpack message, MessageContext ctx)
+        {
+            if (ctx.side.isClient())
+            {
                 EntityPlayer player = TransformersMod.proxy.getPlayer();
                 EntityPlayer from = null;
                 Entity entity = player.worldObj.getEntityByID(message.id);
@@ -43,10 +51,13 @@ public class MessageCloudtrapJetpack implements IMessage {
                 if (entity instanceof EntityPlayer)
                     from = (EntityPlayer) entity;
 
-                if (from != null && from != player) {
+                if (from != null && from != player)
+                {
                     CloudtrapJetpackManager.cloudtrapJetpacking.put(from, message.jetpacking);
                 }
-            } else {
+            }
+            else
+            {
                 EntityPlayer player = ctx.getServerHandler().playerEntity;
 
                 TFNetworkManager.networkWrapper.sendToDimension(new MessageCloudtrapJetpack(player, message.jetpacking), player.dimension);

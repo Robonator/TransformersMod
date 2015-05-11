@@ -6,7 +6,8 @@ import net.minecraft.init.Items;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 
-public class TFAchievements {
+public class TFAchievements
+{
     public static Achievement transformersMod = (new Achievement("achievement.tf.transformers_mod", "tf.transformers_mod", 0, 0, TFBlocks.energonCrystal, null))/*.initIndependentStat().registerStat()*/;
     public static Achievement transformium = (new Achievement("achievement.tf.transformium", "tf.transformium", 2, -2, TFItems.transformium, transformersMod))/*.registerStat()*/;
     public static Achievement transform = new Achievement("achievement.tf.transform", "tf.transform", 4, -2, TFItems.carWheel, transformium)/*.registerStat()*/;
@@ -23,7 +24,8 @@ public class TFAchievements {
 
     public static AchievementPage transformersPage = new AchievementPage("Transformers", transformersMod, transformium, firstMissile, transform, donate, tracks, skystrike, purge, vurp, subwoofer, detonateSeed, sharpshooter);
 
-    public static void register() {
+    public static void register()
+    {
         AchievementPage.registerAchievementPage(transformersPage);
     }
 }

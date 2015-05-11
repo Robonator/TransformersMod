@@ -24,29 +24,36 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 import java.lang.reflect.Field;
 
-public class ClientProxy extends CommonProxy {
+public class ClientProxy extends CommonProxy
+{
     public static Field camRollField;
     private Minecraft mc = Minecraft.getMinecraft();
 
     @Override
-    public World getWorld() {
+    public World getWorld()
+    {
         return mc.theWorld;
     }
 
     @Override
-    public EntityPlayer getPlayer() {
+    public EntityPlayer getPlayer()
+    {
         return mc.thePlayer;
     }
 
     @Override
-    public void registerRenderInformation() {
+    public void registerRenderInformation()
+    {
         RenderCustomPlayer renderCustomPlayer = new RenderCustomPlayer();
         mc.getRenderManager().entityRenderMap.put(EntityPlayer.class, renderCustomPlayer);
 
         int i = 0;
-        for (Field curField : EntityRenderer.class.getDeclaredFields()) {
-            if (curField.getType() == float.class) {
-                if (++i == 15) {
+        for (Field curField : EntityRenderer.class.getDeclaredFields())
+        {
+            if (curField.getType() == float.class)
+            {
+                if (++i == 15)
+                {
                     camRollField = curField;
                     curField.setAccessible(true);
                 }
@@ -78,12 +85,14 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void registerTickHandlers() {
+    public void registerTickHandlers()
+    {
         tickHandler = new ClientTickHandler();
     }
 
     @Override
-    public void registerKeyBinds() {
+    public void registerKeyBinds()
+    {
         TFKeyBinds.register();
     }
 }

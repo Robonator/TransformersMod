@@ -10,7 +10,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public abstract class TransformerModel {
+public abstract class TransformerModel
+{
     public abstract Biped getMainModel();
 
     public abstract ModelBaseVehicle getVehicleModel();
@@ -25,16 +26,20 @@ public abstract class TransformerModel {
 
     public abstract ResourceLocation getTexture();
 
-    public Biped getStealthModel() {
+    public Biped getStealthModel()
+    {
         return null;
     }
 
-    public void renderItem(EntityPlayer player, ItemStack stack) {
+    public void renderItem(EntityPlayer player, ItemStack stack)
+    {
     }
 
-    public void renderCape(EntityPlayer player) {
+    public void renderCape(EntityPlayer player)
+    {
     }
 
-    public void renderFirstPersonArm(EntityPlayer player) {
+    public void renderFirstPersonArm(EntityPlayer player)
+    {
     }
 }

@@ -11,7 +11,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelTransformer extends MowzieModelBase {
+public class ModelTransformer extends MowzieModelBase
+{
     public MowzieModelRenderer upperLegR;
     public MowzieModelRenderer upperLegPanel1;
     public MowzieModelRenderer lowerLeg1;
@@ -78,7 +79,8 @@ public class ModelTransformer extends MowzieModelBase {
     public ModelRenderer vehicleTurretRear;
     public ModelRenderer vehicleMissileLauncher;
 
-    public ModelTransformer() {
+    public ModelTransformer()
+    {
         textureWidth = 128;
         textureHeight = 128;
 
@@ -406,30 +408,38 @@ public class ModelTransformer extends MowzieModelBase {
         setInitPose();
     }
 
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    {
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
-        if (entity instanceof EntityTransformer) {
+        if (entity instanceof EntityTransformer)
+        {
             EntityTransformer transformer = (EntityTransformer) entity;
 
-            if (transformer.getTransformationTimer() != 0) {
+            if (transformer.getTransformationTimer() != 0)
+            {
                 waist.render(f5);
-            } else {
+            }
+            else
+            {
                 vehicleBody.render(f5);
             }
         }
     }
 
-    private void setRotation(MowzieModelRenderer model, float x, float y, float z) {
+    private void setRotation(MowzieModelRenderer model, float x, float y, float z)
+    {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
 
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity) {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity)
+    {
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, entity);
 
-        if (entity instanceof EntityTransformer) {
+        if (entity instanceof EntityTransformer)
+        {
             EntityTransformer transformer = (EntityTransformer) entity;
 
             setToInitPose();
@@ -453,7 +463,8 @@ public class ModelTransformer extends MowzieModelBase {
 
             boolean sneaking = entity.isSneaking();
 
-            if (sneaking) {
+            if (sneaking)
+            {
                 waist.rotateAngleX -= 0.5F;
                 waist.rotationPointZ -= 6F;
                 waist.rotationPointY -= 3F;
@@ -467,19 +478,23 @@ public class ModelTransformer extends MowzieModelBase {
             head.rotateAngleX = par5 / (180F / (float) Math.PI);
 
             int backwardInverter = 1;
-            if (transformer.moveForward < 0) {
+            if (transformer.moveForward < 0)
+            {
                 backwardInverter = -1;
                 globalDegree = 0.5F;
             }
 
-            if (this.heldItemLeft != 0) {
+            if (this.heldItemLeft != 0)
+            {
                 this.upperArmL.rotateAngleX -= 0.2F;
             }
-            if (this.heldItemRight != 0) {
+            if (this.heldItemRight != 0)
+            {
                 this.upperArmR.rotateAngleX -= 0.2F;
             }
 
-            if (this.swingProgress > -9990.0F) {
+            if (this.swingProgress > -9990.0F)
+            {
                 float hitTick = this.swingProgress;
                 double max = 0.99126524;
 
@@ -498,7 +513,8 @@ public class ModelTransformer extends MowzieModelBase {
 
             boolean playerOnGround = onGround(transformer);
 
-            if (playerOnGround) {
+            if (playerOnGround)
+            {
                 //New pose!
                 upperLegR.rotateAngleY += 0.2;
                 upperLegL.rotateAngleY -= 0.2;
@@ -553,7 +569,8 @@ public class ModelTransformer extends MowzieModelBase {
                 walk(lowerArm1, 0.08F, 0.1F, true, 1, 0, ticksExisted, 1F);
                 walk(lowerArm2, 0.08F, 0.1F, true, 1, 0, ticksExisted, 1F);
 
-                if (sneaking) {
+                if (sneaking)
+                {
                     waist.rotationPointY += 3;
                     waist.rotationPointZ += 3;
                     waist.rotateAngleX += 0.5;
@@ -576,7 +593,9 @@ public class ModelTransformer extends MowzieModelBase {
                     lowerArm1.rotateAngleZ -= 0.5;
                     lowerArm2.rotateAngleZ += 0.5;
                 }
-            } else {
+            }
+            else
+            {
                 double motionY = entity.posY - entity.prevPosY;
                 float upwardPose = (float) (1 / (1 + Math.exp(-20 * (motionY + 0.2))));
                 float downwardPose = (float) (1 / (1 + Math.exp(10 * (motionY + 0.2))));
@@ -650,16 +669,22 @@ public class ModelTransformer extends MowzieModelBase {
             hipPanel1.rotateAngleZ -= Math.PI / 2 * transformProgressSin;
             hipPanel2.rotateAngleZ += Math.PI / 2 * transformProgressSin;
 
-            if (transformationTimer == 0) {
+            if (transformationTimer == 0)
+            {
                 float xRotation = par5 / (180F / (float) Math.PI);
 
                 this.vehicleBody.rotateAngleY = bipedBody.rotateAngleY;
                 this.vehicleGun.rotateAngleX = par5 < 0 ? xRotation : 0;
                 this.vehicleTurret.rotateAngleY = par4 / (180F / (float) Math.PI);
-            } else {
-                if (transformer.getHeldItem() != null && transformer.getHeldItem().getItem() == TFItems.purgesKatana) {
+            }
+            else
+            {
+                if (transformer.getHeldItem() != null && transformer.getHeldItem().getItem() == TFItems.purgesKatana)
+                {
                     tread1.showModel = false;
-                } else {
+                }
+                else
+                {
                     tread1.showModel = true;
                 }
             }

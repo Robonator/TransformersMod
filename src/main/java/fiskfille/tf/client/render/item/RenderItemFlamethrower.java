@@ -9,21 +9,26 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
-public class RenderItemFlamethrower implements IItemRenderer {
+public class RenderItemFlamethrower implements IItemRenderer
+{
     private ModelFlamethrower model = new ModelFlamethrower();
 
-    public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+    public boolean handleRenderType(ItemStack item, ItemRenderType type)
+    {
         return type == ItemRenderType.EQUIPPED || type == ItemRenderType.EQUIPPED_FIRST_PERSON;
     }
 
-    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
+    {
         return false;
     }
 
-    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data)
+    {
         Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/weapons/flame_thrower.png"));
 
-        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
+        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON)
+        {
             GL11.glPushMatrix();
 
             GL11.glTranslatef(0.8F, 0.6F, 0);
@@ -31,10 +36,12 @@ public class RenderItemFlamethrower implements IItemRenderer {
             GL11.glRotatef(200, 0, 0, 1);
             GL11.glRotatef(180, 0, 1, 0);
 
-            if (data[1] instanceof EntityPlayer) {
+            if (data[1] instanceof EntityPlayer)
+            {
                 EntityPlayer player = (EntityPlayer) data[1];
 
-                if (player.getItemInUseDuration() != 0) {
+                if (player.getItemInUseDuration() != 0)
+                {
                     GL11.glRotatef(-25, 0, 0, 1);
                     GL11.glTranslatef(0, 0.2F, 0);
                 }
@@ -44,7 +51,9 @@ public class RenderItemFlamethrower implements IItemRenderer {
             GL11.glScalef(f, f, f);
             model.render();
             GL11.glPopMatrix();
-        } else if (type == ItemRenderType.EQUIPPED) {
+        }
+        else if (type == ItemRenderType.EQUIPPED)
+        {
             GL11.glPushMatrix();
             GL11.glTranslatef(0.6F, 0.4F, -0F);
             GL11.glRotatef(-135, 0, 0, 1);

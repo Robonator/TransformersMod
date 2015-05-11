@@ -11,19 +11,22 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class EntityTransformiumSeed extends Entity {
+public class EntityTransformiumSeed extends Entity
+{
     public int fuse;
     public int maxFuse;
     private EntityLivingBase placedBy;
 
-    public EntityTransformiumSeed(World world) {
+    public EntityTransformiumSeed(World world)
+    {
         super(world);
         this.preventEntitySpawning = true;
         this.setSize(0.98F, 0.98F);
         this.height = this.height / 2.0F;
     }
 
-    public EntityTransformiumSeed(World world, double x, double y, double z, EntityLivingBase entity) {
+    public EntityTransformiumSeed(World world, double x, double y, double z, EntityLivingBase entity)
+    {
         this(world);
         this.setPosition(x, y, z);
         float f = (float) (Math.random() * Math.PI * 2.0D);
@@ -36,22 +39,27 @@ public class EntityTransformiumSeed extends Entity {
         this.placedBy = entity;
     }
 
-    public static List<Entity> getEntitiesNear(World world, double x, double y, double z, float radius) {
+    public static List<Entity> getEntitiesNear(World world, double x, double y, double z, float radius)
+    {
         return world.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.fromBounds(x - radius, y - radius, z - radius, x + radius, y + radius, z + radius), IEntitySelector.selectAnything);
     }
 
-    protected void entityInit() {
+    protected void entityInit()
+    {
     }
 
-    protected boolean canTriggerWalking() {
+    protected boolean canTriggerWalking()
+    {
         return false;
     }
 
-    public boolean canBeCollidedWith() {
+    public boolean canBeCollidedWith()
+    {
         return !this.isDead;
     }
 
-    public void onUpdate() {
+    public void onUpdate()
+    {
         this.motionX = 0;
         this.motionZ = 0;
         this.prevPosX = this.posX;
@@ -59,25 +67,34 @@ public class EntityTransformiumSeed extends Entity {
         this.prevPosZ = this.posZ;
         this.moveEntity(this.motionX, this.motionY, this.motionZ);
 
-        if (this.motionY > 0) {
+        if (this.motionY > 0)
+        {
             this.motionY -= 0.0005D;
-        } else {
+        }
+        else
+        {
             this.motionY = 0D;
         }
 
         this.worldObj.playSoundAtEntity(this, "note.pling", 1, 0.0F + (float) ticksExisted / 50);
         this.worldObj.playSoundAtEntity(this, "note.bassattack", 1, 0.0F + (float) ticksExisted / 50);
 
-        for (int j = 0; j < 5; ++j) {
+        for (int j = 0; j < 5; ++j)
+        {
             worldObj.spawnParticle(EnumParticleTypes.FLAME, posX, posY, posZ, 0.0D, -0.5D, 0.0D);
         }
 
-        if (this.ticksExisted > 100) {
-            if (this.fuse++ >= 40) {
+        if (this.ticksExisted > 100)
+        {
+            if (this.fuse++ >= 40)
+            {
                 this.setDead();
                 this.explode();
-            } else {
-                for (int i = 0; i < 360; ++i) {
+            }
+            else
+            {
+                for (int i = 0; i < 360; ++i)
+                {
                     float f = 1.0F;
                     float f1 = 0.0F;
                     double d0 = prevPosX + (posX - prevPosX) * (double) f;
@@ -97,25 +114,31 @@ public class EntityTransformiumSeed extends Entity {
                     int y = 256;
                     double z = (int) vec31.zCoord;
 
-                    while (worldObj.getBlockState(new BlockPos((int) x, y, (int) z)).getBlock() == Blocks.air) {
+                    while (worldObj.getBlockState(new BlockPos((int) x, y, (int) z)).getBlock() == Blocks.air)
+                    {
                         --y;
                     }
 
-                    for (int j = 0; j < 5; ++j) {
+                    for (int j = 0; j < 5; ++j)
+                    {
                         worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + rand.nextFloat() - 0.5F / 2, y + 1.2F, z + rand.nextFloat() - 0.5F / 2, 0.0D, 0.0D, 0.0D);
                         worldObj.spawnParticle(EnumParticleTypes.FLAME, x + rand.nextFloat() - 0.5F / 2, y + 1.2F, z + rand.nextFloat() - 0.5F / 2, 0.0D, 0.0D, 0.0D);
 
                         if (worldObj.getBlockState(new BlockPos((int) x, y - j, (int) z)).getBlock() != TFBlocks.transformiumStone
                                 && !worldObj.isAirBlock(new BlockPos((int) x, y - j, (int) z))
-                                && worldObj.getBlockState(new BlockPos((int) x, y - j, (int) z)).getBlock() != Blocks.bedrock) {
+                                && worldObj.getBlockState(new BlockPos((int) x, y - j, (int) z)).getBlock() != Blocks.bedrock)
+                        {
                             worldObj.setBlockState(new BlockPos((int) x, y - j, (int) z), TFBlocks.transformiumStone.getDefaultState());
                         }
 
                         List<Entity> list = getEntitiesNear(worldObj, x, y, z, 5.0F);
 
-                        for (Entity entity : list) {
-                            if (!entity.getUniqueID().equals(getUniqueID())) {
-                                if (entity instanceof EntityLivingBase) {
+                        for (Entity entity : list)
+                        {
+                            if (!entity.getUniqueID().equals(getUniqueID()))
+                            {
+                                if (entity instanceof EntityLivingBase)
+                                {
                                     entity.attackEntityFrom(DamageSource.onFire, 99999999999999999999.0F);
                                     entity.attackEntityFrom(DamageSource.generic, 99999999999999999999.0F);
                                 }
@@ -127,24 +150,29 @@ public class EntityTransformiumSeed extends Entity {
         }
     }
 
-    private void explode() {
-        if (!this.worldObj.isRemote) {
+    private void explode()
+    {
+        if (!this.worldObj.isRemote)
+        {
             float f = 10.0F;
             this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, f, true);
         }
     }
 
-    protected void writeEntityToNBT(NBTTagCompound nbt) {
+    protected void writeEntityToNBT(NBTTagCompound nbt)
+    {
         nbt.setByte("Fuse", (byte) this.fuse);
         nbt.setByte("MaxFuse", (byte) this.maxFuse);
     }
 
-    protected void readEntityFromNBT(NBTTagCompound nbt) {
+    protected void readEntityFromNBT(NBTTagCompound nbt)
+    {
         this.fuse = nbt.getByte("Fuse");
         this.maxFuse = nbt.getByte("MaxFuse");
     }
 
-    public EntityLivingBase getSeedPlacedBy() {
+    public EntityLivingBase getSeedPlacedBy()
+    {
         return this.placedBy;
     }
 }

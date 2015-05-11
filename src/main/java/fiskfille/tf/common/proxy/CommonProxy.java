@@ -4,26 +4,32 @@ import fiskfille.tf.client.tick.ClientTickHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-public class CommonProxy {
+public class CommonProxy
+{
     public ClientTickHandler tickHandler;
 
-    public World getWorld() {
+    public World getWorld()
+    {
         return null;
     }
 
-    public EntityPlayer getPlayer() {
+    public EntityPlayer getPlayer()
+    {
         return null;
     }
 
-    public void registerRenderInformation() {
+    public void registerRenderInformation()
+    {
 
     }
 
-    public void registerKeyBinds() {
+    public void registerKeyBinds()
+    {
 
     }
 
-    public void registerTickHandlers() {
+    public void registerTickHandlers()
+    {
 
     }
 }

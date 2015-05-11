@@ -8,21 +8,26 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
-public class RenderItemBassBlaster implements IItemRenderer {
+public class RenderItemBassBlaster implements IItemRenderer
+{
     private ModelBassBlaster model = new ModelBassBlaster();
 
-    public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+    public boolean handleRenderType(ItemStack item, ItemRenderType type)
+    {
         return type == ItemRenderType.EQUIPPED || type == ItemRenderType.EQUIPPED_FIRST_PERSON;
     }
 
-    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
+    {
         return false;
     }
 
-    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data)
+    {
         Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(TransformersMod.modid, "textures/models/weapons/bass_blaster.png"));
 
-        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
+        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON)
+        {
             GL11.glPushMatrix();
             GL11.glTranslatef(0.8F, 0.6F, 0.2F);
             GL11.glRotatef(-5, 1, 0, 0);
@@ -33,7 +38,9 @@ public class RenderItemBassBlaster implements IItemRenderer {
             GL11.glScalef(f, f, f);
             model.render();
             GL11.glPopMatrix();
-        } else if (type == ItemRenderType.EQUIPPED) {
+        }
+        else if (type == ItemRenderType.EQUIPPED)
+        {
             GL11.glPushMatrix();
             GL11.glTranslatef(0.8F, 0.29F, -0.025F);
             GL11.glRotatef(4, 0, 0, 1);

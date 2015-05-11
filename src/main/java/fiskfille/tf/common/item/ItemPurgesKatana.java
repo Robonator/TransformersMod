@@ -13,18 +13,23 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-public class ItemPurgesKatana extends ItemSword {
-    public ItemPurgesKatana(ToolMaterial material) {
+public class ItemPurgesKatana extends ItemSword
+{
+    public ItemPurgesKatana(ToolMaterial material)
+    {
         super(material);
         this.setMaxDamage(1500);
     }
 
-    public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int time) {
-        if (!TFDataManager.isInVehicleMode(player) && TFHelper.isPlayerPurge(player)) {
+    public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int time)
+    {
+        if (!TFDataManager.isInVehicleMode(player) && TFHelper.isPlayerPurge(player))
+        {
             int timeLeft = this.getMaxItemUseDuration(stack) - time;
             double force = (double) timeLeft / 10;
 
-            if (force > 2.0D) {
+            if (force > 2.0D)
+            {
                 force = 2.0D;
             }
 
@@ -38,17 +43,22 @@ public class ItemPurgesKatana extends ItemSword {
         }
     }
 
-    public int getMaxItemUseDuration(ItemStack stack) {
+    public int getMaxItemUseDuration(ItemStack stack)
+    {
         return 72000;
     }
 
-    public EnumAction getItemUseAction(ItemStack stack) {
+    public EnumAction getItemUseAction(ItemStack stack)
+    {
         return EnumAction.DRINK;
     }
 
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        if (TFHelper.isPlayerPurge(player)) {
-            if (!TFDataManager.isInVehicleMode(player)) {
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+    {
+        if (TFHelper.isPlayerPurge(player))
+        {
+            if (!TFDataManager.isInVehicleMode(player))
+            {
                 player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
             }
         }
@@ -56,7 +66,8 @@ public class ItemPurgesKatana extends ItemSword {
         return stack;
     }
 
-    public Multimap getItemAttributeModifiers() {
+    public Multimap getItemAttributeModifiers()
+    {
         Multimap multimap = super.getItemAttributeModifiers();
         multimap.removeAll(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
         multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(itemModifierUUID, "Weapon modifier", 8.0D, 0));

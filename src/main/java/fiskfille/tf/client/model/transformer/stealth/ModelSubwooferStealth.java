@@ -12,7 +12,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelSubwooferStealth extends MowzieModelBase {
+public class ModelSubwooferStealth extends MowzieModelBase
+{
     public ModelRenderer vehicleBase;
     public ModelRenderer vehicleStomach;
     public ModelRenderer vehicleCrotch1;
@@ -64,7 +65,8 @@ public class ModelSubwooferStealth extends MowzieModelBase {
     public ModelRenderer vehicleLowerLegR3;
     public ModelRenderer vehicleRearWheel1;
 
-    public ModelSubwooferStealth() {
+    public ModelSubwooferStealth()
+    {
         this.textureWidth = 128;
         this.textureHeight = 128;
         this.vehicleLowerArmL1 = new ModelRenderer(this, 48, 94);
@@ -306,21 +308,25 @@ public class ModelSubwooferStealth extends MowzieModelBase {
         this.vehicleDish1.addChild(this.vehicleDish2);
     }
 
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    {
         this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         this.vehicleBase.render(0.0625F);
     }
 
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
+    {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
     }
 
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity) {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity)
+    {
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, entity);
 
-        if (entity instanceof EntityPlayer) {
+        if (entity instanceof EntityPlayer)
+        {
             EntityPlayer player = (EntityPlayer) entity;
 
             int t = TFDataManager.getStealthModeTimer(player);
@@ -346,8 +352,10 @@ public class ModelSubwooferStealth extends MowzieModelBase {
 
             VehicleMotion transformedPlayer = TFMotionManager.getTransformerPlayer(player);
 
-            if (transformedPlayer != null) {
-                for (ModelRenderer modelRenderer : new ModelRenderer[]{vehicleFrontWheel1, vehicleFrontWheel2, vehicleRearWheel1, vehicleRearWheel2}) {
+            if (transformedPlayer != null)
+            {
+                for (ModelRenderer modelRenderer : new ModelRenderer[]{vehicleFrontWheel1, vehicleFrontWheel2, vehicleRearWheel1, vehicleRearWheel2})
+                {
                     modelRenderer.rotateAngleX = (transformedPlayer.getForwardVelocity() < 0 ? -par1 : par1) * 0.8F;
                 }
 
@@ -362,9 +370,12 @@ public class ModelSubwooferStealth extends MowzieModelBase {
 
             vehicleBase.rotateAngleY = bipedBody.rotateAngleY;
 
-            if (player == Minecraft.getMinecraft().thePlayer) {
+            if (player == Minecraft.getMinecraft().thePlayer)
+            {
                 vehicleBase.rotateAngleX = -(float) player.motionY - 0.0784000015258789F;
-            } else {
+            }
+            else
+            {
                 vehicleBase.rotateAngleX = -(float) (player.posY - player.prevPosY) * 1.5F;
             }
         }

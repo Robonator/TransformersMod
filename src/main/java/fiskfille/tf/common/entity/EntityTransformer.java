@@ -14,20 +14,24 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class EntityTransformer extends EntityCreature {
+public class EntityTransformer extends EntityCreature
+{
     private boolean transformed;
     private int transformationTimer;
 
-    public EntityTransformer(World world) {
+    public EntityTransformer(World world)
+    {
         super(world);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(0, new EntityAIWander(this, 0.45F));
         this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.5D, true));
         this.tasks.addTask(1, new EntityAITransform(this, EntityVillager.class, 20)); //Robots in disguise!
         this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 4F, 10F));
-        this.tasks.addTask(3, new EntityAIAvoidEntity(this, new Predicate() {
+        this.tasks.addTask(3, new EntityAIAvoidEntity(this, new Predicate()
+        {
             @Override
-            public boolean apply(Object input) {
+            public boolean apply(Object input)
+            {
                 return input instanceof EntityTransformiumSeed;
             }
         }, 100F, 0.6F, 0.6F));
@@ -37,8 +41,10 @@ public class EntityTransformer extends EntityCreature {
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity entity) {
-        if (!transformed) {
+    public boolean attackEntityAsMob(Entity entity)
+    {
+        if (!transformed)
+        {
             float damage = 10;
 
             return entity.attackEntityFrom(DamageSource.causeMobDamage(this), damage);
@@ -48,29 +54,36 @@ public class EntityTransformer extends EntityCreature {
     }
 
     @Override
-    protected void applyEntityAttributes() {
+    protected void applyEntityAttributes()
+    {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
     }
 
     @Override
-    public void entityInit() {
+    public void entityInit()
+    {
         super.entityInit();
 
         this.dataWatcher.addObject(20, transformedByte());
     }
 
     @Override
-    public void onUpdate() {
+    public void onUpdate()
+    {
         super.onUpdate();
 
-        if (worldObj.isRemote) {
+        if (worldObj.isRemote)
+        {
             this.transformed = this.dataWatcher.getWatchableObjectByte(20) == 1;
         }
 
-        if (transformed) {
+        if (transformed)
+        {
             this.stepHeight = 1.0F;
-        } else {
+        }
+        else
+        {
             this.stepHeight = 0.5F;
         }
 
@@ -81,48 +94,58 @@ public class EntityTransformer extends EntityCreature {
 
         this.setSize(0.8F, (transformationTimer * 0.05F) + 1F);
 
-        if (!worldObj.isRemote) {
+        if (!worldObj.isRemote)
+        {
             this.dataWatcher.updateObject(20, transformedByte());
         }
     }
 
-    private byte transformedByte() {
+    private byte transformedByte()
+    {
         return transformed ? (byte) 1 : (byte) 0;
     }
 
-    public boolean isTransformed() {
+    public boolean isTransformed()
+    {
         return transformed;
     }
 
-    public int getTransformationTimer() {
+    public int getTransformationTimer()
+    {
         return transformationTimer;
     }
 
-    public void setInVehicleMode(boolean vehicleMode) {
+    public void setInVehicleMode(boolean vehicleMode)
+    {
         this.transformed = vehicleMode;
     }
 
     @Override
-    public ItemStack getHeldItem() {
+    public ItemStack getHeldItem()
+    {
         return null;
         //return new ItemStack(TFItems.purgesKatana);
     }
 
     @Override
-    public ItemStack getEquipmentInSlot(int slot) {
+    public ItemStack getEquipmentInSlot(int slot)
+    {
         return null;
     }
 
     @Override
-    public void setCurrentItemOrArmor(int slot, ItemStack stack) {
+    public void setCurrentItemOrArmor(int slot, ItemStack stack)
+    {
     }
 
-    public void readEntityFromNBT(NBTTagCompound nbt) {
+    public void readEntityFromNBT(NBTTagCompound nbt)
+    {
         transformed = nbt.getBoolean("Transformed");
         transformationTimer = transformed ? 0 : 20;
     }
 
-    public void writeEntityToNBT(NBTTagCompound nbt) {
+    public void writeEntityToNBT(NBTTagCompound nbt)
+    {
         nbt.setBoolean("Transformed", transformed);
     }
 }

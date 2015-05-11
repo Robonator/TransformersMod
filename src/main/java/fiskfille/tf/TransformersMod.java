@@ -26,7 +26,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import java.lang.reflect.Method;
 
 @Mod(modid = TransformersMod.modid, name = "Transformers Mod", version = TransformersMod.version, guiFactory = "fiskfille.tf.client.gui.TFGuiFactory")
-public class TransformersMod {
+public class TransformersMod
+{
     public static final String modid = "transformers";
     public static final String version = "0.5.0";
     @Mod.Instance(TransformersMod.modid)
@@ -43,18 +44,21 @@ public class TransformersMod {
     public TFBlocks blocks = new TFBlocks();
 
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
+    public void preInit(FMLPreInitializationEvent event)
+    {
         TransformerManager.register();
 
         configFile = new Configuration(event.getSuggestedConfigurationFile());
         configFile.load();
         config.load(configFile);
 
-        if (configFile.hasChanged()) {
+        if (configFile.hasChanged())
+        {
             configFile.save();
         }
 
-        if (TFConfig.checkForUpdates) {
+        if (TFConfig.checkForUpdates)
+        {
             UpdateChecker updateChecker = new UpdateChecker();
             updateChecker.handleUpdates();
             Donators.loadDonators();
@@ -69,11 +73,14 @@ public class TransformersMod {
 
         GameRegistry.registerWorldGenerator(new OreWorldGenerator(), 0);
 
-        for (Method method : Entity.class.getDeclaredMethods()) {
+        for (Method method : Entity.class.getDeclaredMethods())
+        {
             Class<?>[] parameters = method.getParameterTypes();
 
-            if (parameters.length == 2) {
-                if (parameters[0] == float.class && parameters[1] == float.class) {
+            if (parameters.length == 2)
+            {
+                if (parameters[0] == float.class && parameters[1] == float.class)
+                {
                     method.setAccessible(true);
                     setSizeMethod = method;
                     break;

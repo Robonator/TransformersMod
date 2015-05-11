@@ -7,11 +7,14 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityDisplayPillar extends TileEntity {
+public class TileEntityDisplayPillar extends TileEntity
+{
     private ItemStack displayItem;
 
-    public void setDisplayItem(ItemStack item, boolean sync) {
-        if (item != this.displayItem) {
+    public void setDisplayItem(ItemStack item, boolean sync)
+    {
+        if (item != this.displayItem)
+        {
             if (sync)
                 worldObj.markBlockForUpdate(pos);
 
@@ -19,7 +22,8 @@ public class TileEntityDisplayPillar extends TileEntity {
         }
     }
 
-    public void readFromNBT(NBTTagCompound tagCompound) {
+    public void readFromNBT(NBTTagCompound tagCompound)
+    {
         super.readFromNBT(tagCompound);
 
         NBTTagCompound itemTag = tagCompound.getCompoundTag("Item");
@@ -27,24 +31,28 @@ public class TileEntityDisplayPillar extends TileEntity {
         this.displayItem = ItemStack.loadItemStackFromNBT(itemTag);
     }
 
-    public void writeToNBT(NBTTagCompound tagCompound) {
+    public void writeToNBT(NBTTagCompound tagCompound)
+    {
         super.writeToNBT(tagCompound);
 
         NBTTagCompound itemTag = new NBTTagCompound();
 
-        if (displayItem != null) {
+        if (displayItem != null)
+        {
             displayItem.writeToNBT(itemTag);
         }
 
         tagCompound.setTag("Item", itemTag);
     }
 
-    public ItemStack getDisplayItem() {
+    public ItemStack getDisplayItem()
+    {
         return displayItem;
     }
 
     @Override
-    public Packet getDescriptionPacket() {
+    public Packet getDescriptionPacket()
+    {
         NBTTagCompound syncData = new NBTTagCompound();
         this.writeToNBT(syncData);
 
@@ -52,7 +60,8 @@ public class TileEntityDisplayPillar extends TileEntity {
     }
 
     @Override
-    public void onDataPacket(NetworkManager netManager, S35PacketUpdateTileEntity packet) {
+    public void onDataPacket(NetworkManager netManager, S35PacketUpdateTileEntity packet)
+    {
         this.readFromNBT(packet.getNbtCompound());
     }
 }

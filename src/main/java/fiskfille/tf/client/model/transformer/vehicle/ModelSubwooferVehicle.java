@@ -6,7 +6,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelSubwooferVehicle extends ModelBaseVehicle {
+public class ModelSubwooferVehicle extends ModelBaseVehicle
+{
     public ModelRenderer vehicleBase;
     public ModelRenderer vehicleStomach;
     public ModelRenderer vehicleCrotch1;
@@ -52,7 +53,8 @@ public class ModelSubwooferVehicle extends ModelBaseVehicle {
     public ModelRenderer vehicleLowerLegR3;
     public ModelRenderer vehicleRearWheel1;
 
-    public ModelSubwooferVehicle() {
+    public ModelSubwooferVehicle()
+    {
         this.textureWidth = 128;
         this.textureHeight = 128;
 
@@ -271,19 +273,22 @@ public class ModelSubwooferVehicle extends ModelBaseVehicle {
         this.vehicleLowerLegR1.addChild(this.vehicleRearWheel1);
     }
 
-    public void render() {
+    public void render()
+    {
         this.vehicleBase.render(0.0625F);
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    {
         this.vehicleBase.render(f5);
     }
 
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
+    {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

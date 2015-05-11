@@ -11,15 +11,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderTankShell extends Render {
+public class RenderTankShell extends Render
+{
     public ModelTankShell model = new ModelTankShell();
     public ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/weapons/tank_shell.png");
 
-    public RenderTankShell() {
+    public RenderTankShell()
+    {
         super(Minecraft.getMinecraft().getRenderManager());
     }
 
-    public void doRender(Entity entity, double x, double y, double z, float par8, float par9) {
+    public void doRender(Entity entity, double x, double y, double z, float par8, float par9)
+    {
         GL11.glPushMatrix();
         GL11.glTranslated(x, y, z);
         GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * par9 + 180, 0.0F, 1.0F, 0.0F);
@@ -31,7 +34,8 @@ public class RenderTankShell extends Render {
         GL11.glPopMatrix();
     }
 
-    protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
+    {
         return texture;
     }
 }

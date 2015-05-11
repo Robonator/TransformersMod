@@ -13,11 +13,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelChildBase {
-    public static class Base extends ModelBase {
+public class ModelChildBase
+{
+    public static class Base extends ModelBase
+    {
         public float pi = (float) Math.PI;
 
-        protected void addChildTo(ModelRenderer child, ModelRenderer parent) {
+        protected void addChildTo(ModelRenderer child, ModelRenderer parent)
+        {
             child.rotationPointX -= parent.rotationPointX;
             child.rotationPointY -= parent.rotationPointY;
             child.rotationPointZ -= parent.rotationPointZ;
@@ -28,7 +31,8 @@ public class ModelChildBase {
             parent.addChild(child);
         }
 
-        protected void addChildToWithoutPoint(ModelRenderer child, ModelRenderer parent) {
+        protected void addChildToWithoutPoint(ModelRenderer child, ModelRenderer parent)
+        {
             child.rotateAngleX -= parent.rotateAngleX;
             child.rotateAngleY -= parent.rotateAngleY;
             child.rotateAngleZ -= parent.rotateAngleZ;
@@ -36,10 +40,12 @@ public class ModelChildBase {
         }
     }
 
-    public static class Biped extends ModelBiped {
+    public static class Biped extends ModelBiped
+    {
         public float pi = (float) Math.PI;
 
-        protected void addChildTo(ModelRenderer child, ModelRenderer parent) {
+        protected void addChildTo(ModelRenderer child, ModelRenderer parent)
+        {
             child.rotationPointX -= parent.rotationPointX;
             child.rotationPointY -= parent.rotationPointY;
             child.rotationPointZ -= parent.rotationPointZ;
@@ -51,27 +57,32 @@ public class ModelChildBase {
             parent.addChild(child);
         }
 
-        protected void addChildToWithoutPoint(ModelRenderer child, ModelRenderer parent) {
+        protected void addChildToWithoutPoint(ModelRenderer child, ModelRenderer parent)
+        {
             child.rotateAngleX -= parent.rotateAngleX;
             child.rotateAngleY -= parent.rotateAngleY;
             child.rotateAngleZ -= parent.rotateAngleZ;
             parent.addChild(child);
         }
 
-        protected void setRotation(ModelRenderer model, float x, float y, float z) {
+        protected void setRotation(ModelRenderer model, float x, float y, float z)
+        {
             model.rotateAngleX = x;
             model.rotateAngleY = y;
             model.rotateAngleZ = z;
         }
 
-        protected void setPos(ModelRenderer model, float x, float y, float z) {
+        protected void setPos(ModelRenderer model, float x, float y, float z)
+        {
             model.rotationPointX = x;
             model.rotationPointY = y;
             model.rotationPointZ = z;
         }
 
-        protected void applyDefaultHittingAnimation(ModelRenderer upperArmR, ModelRenderer upperArmL, ModelRenderer head, ModelRenderer chest, ModelRenderer lowerArmR, ModelRenderer lowerArmL) {
-            if (this.swingProgress > -9990.0F) {
+        protected void applyDefaultHittingAnimation(ModelRenderer upperArmR, ModelRenderer upperArmL, ModelRenderer head, ModelRenderer chest, ModelRenderer lowerArmR, ModelRenderer lowerArmL)
+        {
+            if (this.swingProgress > -9990.0F)
+            {
                 float hitAnimation = this.swingProgress;
 
                 float change = MathHelper.sin(MathHelper.sqrt_float(hitAnimation) * (float) Math.PI * 2.0F) * 0.2F;
@@ -107,7 +118,8 @@ public class ModelChildBase {
 
         }
 
-        protected void applyDefaultHoldingAnimation(ModelRenderer upperArmR, ModelRenderer upperArmL, ModelRenderer lowerArmR, ModelRenderer lowerArmL) {
+        protected void applyDefaultHoldingAnimation(ModelRenderer upperArmR, ModelRenderer upperArmL, ModelRenderer lowerArmR, ModelRenderer lowerArmL)
+        {
             upperArmL.rotateAngleX -= this.heldItemLeft * 0.125F;
             upperArmR.rotateAngleX -= this.heldItemRight * 0.125F;
 
@@ -115,19 +127,25 @@ public class ModelChildBase {
             lowerArmR.rotateAngleX -= this.heldItemRight * 0.0625F;
         }
 
-        public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity) {
+        public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity)
+        {
             super.setRotationAngles(par1, par2, par3, par4, par5, par6, entity);
 
-            if (entity instanceof EntityPlayer) {
+            if (entity instanceof EntityPlayer)
+            {
                 EntityPlayer player = (EntityPlayer) entity;
                 ItemStack itemstack = player.getHeldItem();
 
-                if (TFDataManager.getTransformationTimer(player) == 20) {
-                    if (itemstack != null && itemstack.getItem() == TFItems.vurpsSniper) {
+                if (TFDataManager.getTransformationTimer(player) == 20)
+                {
+                    if (itemstack != null && itemstack.getItem() == TFItems.vurpsSniper)
+                    {
                         this.setRotation(this.bipedRightArm, -1.3F, bipedHead.rotateAngleY - 0.45F, 0.0F);
                         this.setRotation(this.bipedLeftArm, -1.2F, bipedHead.rotateAngleY + 0.4F, 0.0F);
                         this.bipedLeftArm.setRotationPoint(3.0F, 3.0F, -2.5F);
-                    } else {
+                    }
+                    else
+                    {
                         this.bipedLeftArm.setRotationPoint(5.0F, 2.0F, 0.0F);
                         this.bipedRightArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
                     }

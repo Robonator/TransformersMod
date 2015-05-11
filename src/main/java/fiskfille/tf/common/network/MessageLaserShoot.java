@@ -18,32 +18,40 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageLaserShoot implements IMessage {
+public class MessageLaserShoot implements IMessage
+{
     public int id;
     public boolean consume;
 
-    public MessageLaserShoot() {
+    public MessageLaserShoot()
+    {
 
     }
 
-    public MessageLaserShoot(EntityPlayer player, boolean consume) {
+    public MessageLaserShoot(EntityPlayer player, boolean consume)
+    {
         this.id = player.getEntityId();
         this.consume = consume;
     }
 
-    public void fromBytes(ByteBuf buf) {
+    public void fromBytes(ByteBuf buf)
+    {
         id = buf.readInt();
         consume = buf.readBoolean();
     }
 
-    public void toBytes(ByteBuf buf) {
+    public void toBytes(ByteBuf buf)
+    {
         buf.writeInt(id);
         buf.writeBoolean(consume);
     }
 
-    public static class Handler implements IMessageHandler<MessageLaserShoot, IMessage> {
-        public IMessage onMessage(MessageLaserShoot message, MessageContext ctx) {
-            if (ctx.side.isClient()) {
+    public static class Handler implements IMessageHandler<MessageLaserShoot, IMessage>
+    {
+        public IMessage onMessage(MessageLaserShoot message, MessageContext ctx)
+        {
+            if (ctx.side.isClient())
+            {
                 //				EntityPlayer player = TransformersMod.proxy.getPlayer(); TODO-TF laser sound
                 //				Entity fromEntity = player.worldObj.getEntityByID(message.id);
                 //
@@ -63,41 +71,51 @@ public class MessageLaserShoot implements IMessage {
                 //						}
                 //					}
                 //				}
-            } else {
+            }
+            else
+            {
                 EntityPlayer from = null;
 
-                for (World world : MinecraftServer.getServer().worldServers) {
+                for (World world : MinecraftServer.getServer().worldServers)
+                {
                     Entity entity = world.getEntityByID(message.id);
 
-                    if (entity instanceof EntityPlayer) {
+                    if (entity instanceof EntityPlayer)
+                    {
                         from = (EntityPlayer) entity;
                         break;
                     }
                 }
 
-                if (from != null) {
+                if (from != null)
+                {
                     Transformer transformer = TFHelper.getTransformer(from);
 
                     ItemStack heldItem = from.getHeldItem();
 
                     boolean hasSniper = heldItem != null && heldItem.getItem() instanceof ItemVurpsSniper && TFDataManager.getTransformationTimer(from) == 20;
 
-                    if (transformer instanceof TransformerVurp && (hasSniper || transformer.canShoot(from))) {
+                    if (transformer instanceof TransformerVurp && (hasSniper || transformer.canShoot(from)))
+                    {
                         Item shootItem = TFItems.energonCrystalPiece;
                         boolean isCreative = from.capabilities.isCreativeMode;
                         boolean consumeItems = !isCreative || from.inventory.hasItem(shootItem) && message.consume;
 
-                        if (!message.consume) {
+                        if (!message.consume)
+                        {
                             World world = from.worldObj;
 
                             Entity entity = new EntityLaser(world, from);
 
-                            if (TFDataManager.isInVehicleMode(from)) {
+                            if (TFDataManager.isInVehicleMode(from))
+                            {
                                 entity.posY -= 0.8F;
                             }
 
                             world.spawnEntityInWorld(entity);
-                        } else if (consumeItems && !isCreative) {
+                        }
+                        else if (consumeItems && !isCreative)
+                        {
                             from.inventory.consumeInventoryItem(shootItem);
                         }
                     }

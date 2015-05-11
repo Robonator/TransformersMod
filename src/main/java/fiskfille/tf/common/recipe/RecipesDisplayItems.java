@@ -13,11 +13,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
-public class RecipesDisplayItems implements IRecipe {
-    public boolean matches(InventoryCrafting inventoryCrafting, World world) {
+public class RecipesDisplayItems implements IRecipe
+{
+    public boolean matches(InventoryCrafting inventoryCrafting, World world)
+    {
         ItemStack[] stacks = new ItemStack[9];
 
-        for (int i = 0; i < stacks.length; i++) {
+        for (int i = 0; i < stacks.length; i++)
+        {
             stacks[i] = inventoryCrafting.getStackInSlot(i);
         }
 
@@ -28,24 +31,36 @@ public class RecipesDisplayItems implements IRecipe {
 
         int emptySlots = 0;
 
-        for (ItemStack itemStack : stacks) {
-            if (itemStack != null) {
+        for (ItemStack itemStack : stacks)
+        {
+            if (itemStack != null)
+            {
                 Item item = itemStack.getItem();
 
-                if (item instanceof ItemTransformerArmor) {
+                if (item instanceof ItemTransformerArmor)
+                {
                     ItemArmor armorItem = (ItemArmor) item;
 
-                    if (armorItem.armorType == 0) {
+                    if (armorItem.armorType == 0)
+                    {
                         head = itemStack;
-                    } else if (armorItem.armorType == 1) {
+                    }
+                    else if (armorItem.armorType == 1)
+                    {
                         chest = itemStack;
-                    } else if (armorItem.armorType == 2) {
+                    }
+                    else if (armorItem.armorType == 2)
+                    {
                         legs = itemStack;
-                    } else if (armorItem.armorType == 3) {
+                    }
+                    else if (armorItem.armorType == 3)
+                    {
                         boots = itemStack;
                     }
                 }
-            } else {
+            }
+            else
+            {
                 emptySlots++;
             }
         }
@@ -54,13 +69,15 @@ public class RecipesDisplayItems implements IRecipe {
 
     }
 
-    public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting) {
+    public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting)
+    {
         ItemStack itemstack = new ItemStack(TFItems.displayVehicle, 1);
         itemstack.setTagCompound(new NBTTagCompound());
 
         ItemStack[] stacks = new ItemStack[9];
 
-        for (int i = 0; i < stacks.length; i++) {
+        for (int i = 0; i < stacks.length; i++)
+        {
             stacks[i] = inventoryCrafting.getStackInSlot(i);
         }
 
@@ -69,27 +86,38 @@ public class RecipesDisplayItems implements IRecipe {
         ItemStack legs = null;
         ItemStack feet = null;
 
-        for (ItemStack itemStack : stacks) {
-            if (itemStack != null) {
+        for (ItemStack itemStack : stacks)
+        {
+            if (itemStack != null)
+            {
                 Item item = itemStack.getItem();
 
-                if (item instanceof ItemTransformerArmor) {
+                if (item instanceof ItemTransformerArmor)
+                {
                     ItemArmor armorItem = (ItemArmor) item;
 
-                    if (armorItem.armorType == 0) {
+                    if (armorItem.armorType == 0)
+                    {
                         head = itemStack;
-                    } else if (armorItem.armorType == 1) {
+                    }
+                    else if (armorItem.armorType == 1)
+                    {
                         chest = itemStack;
-                    } else if (armorItem.armorType == 2) {
+                    }
+                    else if (armorItem.armorType == 2)
+                    {
                         legs = itemStack;
-                    } else if (armorItem.armorType == 3) {
+                    }
+                    else if (armorItem.armorType == 3)
+                    {
                         feet = itemStack;
                     }
                 }
             }
         }
 
-        if (head != null && chest != null && legs != null && feet != null) {
+        if (head != null && chest != null && legs != null && feet != null)
+        {
             Item headItem = head.getItem();
             Item chestItem = chest.getItem();
             Item legsItem = legs.getItem();
@@ -99,13 +127,15 @@ public class RecipesDisplayItems implements IRecipe {
 
             boolean found = false;
 
-            for (Transformer transformer : TransformersAPI.getTransformers()) {
+            for (Transformer transformer : TransformersAPI.getTransformers())
+            {
                 Item helmet = transformer.getHelmet();
                 Item chestplate = transformer.getChestplate();
                 Item leggings = transformer.getLeggings();
                 Item boots = transformer.getBoots();
 
-                if (headItem == helmet && chestItem == chestplate && legsItem == leggings && feetItem == boots) {
+                if (headItem == helmet && chestItem == chestplate && legsItem == leggings && feetItem == boots)
+                {
                     itemstack.setItemDamage(i);
                     setNBTData(head, chest, legs, feet, itemstack);
                     found = true;
@@ -114,7 +144,8 @@ public class RecipesDisplayItems implements IRecipe {
                 i++;
             }
 
-            if (!found) {
+            if (!found)
+            {
                 itemstack = null;
             }
         }
@@ -122,12 +153,15 @@ public class RecipesDisplayItems implements IRecipe {
         return itemstack;
     }
 
-    public void setNBTData(ItemStack head, ItemStack chest, ItemStack legs, ItemStack feet, ItemStack itemstack) {
+    public void setNBTData(ItemStack head, ItemStack chest, ItemStack legs, ItemStack feet, ItemStack itemstack)
+    {
         ItemStack[] itemstacks = {head, chest, legs, feet};
         NBTTagList itemsList = new NBTTagList();
 
-        for (int i = 0; i < itemstacks.length; ++i) {
-            if (itemstacks[i] != null) {
+        for (int i = 0; i < itemstacks.length; ++i)
+        {
+            if (itemstacks[i] != null)
+            {
                 NBTTagCompound itemTag = new NBTTagCompound();
                 itemTag.setByte("Slot", (byte) i);
                 itemstacks[i].writeToNBT(itemTag);
@@ -138,15 +172,18 @@ public class RecipesDisplayItems implements IRecipe {
         itemstack.getTagCompound().setTag("Items", itemsList);
     }
 
-    public int getRecipeSize() {
+    public int getRecipeSize()
+    {
         return 10;
     }
 
-    public ItemStack getRecipeOutput() {
+    public ItemStack getRecipeOutput()
+    {
         return null;
     }
 
-    public ItemStack[] getRemainingItems(InventoryCrafting p_179532_1_) {
+    public ItemStack[] getRemainingItems(InventoryCrafting p_179532_1_)
+    {
         return new ItemStack[0];
     }
 }

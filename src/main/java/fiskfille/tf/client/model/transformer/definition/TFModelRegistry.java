@@ -9,18 +9,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SideOnly(Side.CLIENT)
-public class TFModelRegistry {
+public class TFModelRegistry
+{
     private static Map<Transformer, TransformerModel> models = new HashMap<Transformer, TransformerModel>();
 
-    public static void registerModel(Transformer transformer, TransformerModel model) {
+    public static void registerModel(Transformer transformer, TransformerModel model)
+    {
         models.put(transformer, model);
     }
 
-    public static TransformerModel getModel(Transformer transformer) {
+    public static TransformerModel getModel(Transformer transformer)
+    {
         return models.get(transformer);
     }
 
-    public static void registerModels() {
+    public static void registerModels()
+    {
         TFModelRegistry.registerModel(TransformerManager.transformerCloudtrap, new TFModelCloudtrap());
         TFModelRegistry.registerModel(TransformerManager.transformerPurge, new TFModelPurge());
         TFModelRegistry.registerModel(TransformerManager.transformerSkystrike, new TFModelSkystrike());

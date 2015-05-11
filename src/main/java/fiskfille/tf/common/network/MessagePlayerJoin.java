@@ -15,22 +15,26 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class MessagePlayerJoin implements IMessage {
+public class MessagePlayerJoin implements IMessage
+{
     private Map<Transformer, Boolean> canTransform;
 
     private boolean vehicleMode;
     private boolean stealthForce;
 
-    public MessagePlayerJoin() {
+    public MessagePlayerJoin()
+    {
     }
 
-    public MessagePlayerJoin(boolean vehicleMode, boolean stealthForce, Map<Transformer, Boolean> t) {
+    public MessagePlayerJoin(boolean vehicleMode, boolean stealthForce, Map<Transformer, Boolean> t)
+    {
         this.canTransform = t;
         this.vehicleMode = vehicleMode;
         this.stealthForce = stealthForce;
     }
 
-    public void fromBytes(ByteBuf buf) {
+    public void fromBytes(ByteBuf buf)
+    {
         vehicleMode = buf.readBoolean();
         stealthForce = buf.readBoolean();
 
@@ -40,18 +44,23 @@ public class MessagePlayerJoin implements IMessage {
             canTransform.put(transformer, buf.readBoolean());
     }
 
-    public void toBytes(ByteBuf buf) {
+    public void toBytes(ByteBuf buf)
+    {
         buf.writeBoolean(vehicleMode);
         buf.writeBoolean(stealthForce);
 
-        for (Entry<Transformer, Boolean> transformable : canTransform.entrySet()) {
+        for (Entry<Transformer, Boolean> transformable : canTransform.entrySet())
+        {
             buf.writeBoolean(transformable.getValue());
         }
     }
 
-    public static class Handler implements IMessageHandler<MessagePlayerJoin, IMessage> {
-        public IMessage onMessage(MessagePlayerJoin message, MessageContext ctx) {
-            if (ctx.side.isClient()) {
+    public static class Handler implements IMessageHandler<MessagePlayerJoin, IMessage>
+    {
+        public IMessage onMessage(MessagePlayerJoin message, MessageContext ctx)
+        {
+            if (ctx.side.isClient())
+            {
                 EntityPlayer player = TransformersMod.proxy.getPlayer();
 
                 TFDataManager.setInVehicleModeWithoutNotify(player, message.vehicleMode);
@@ -60,7 +69,8 @@ public class MessagePlayerJoin implements IMessage {
                 TFDataManager.setTransformationTimer(player, message.vehicleMode ? 0 : 20);
                 TFDataManager.setStealthModeTimer(player, message.stealthForce ? 0 : 5);
 
-                if (message.canTransform != null) {
+                if (message.canTransform != null)
+                {
                     TFConfig.canTransform = message.canTransform;
                 }
             }

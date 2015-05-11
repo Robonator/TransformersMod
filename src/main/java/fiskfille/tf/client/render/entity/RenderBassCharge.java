@@ -13,12 +13,15 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
-public class RenderBassCharge extends Render {
-    public RenderBassCharge() {
+public class RenderBassCharge extends Render
+{
+    public RenderBassCharge()
+    {
         super(Minecraft.getMinecraft().getRenderManager());
     }
 
-    public void doRender(Entity entity, double x, double y, double z, float p_76986_8_, float p_76986_9_) {
+    public void doRender(Entity entity, double x, double y, double z, float p_76986_8_, float p_76986_9_)
+    {
         float scale = 0.5F;
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x, (float) y, (float) z);
@@ -32,11 +35,13 @@ public class RenderBassCharge extends Render {
         GL11.glPopMatrix();
     }
 
-    protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
+    {
         return TextureMap.LOCATION_MISSING_TEXTURE;
     }
 
-    private void renderIIcon(WorldRenderer p_77026_1_) {
+    private void renderIIcon(WorldRenderer p_77026_1_)
+    {
         float f = 0f;
         float f1 = 1f;
         float f2 = 0f;

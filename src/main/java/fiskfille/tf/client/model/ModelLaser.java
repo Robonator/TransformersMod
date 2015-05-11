@@ -8,11 +8,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class ModelLaser extends ModelBase {
+public class ModelLaser extends ModelBase
+{
     public ModelRenderer laserInner;
     public ModelRenderer laserOuter;
 
-    public ModelLaser() {
+    public ModelLaser()
+    {
         this.textureWidth = 64;
         this.textureHeight = 16;
         this.laserInner = new ModelRenderer(this, 0, 0);
@@ -25,7 +27,8 @@ public class ModelLaser extends ModelBase {
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    {
         GL11.glPushMatrix();
 
         this.laserInner.render(f5);

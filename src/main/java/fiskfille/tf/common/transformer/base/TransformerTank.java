@@ -20,31 +20,38 @@ import java.util.Random;
 /**
  * @author gegy1000
  */
-public abstract class TransformerTank extends Transformer {
-    public TransformerTank(String name) {
+public abstract class TransformerTank extends Transformer
+{
+    public TransformerTank(String name)
+    {
         super(name);
     }
 
-    public boolean canZoom(EntityPlayer player) {
+    public boolean canZoom(EntityPlayer player)
+    {
         return true;
     }
 
-    public float getVehicleCameraYOffset(EntityPlayer player) {
+    public float getVehicleCameraYOffset(EntityPlayer player)
+    {
         return -0.9F;
     }
 
     @Override
-    public String getShootSound() {
+    public String getShootSound()
+    {
         return TransformersMod.modid + ":tankfire";
     }
 
     @Override
-    public float fall(EntityPlayer player, float distance) {
+    public float fall(EntityPlayer player, float distance)
+    {
         return TFDataManager.isInVehicleMode(player) ? 0 : super.fall(player, distance);
     }
 
     @Override
-    public void updateMovement(EntityPlayer player) {
+    public void updateMovement(EntityPlayer player)
+    {
         //    	TFMotionManager.motion(player, false, 20, 30, 10, 20, false, true, true);
         TFMotionManager.motion(player, 20, 30, 0, 20, false, true, false, false);
 
@@ -102,12 +109,16 @@ public abstract class TransformerTank extends Transformer {
     }
 
     @Override
-    public void tick(EntityPlayer player, int timer) {
+    public void tick(EntityPlayer player, int timer)
+    {
         IAttributeInstance entityAttribute = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
 
-        if (TFDataManager.isInVehicleMode(player) && timer == 0) {
+        if (TFDataManager.isInVehicleMode(player) && timer == 0)
+        {
             entityAttribute.setBaseValue(0.0D);
-        } else if (timer == 20) {
+        }
+        else if (timer == 20)
+        {
             entityAttribute.setBaseValue(0.1D);
         }
         //    		if (!TFPlayerData.getData(player).stealthForce)
@@ -125,23 +136,28 @@ public abstract class TransformerTank extends Transformer {
     }
 
     @Override
-    public boolean canShoot(EntityPlayer player) {
+    public boolean canShoot(EntityPlayer player)
+    {
         return true;
     }
 
     @Override
-    public Item getShootItem() {
+    public Item getShootItem()
+    {
         return TFItems.tankShell;
     }
 
     @Override
-    public Entity getShootEntity(EntityPlayer player) {
+    public Entity getShootEntity(EntityPlayer player)
+    {
         return new EntityTankShell(player.worldObj, player, TFConfig.allowTankShellExplosions);
     }
 
     @Override
-    public void doNitroParticles(EntityPlayer player) {
-        for (int i = 0; i < 4; ++i) {
+    public void doNitroParticles(EntityPlayer player)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
             Vec3 side = NitroParticleHandler.getBackSideCoords(player, 0.15F, i < 2, -0.6, false);
             Random rand = new Random();
             player.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, side.xCoord, side.yCoord + 0.3F, side.zCoord, rand.nextFloat() / 20, rand.nextFloat() / 20, rand.nextFloat() / 20);

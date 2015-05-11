@@ -6,8 +6,10 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
-public class GuiHandlerTF implements IGuiHandler {
-    public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+public class GuiHandlerTF implements IGuiHandler
+{
+    public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
+    {
         TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 
         //		switch (id)
@@ -18,7 +20,8 @@ public class GuiHandlerTF implements IGuiHandler {
         return null;
     }
 
-    public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+    public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
+    {
         TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 
         //		switch (id)

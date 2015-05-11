@@ -9,36 +9,48 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntityLaser extends EntityThrowable {
-    public EntityLaser(World world) {
+public class EntityLaser extends EntityThrowable
+{
+    public EntityLaser(World world)
+    {
         super(world);
     }
 
-    public EntityLaser(World world, EntityLivingBase entity) {
+    public EntityLaser(World world, EntityLivingBase entity)
+    {
         super(world, entity);
     }
 
-    public EntityLaser(World world, double x, double y, double z) {
+    public EntityLaser(World world, double x, double y, double z)
+    {
         super(world, x, y, z);
     }
 
-    public void onUpdate() {
+    public void onUpdate()
+    {
         super.onUpdate();
     }
 
-    protected float getGravityVelocity() {
+    protected float getGravityVelocity()
+    {
         return 0.005F;
     }
 
-    protected float getInaccuracy() {
+    protected float getInaccuracy()
+    {
         return 4F;
     }
 
-    protected void onImpact(MovingObjectPosition mop) {
-        if (!worldObj.isRemote) {
-            if (mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
+    protected void onImpact(MovingObjectPosition mop)
+    {
+        if (!worldObj.isRemote)
+        {
+            if (mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
+            {
                 setFire(mop.getBlockPos(), mop.sideHit.getIndex());
-            } else if (mop.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
+            }
+            else if (mop.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY)
+            {
                 Entity entityHit = mop.entityHit;
 
                 entityHit.setFire(10);
@@ -51,28 +63,35 @@ public class EntityLaser extends EntityThrowable {
         setDead();
     }
 
-    public void setFire(BlockPos pos, int sideHit) {
-        if (sideHit == 0) {
+    public void setFire(BlockPos pos, int sideHit)
+    {
+        if (sideHit == 0)
+        {
             pos.down();
         }
 
-        if (sideHit == 1) {
+        if (sideHit == 1)
+        {
             pos.up();
         }
 
-        if (sideHit == 2) {
+        if (sideHit == 2)
+        {
             pos.north();
         }
 
-        if (sideHit == 3) {
+        if (sideHit == 3)
+        {
             pos.south();
         }
 
-        if (sideHit == 4) {
+        if (sideHit == 4)
+        {
             pos.west();
         }
 
-        if (sideHit == 5) {
+        if (sideHit == 5)
+        {
             pos.east();
         }
 

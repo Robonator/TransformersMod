@@ -8,7 +8,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class ModelTransformiumSeed extends ModelBase {
+public class ModelTransformiumSeed extends ModelBase
+{
     public ModelRenderer shape1;
     public ModelRenderer shape2;
     public ModelRenderer shape3;
@@ -22,7 +23,8 @@ public class ModelTransformiumSeed extends ModelBase {
     public ModelRenderer wingD;
     public ModelRenderer antenna;
 
-    public ModelTransformiumSeed() {
+    public ModelTransformiumSeed()
+    {
         this.textureWidth = 64;
         this.textureHeight = 32;
         this.shape1 = new ModelRenderer(this, 0, 0);
@@ -68,7 +70,8 @@ public class ModelTransformiumSeed extends ModelBase {
         this.setRotation(wingD, 0.0F, 0.0F, 0.06981317007977318F);
     }
 
-    public void render(EntityTransformiumSeed seed) {
+    public void render(EntityTransformiumSeed seed)
+    {
         setRotationAngles(seed);
         float f5 = 0.0625F;
         float scale = 1.3F;
@@ -90,13 +93,15 @@ public class ModelTransformiumSeed extends ModelBase {
         GL11.glPopMatrix();
     }
 
-    public void setRotation(ModelRenderer modelRenderer, float x, float y, float z) {
+    public void setRotation(ModelRenderer modelRenderer, float x, float y, float z)
+    {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
     }
 
-    public void setRotationAngles(EntityTransformiumSeed seed) {
+    public void setRotationAngles(EntityTransformiumSeed seed)
+    {
         super.setRotationAngles(0, 0, 0, 0, 0, 0, seed);
 
         float t = (float) (seed.ticksExisted <= 50 ? seed.ticksExisted : 50) / 50;

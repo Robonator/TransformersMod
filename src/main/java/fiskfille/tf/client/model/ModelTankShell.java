@@ -6,10 +6,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelTankShell extends ModelBase {
+public class ModelTankShell extends ModelBase
+{
     public ModelRenderer shell;
 
-    public ModelTankShell() {
+    public ModelTankShell()
+    {
         this.textureWidth = 16;
         this.textureHeight = 8;
         this.shell = new ModelRenderer(this, 0, 0);
@@ -18,7 +20,8 @@ public class ModelTankShell extends ModelBase {
         this.shell.rotateAngleY = (float) Math.PI / 2;
     }
 
-    public void render() {
+    public void render()
+    {
         this.shell.render(0.0625F);
     }
 }

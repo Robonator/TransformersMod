@@ -7,7 +7,8 @@ import net.minecraftforge.common.config.Configuration;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TFConfig {
+public class TFConfig
+{
     public static boolean firstPersonAfterTransformation;
     public static boolean purgeDashTop;
     public static boolean allowMissileExplosions;
@@ -19,11 +20,13 @@ public class TFConfig {
 
     private Configuration config;
 
-    public static Boolean canTransform(Transformer transformer) {
+    public static Boolean canTransform(Transformer transformer)
+    {
         return transformer != null ? TFConfig.canTransform.get(transformer) : true;
     }
 
-    public void load(Configuration config) {
+    public void load(Configuration config)
+    {
         this.config = config;
 
         checkForUpdates = getBoolean("Check For Updates", true, "If false, the Transformers Mod will not check for updates.");
@@ -36,25 +39,30 @@ public class TFConfig {
 
         firstPersonAfterTransformation = getTransformationBoolean("First-person Switch", false, "If true, you will switch to first-person mode after transforming from vehicle to robot mode.");
 
-        for (Transformer transformer : TransformersAPI.getTransformers()) {
+        for (Transformer transformer : TransformersAPI.getTransformers())
+        {
             String name = transformer.getName();
             canTransform.put(transformer, getTransformationBoolean("Can Transform As " + name, true, "If false, you will not be able to transform as " + name + ". Useful for servers."));
         }
     }
 
-    private boolean getAestheticBoolean(String name, boolean defualt, String desc) {
+    private boolean getAestheticBoolean(String name, boolean defualt, String desc)
+    {
         return config.getBoolean(name, "Aesthetic", defualt, desc);
     }
 
-    private boolean getProjectileBoolean(String name, boolean defualt, String desc) {
+    private boolean getProjectileBoolean(String name, boolean defualt, String desc)
+    {
         return config.getBoolean(name, "Projectiles", defualt, desc);
     }
 
-    private boolean getTransformationBoolean(String name, boolean defualt, String desc) {
+    private boolean getTransformationBoolean(String name, boolean defualt, String desc)
+    {
         return config.getBoolean(name, "Transformation", defualt, desc);
     }
 
-    private boolean getBoolean(String name, boolean defualt, String desc) {
+    private boolean getBoolean(String name, boolean defualt, String desc)
+    {
         return config.getBoolean(name, "Options", defualt, desc);
     }
 }
