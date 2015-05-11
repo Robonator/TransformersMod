@@ -3,15 +3,16 @@ package fiskfille.tf.client.model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
-public class ModelLaser extends ModelBase
-{
+@SideOnly(Side.CLIENT)
+public class ModelLaser extends ModelBase {
     public ModelRenderer laserInner;
     public ModelRenderer laserOuter;
-    
-    public ModelLaser()
-    {
+
+    public ModelLaser() {
         this.textureWidth = 64;
         this.textureHeight = 16;
         this.laserInner = new ModelRenderer(this, 0, 0);
@@ -22,14 +23,13 @@ public class ModelLaser extends ModelBase
         this.laserOuter.addBox(-1.0F, -1.0F, -4.0F, 2, 2, 8);
         this.laserInner.addChild(this.laserOuter);
     }
-    
+
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         GL11.glPushMatrix();
-        
+
         this.laserInner.render(f5);
-        
+
         GL11.glPopMatrix();
     }
 }

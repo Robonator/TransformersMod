@@ -1,97 +1,81 @@
 package fiskfille.tf.common.entity;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
-public class EntityLaser extends EntityThrowable
-{
-    public EntityLaser(World world)
-    {
+public class EntityLaser extends EntityThrowable {
+    public EntityLaser(World world) {
         super(world);
     }
-    
-    public EntityLaser(World world, EntityLivingBase entity)
-    {
+
+    public EntityLaser(World world, EntityLivingBase entity) {
         super(world, entity);
     }
-    
-    public EntityLaser(World world, double x, double y, double z)
-    {
+
+    public EntityLaser(World world, double x, double y, double z) {
         super(world, x, y, z);
     }
-    
-    public void onUpdate()
-    {
+
+    public void onUpdate() {
         super.onUpdate();
     }
-    
-    protected float getGravityVelocity()
-    {
+
+    protected float getGravityVelocity() {
         return 0.005F;
     }
-    
-    protected float func_70182_d()
-    {
+
+    protected float getInaccuracy() {
         return 4F;
     }
-    
-    protected void onImpact(MovingObjectPosition mop)
-    {
-        if (!worldObj.isRemote)
-        {
-            if (mop.typeOfHit == mop.typeOfHit.BLOCK)
-            {
-                setFire(mop.blockX, mop.blockY, mop.blockZ, mop.sideHit);
-            }
-            else if (mop.typeOfHit == mop.typeOfHit.ENTITY)
-            {
+
+    protected void onImpact(MovingObjectPosition mop) {
+        if (!worldObj.isRemote) {
+            if (mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
+                setFire(mop.getBlockPos(), mop.sideHit.getIndex());
+            } else if (mop.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
                 Entity entityHit = mop.entityHit;
-                
+
                 entityHit.setFire(10);
                 entityHit.attackEntityFrom(DamageSource.inFire, 10F);
                 entityHit.hurtResistantTime = 0;
                 entityHit.motionY -= 0.2F;
             }
         }
-        
+
         setDead();
     }
-    
-    public void setFire(int x, int y, int z, int sideHit)
-    {
-        if (sideHit == 0)
-        {
-            --y;
+
+    public void setFire(BlockPos pos, int sideHit) {
+        if (sideHit == 0) {
+            pos.down();
         }
-        else if (sideHit == 1)
-        {
-            ++y;
+
+        if (sideHit == 1) {
+            pos.up();
         }
-        else if (sideHit == 2)
-        {
-            --z;
+
+        if (sideHit == 2) {
+            pos.north();
         }
-        else if (sideHit == 3)
-        {
-            ++z;
+
+        if (sideHit == 3) {
+            pos.south();
         }
-        else if (sideHit == 4)
-        {
-            --x;
+
+        if (sideHit == 4) {
+            pos.west();
         }
-        else if (sideHit == 5)
-        {
-            ++x;
+
+        if (sideHit == 5) {
+            pos.east();
         }
-        
-        worldObj.setBlock(x, y, z, Blocks.fire);
+
+        worldObj.setBlockState(pos, Blocks.fire.getDefaultState());
     }
 }

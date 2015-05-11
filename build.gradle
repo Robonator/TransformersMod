@@ -22,8 +22,9 @@ group = "fiskfille.tf"
 archivesBaseName = "TransformersMod"
 
 minecraft {
-    version = "1.7.10-10.13.2.1291"
+    version = "1.8-11.14.1.1402"
     runDir = "minecraft"
+	mappings = "snapshot_20141130"
 	replace '${version}', project.version
 }
 

@@ -1,12 +1,12 @@
 package fiskfille.tf.client.model.transformer.vehicle;
 
-import fiskfille.tf.client.model.transformer.ModelChildBase;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ModelSubwooferVehicle extends ModelVehicleBase
-{
+@SideOnly(Side.CLIENT)
+public class ModelSubwooferVehicle extends ModelBaseVehicle {
     public ModelRenderer vehicleBase;
     public ModelRenderer vehicleStomach;
     public ModelRenderer vehicleCrotch1;
@@ -51,12 +51,11 @@ public class ModelSubwooferVehicle extends ModelVehicleBase
     public ModelRenderer vehicleLowerLegR1;
     public ModelRenderer vehicleLowerLegR3;
     public ModelRenderer vehicleRearWheel1;
-    
-    public ModelSubwooferVehicle()
-    {
+
+    public ModelSubwooferVehicle() {
         this.textureWidth = 128;
         this.textureHeight = 128;
-        
+
         this.vehicleCover6 = new ModelRenderer(this, 17, 0);
         this.vehicleCover6.setRotationPoint(4.1F, -1.4F, -2.4F);
         this.vehicleCover6.addBox(-1.0F, 0.0F, 0.0F, 1, 4, 9, 0.0F);
@@ -226,7 +225,7 @@ public class ModelSubwooferVehicle extends ModelVehicleBase
         this.vehicleRearWheel1.mirror = true;
         this.vehicleRearWheel1.setRotationPoint(-0.2F, 4.4F, -0.5F);
         this.vehicleRearWheel1.addBox(-2.0F, -1.5F, -1.5F, 2, 3, 3, 0.0F);
-        
+
         this.vehicleChestMain1.addChild(this.vehicleCover6);
         this.vehicleUpperArmR.addChild(this.vehicleLowerArmRL1);
         this.vehicleStomach.addChild(this.vehicleChestMain1);
@@ -271,23 +270,20 @@ public class ModelSubwooferVehicle extends ModelVehicleBase
         this.vehicleChestMain1.addChild(this.vehicleShoulderBase2);
         this.vehicleLowerLegR1.addChild(this.vehicleRearWheel1);
     }
-    
-    public void render()
-    {
+
+    public void render() {
         this.vehicleBase.render(0.0625F);
     }
-    
+
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         this.vehicleBase.render(f5);
     }
-    
+
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

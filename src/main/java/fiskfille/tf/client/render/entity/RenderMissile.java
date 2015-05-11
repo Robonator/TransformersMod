@@ -1,25 +1,25 @@
 package fiskfille.tf.client.render.entity;
 
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import fiskfille.tf.TransformersMod;
 import fiskfille.tf.client.model.ModelMissile;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderMissile extends Render
-{
+public class RenderMissile extends Render {
     public ModelMissile model = new ModelMissile();
     public ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/weapons/missile.png");
-    
-    public void doRender(Entity entity, double x, double y, double z, float par8, float par9)
-    {
+
+    public RenderMissile() {
+        super(Minecraft.getMinecraft().getRenderManager());
+    }
+
+    public void doRender(Entity entity, double x, double y, double z, float par8, float par9) {
         GL11.glPushMatrix();
         GL11.glTranslated(x, y, z);
         GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * par9 + 180, 0.0F, 1.0F, 0.0F);
@@ -30,9 +30,8 @@ public class RenderMissile extends Render
         model.render();
         GL11.glPopMatrix();
     }
-    
-    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
-    {
+
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
         return texture;
     }
 }

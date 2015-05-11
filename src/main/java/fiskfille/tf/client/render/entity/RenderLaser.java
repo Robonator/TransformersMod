@@ -1,24 +1,25 @@
 package fiskfille.tf.client.render.entity;
 
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.client.model.ModelLaser;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.client.model.ModelLaser;
-
 @SideOnly(Side.CLIENT)
-public class RenderLaser extends Render
-{
+public class RenderLaser extends Render {
     public ModelLaser model = new ModelLaser();
     public ResourceLocation texture = new ResourceLocation(TransformersMod.modid, "textures/models/weapons/laser.png");
-    
-    public void doRender(Entity entity, double x, double y, double z, float par8, float par9)
-    {
+
+    public RenderLaser() {
+        super(Minecraft.getMinecraft().getRenderManager());
+    }
+
+    public void doRender(Entity entity, double x, double y, double z, float par8, float par9) {
         GL11.glPushMatrix();
         GL11.glTranslated(x, y, z);
         GL11.glEnable(GL11.GL_BLEND);
@@ -29,9 +30,8 @@ public class RenderLaser extends Render
         model.render(entity, 0, 0, 0, 0, 0, 0.0625F);
         GL11.glPopMatrix();
     }
-    
-    protected ResourceLocation getEntityTexture(Entity p_110775_1_)
-    {
+
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
         return texture;
     }
 }

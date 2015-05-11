@@ -3,9 +3,11 @@ package fiskfille.tf.client.model.item;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ModelVurpsSniper extends ModelBase
-{
+@SideOnly(Side.CLIENT)
+public class ModelVurpsSniper extends ModelBase {
     public ModelRenderer middlePiece;
     public ModelRenderer handle;
     public ModelRenderer backPiece1;
@@ -23,9 +25,8 @@ public class ModelVurpsSniper extends ModelBase
     public ModelRenderer scope;
     public ModelRenderer scopeholdB;
     public ModelRenderer ammo;
-    
-    public ModelVurpsSniper()
-    {
+
+    public ModelVurpsSniper() {
         this.textureWidth = 64;
         this.textureHeight = 32;
         this.backPiece2 = new ModelRenderer(this, 11, 0);
@@ -89,10 +90,9 @@ public class ModelVurpsSniper extends ModelBase
         this.backPiece1.setRotationPoint(0.0F, -1.4F, 5.0F);
         this.backPiece1.addBox(-0.5F, -0.5F, -0.5F, 1, 1, 3);
     }
-    
+
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         this.backPiece2.render(f5);
         this.bodypart2.render(f5);
         this.monitorA.render(f5);
@@ -111,11 +111,10 @@ public class ModelVurpsSniper extends ModelBase
         this.handle.render(f5);
         this.backPiece1.render(f5);
     }
-    
-    public void render()
-    {
+
+    public void render() {
         float f5 = 0.0625F;
-        
+
         this.backPiece2.render(f5);
         this.bodypart2.render(f5);
         this.monitorA.render(f5);
@@ -134,12 +133,11 @@ public class ModelVurpsSniper extends ModelBase
         this.handle.render(f5);
         this.backPiece1.render(f5);
     }
-    
+
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

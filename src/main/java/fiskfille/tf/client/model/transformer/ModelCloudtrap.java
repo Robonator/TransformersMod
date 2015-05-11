@@ -1,15 +1,19 @@
 package fiskfille.tf.client.model.transformer;
 
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import fiskfille.tf.client.model.tools.MowzieModelRenderer;
 import fiskfille.tf.common.playerdata.TFDataManager;
 import fiskfille.tf.helper.ModelOffset;
 import fiskfille.tf.helper.TFModelHelper;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ModelCloudtrap extends ModelChildBase.Biped
-{
+@SideOnly(Side.CLIENT)
+public class ModelCloudtrap extends ModelChildBase.Biped {
+    public MowzieModelRenderer lowerArm1;
+    public ModelRenderer vehicleBody;
     MowzieModelRenderer upperLeg1;
     MowzieModelRenderer backLeg1;
     MowzieModelRenderer frontLegBeam1;
@@ -27,7 +31,6 @@ public class ModelCloudtrap extends ModelChildBase.Biped
     MowzieModelRenderer upperWing1;
     MowzieModelRenderer outerWing1;
     MowzieModelRenderer innerWing1;
-    public MowzieModelRenderer lowerArm1;
     MowzieModelRenderer lowerArmPanel1;
     MowzieModelRenderer upperWing2;
     MowzieModelRenderer outerWing2;
@@ -51,7 +54,6 @@ public class ModelCloudtrap extends ModelChildBase.Biped
     MowzieModelRenderer ear2;
     MowzieModelRenderer eyeGlass;
     MowzieModelRenderer mouthPiece;
-    
     ModelRenderer vehicleMain;
     ModelRenderer vehicleFrontPiece2;
     ModelRenderer vehicleFrontPiece3;
@@ -71,13 +73,11 @@ public class ModelCloudtrap extends ModelChildBase.Biped
     ModelRenderer vehicleLeftBackWing;
     ModelRenderer vehicleCockpit;
     ModelRenderer vehicleFrontPiece1;
-    public ModelRenderer vehicleBody;
-    
-    public ModelCloudtrap()
-    {
+
+    public ModelCloudtrap() {
         textureWidth = 64;
         textureHeight = 128;
-        
+
         bipedBody = new MowzieModelRenderer(this, 1000, 1000);
         bipedHead = new MowzieModelRenderer(this, 1000, 1000);
         bipedHeadwear = new MowzieModelRenderer(this, 1000, 1000);
@@ -85,7 +85,7 @@ public class ModelCloudtrap extends ModelChildBase.Biped
         bipedLeftLeg = new MowzieModelRenderer(this, 1000, 1000);
         bipedRightArm = new MowzieModelRenderer(this, 1000, 1000);
         bipedLeftArm = new MowzieModelRenderer(this, 1000, 1000);
-        
+
         headTopPiece2 = new MowzieModelRenderer(this, 12, 0);
         headTopPiece2.setRotationPoint(1.2F, -3.5F, -1.2F);
         headTopPiece2.addBox(-1.0F, -1.0F, -1.0F, 2, 1, 2);
@@ -240,7 +240,7 @@ public class ModelCloudtrap extends ModelChildBase.Biped
         legPanel1.setRotationPoint(0.0F, 0.5F, -0.6F);
         legPanel1.addBox(-1.5F, -4.0F, -1.0F, 3, 5, 1);
         setRotateAngle(legPanel1, 0.06981317007977318F, 0.17453292519943295F, 0.08726646259971647F);
-        
+
         jetEngine1.addChild(legPanel1);
         frontPiece2.addChild(frontPiece1);
         upperWing1.addChild(innerWing1);
@@ -282,14 +282,14 @@ public class ModelCloudtrap extends ModelChildBase.Biped
         bipedLeftArm.addChild(upperWing2);
         bipedRightLeg.addChild(upperLeg1);
         bipedLeftLeg.addChild(upperLeg2);
-        
+
         vehicleMain = new ModelRenderer(this, 0, 98);
         vehicleMain.addBox(-4.0F, 0.0F, -2.0F, 0, 0, 0);
         vehicleMain.setRotationPoint(0.0F, 0.0F, 0.0F);
         vehicleBody = new ModelRenderer(this, 0, 98);
         vehicleBody.addBox(-4.0F, 0.0F, -2.0F, 0, 0, 0);
         vehicleBody.setRotationPoint(0.0F, 0.0F, 0.0F);
-        
+
         vehicleCockpit = new ModelRenderer(this, 0, 64);
         vehicleCockpit.setRotationPoint(0.0F, -1.5F, -11.0F);
         vehicleCockpit.addBox(-1.5F, -1.0F, -3.0F, 3, 1, 6);
@@ -352,7 +352,7 @@ public class ModelCloudtrap extends ModelChildBase.Biped
         vehicleLeftWing.setRotationPoint(5.8F, 0.0F, 3.0F);
         vehicleLeftWing.addBox(0.0F, -0.5F, -1.0F, 8, 1, 4);
         setRotateAngle(vehicleLeftWing, 0.0F, -0.9075712110370513F, 0.0F);
-        
+
         this.addChildTo(vehicleBackFin1, vehicleMain);
         this.addChildTo(vehicleBackFin2, vehicleMain);
         this.addChildTo(vehicleBackFin3, vehicleMain);
@@ -373,41 +373,36 @@ public class ModelCloudtrap extends ModelChildBase.Biped
         this.addChildTo(vehicleRightWing, vehicleMain);
         this.addChildTo(vehicleMain, vehicleBody);
     }
-    
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         super.render(entity, f, f1, f2, f3, f4, f5);
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         this.vehicleBody.render(f5);
     }
-    
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
     }
-    
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity)
-    {
+
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity) {
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, entity);
-        
+
         this.bipedBody.rotationPointY = 0;
         this.upperWing1.rotationPointX = 1.75F;
         this.upperWing2.rotationPointX = -1.75F;
         this.upperLeg1.rotationPointY = 0;
         this.upperLeg2.rotationPointY = 0;
-        
-        if (entity instanceof EntityPlayer)
-        {
+
+        if (entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
             int timer = TFDataManager.getTransformationTimer(player);
-            
-            if (timer == 0)
-            {
+
+            if (timer == 0) {
                 this.vehicleBody.rotateAngleX = par5 / (180F / (float) Math.PI);
                 this.vehicleBody.rotateAngleZ = -(this.bipedHead.rotateAngleY);
-                
+
                 bipedHead.offsetY = 256F;
                 bipedBody.offsetY = 256F;
                 bipedRightArm.offsetY = 256F;
@@ -415,29 +410,25 @@ public class ModelCloudtrap extends ModelChildBase.Biped
                 bipedRightLeg.offsetY = 256F;
                 bipedLeftLeg.offsetY = 256F;
                 vehicleBody.offsetY = 0F;
-            }
-            else
-            {
+            } else {
                 float f = (float) (20 - timer) / 2;
-                
+
                 ModelOffset offsets = TFModelHelper.getOffsets(player);
                 this.bipedHead.rotationPointX = offsets.headOffsetX;
                 this.bipedHead.rotationPointY = offsets.headOffsetY;
                 this.bipedHead.rotationPointZ = offsets.headOffsetZ;
-                
-                if (bipedHead.rotationPointY != 0)
-                {
+
+                if (bipedHead.rotationPointY != 0) {
                     bipedHead.rotationPointY -= 1;
                 }
-                
+
                 this.bipedBody.rotateAngleZ = 0.0F;
                 this.frontPiece2.rotateAngleX = -(pi / 20) * f * 2 - 0.06981317007977318F;
                 this.frontPiece2.rotateAngleY = -3.141592653589793F - (pi / 10) * f;
                 this.bipedRightArm.rotationPointZ = f * 1.2F;
                 this.bipedLeftArm.rotationPointZ = f * 1.2F;
-                
-                if (timer < 20)
-                {
+
+                if (timer < 20) {
                     this.bipedBody.rotateAngleX = (pi / 20) * f;
                     this.bipedHead.rotateAngleX = (pi / 20) * f;
                     this.bipedRightArm.rotateAngleX = -(pi / 20) * f;
@@ -449,7 +440,7 @@ public class ModelCloudtrap extends ModelChildBase.Biped
                     this.bipedRightLeg.rotationPointZ = f * 0.5F;
                     this.bipedLeftLeg.rotationPointZ = f * 0.5F;
                 }
-                
+
                 bipedHead.offsetY = 0;
                 bipedBody.offsetY = 0;
                 bipedRightArm.offsetY = 0;

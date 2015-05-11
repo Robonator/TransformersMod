@@ -1,36 +1,29 @@
 package fiskfille.tf.common.proxy;
 
-import net.minecraft.client.settings.GameSettings;
+import fiskfille.tf.client.tick.ClientTickHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import fiskfille.tf.client.tick.ClientTickHandler;
 
-public class CommonProxy
-{
-    public static ClientTickHandler tickHandler;
-    
-    public World getWorld()
-    {
+public class CommonProxy {
+    public ClientTickHandler tickHandler;
+
+    public World getWorld() {
         return null;
     }
-    
-    public EntityPlayer getPlayer()
-    {
+
+    public EntityPlayer getPlayer() {
         return null;
     }
-    
-    public void registerRenderInformation()
-    {
-        
+
+    public void registerRenderInformation() {
+
     }
-    
-    public void registerKeyBinds()
-    {
-        
+
+    public void registerKeyBinds() {
+
     }
-    
-    public void registerTickHandlers()
-    {
-        
+
+    public void registerTickHandlers() {
+
     }
 }

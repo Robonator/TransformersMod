@@ -2,10 +2,11 @@ package fiskfille.tf.client.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ModelMissile extends ModelBase
-{
+@SideOnly(Side.CLIENT)
+public class ModelMissile extends ModelBase {
     public ModelRenderer missileBase;
     public ModelRenderer bodyupper;
     public ModelRenderer bodylower;
@@ -36,9 +37,8 @@ public class ModelMissile extends ModelBase
     public ModelRenderer rearfin4;
     public ModelRenderer rearfin6;
     public ModelRenderer rearfin8;
-    
-    public ModelMissile()
-    {
+
+    public ModelMissile() {
         this.textureWidth = 64;
         this.textureHeight = 32;
         this.noseupper = new ModelRenderer(this, 0, 23);
@@ -188,14 +188,12 @@ public class ModelMissile extends ModelBase
         this.engine.addChild(this.rearfin3);
         this.missileBase.addChild(this.engine);
     }
-    
-    public void render()
-    {
+
+    public void render() {
         this.missileBase.render(0.0625F);
     }
-    
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

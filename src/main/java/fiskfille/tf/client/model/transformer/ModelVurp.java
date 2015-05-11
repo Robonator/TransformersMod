@@ -1,11 +1,5 @@
 package fiskfille.tf.client.model.transformer;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
 import fiskfille.tf.client.model.tools.MowzieModelBase;
 import fiskfille.tf.client.model.tools.MowzieModelRenderer;
 import fiskfille.tf.common.item.ItemVurpsSniper;
@@ -18,9 +12,17 @@ import fiskfille.tf.common.transformer.base.Transformer;
 import fiskfille.tf.helper.ModelOffset;
 import fiskfille.tf.helper.TFHelper;
 import fiskfille.tf.helper.TFModelHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ModelVurp extends MowzieModelBase
-{
+@SideOnly(Side.CLIENT)
+public class ModelVurp extends MowzieModelBase {
     public MowzieModelRenderer vehicleBase;
     public MowzieModelRenderer vehicleWaist1;
     public MowzieModelRenderer vehicleWaist2;
@@ -73,7 +75,7 @@ public class ModelVurp extends MowzieModelBase
     public MowzieModelRenderer vehicleWindow2;
     public MowzieModelRenderer vehiclerear1;
     public MowzieModelRenderer vehicleRear2;
-    
+
     public MowzieModelRenderer waist;
     public MowzieModelRenderer waist1;
     public MowzieModelRenderer waist2;
@@ -153,12 +155,11 @@ public class ModelVurp extends MowzieModelBase
     public MowzieModelRenderer lowerArmL;
     public MowzieModelRenderer fistL;
     public MowzieModelRenderer lowerarmL2;
-    
-    public ModelVurp()
-    {
+
+    public ModelVurp() {
         this.textureWidth = 128;
         this.textureHeight = 128;
-        
+
         this.waist1 = new MowzieModelRenderer(this, 0, 64);
         this.waist1.mirror = true;
         this.waist1.setRotationPoint(0.0F, 0.0F, -2.0F);
@@ -493,7 +494,7 @@ public class ModelVurp extends MowzieModelBase
         this.lowerLegR.setRotationPoint(-1.0F, 0.4F, -1.0F);
         this.lowerLegR.addBox(-1.5F, 0.0F, 0.0F, 3, 6, 2);
         this.setRotateAngle(lowerLegR, 0.24434609527920614F, 0.0F, 0.0F);
-        
+
         this.footbaseR.addChild(this.footR3);
         this.torsobase.addChild(this.connector1);
         this.torsobase.addChild(this.torsodetail3);
@@ -572,11 +573,11 @@ public class ModelVurp extends MowzieModelBase
         this.hood1.addChild(this.hood4);
         this.hood1.addChild(this.hood3);
         this.torsobase.addChild(this.connector2);
-        
+
         this.setInitPose();
-        
+
         //	this.parts = new MowzieModelRenderer[]{armbaseL1, armbaseR1, backplate1, backplate2};
-        
+
         this.vehiclebackplate2 = new MowzieModelRenderer(this, 51, 74);
         this.vehiclebackplate2.mirror = true;
         this.vehiclebackplate2.setRotationPoint(-2.3F, -1.8F, 1.8F);
@@ -766,7 +767,7 @@ public class ModelVurp extends MowzieModelBase
         this.vehiclehood1.setRotationPoint(0.0F, -0.5F, -3.8F);
         this.vehiclehood1.addBox(-1.5F, -3.0F, -1.0F, 3, 4, 1);
         this.setRotateAngle(vehiclehood1, -1.3439035240356336F, 0.0F, 0.0F);
-        
+
         this.vehicleWheelBackR = new MowzieModelRenderer(this, 55, 68);
         this.vehicleWheelBackR.setRotationPoint(-1F, 3F, 2.2F);
         this.vehicleWheelBackR.addBox(-1.0F, -1.0F, -1.0F, 1, 2, 2);
@@ -781,7 +782,7 @@ public class ModelVurp extends MowzieModelBase
         this.vehicleWheelR = new MowzieModelRenderer(this, 55, 68);
         this.vehicleWheelR.setRotationPoint(-2.7F, 0.3F, -2.0F);
         this.vehicleWheelR.addBox(-1.0F, -1.0F, -1.0F, 1, 2, 2);
-        
+
         this.vehiclearmbaseL1 = new MowzieModelRenderer(this, 64, 60);
         this.vehiclearmbaseL1.mirror = true;
         this.vehiclearmbaseL1.setRotationPoint(1.0F, -0.4F, 1.0F);
@@ -790,7 +791,7 @@ public class ModelVurp extends MowzieModelBase
         this.vehicletorsobase.setRotationPoint(0.0F, -4.0F, 0.0F);
         this.vehicletorsobase.addBox(-2.0F, -2.0F, -1.3F, 4, 3, 4);
         this.setRotateAngle(vehicletorsobase, -1.5707963267948966F, -0.7853981633974483F, 0.0F);
-        
+
         this.vehicleWaistConnector1.addChild(this.vehicleRearplate);
         this.vehicletorsobase.addChild(this.vehiclehood1);
         this.vehiclelowerlegL1.addChild(this.vehicleWheelBackL);
@@ -843,144 +844,123 @@ public class ModelVurp extends MowzieModelBase
         this.vehicleLowerlegR1.addChild(this.vehicleWheelBackR);
         this.vehicleLowerarmL1.addChild(this.vehicleLowerarmL2);
     }
-    
+
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         float scale = 1.25F;
         vehicleWheelR.setScale(1, scale, scale);
         vehicleWheelL.setScale(1, scale, scale);
         vehicleWheelBackR.setScale(1, scale, scale);
         vehicleWheelBackL.setScale(1, scale, scale);
-        
+
         shoulderpadR.setScale(scale, scale, scale);
         shoulderpadL.setScale(scale, scale, scale);
         lowerlegR6.setScale(scale, scale, scale);
         lowerlegL6.setScale(scale, scale, scale);
-        
-        if (entity instanceof EntityPlayer)
-        {
+
+        if (entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
-            
+
             boolean wearingHead = TFHelper.getTransformerFromArmor(player, 3) instanceof TransformerVurp;
             boolean wearingChest = TFHelper.getTransformerFromArmor(player, 2) instanceof TransformerVurp;
             boolean wearingLegs = TFHelper.getTransformerFromArmor(player, 1) instanceof TransformerVurp;
-            
-            if (TFDataManager.getTransformationTimer(player) == 0)
-            {
+
+            if (TFDataManager.getTransformationTimer(player) == 0) {
                 vehicleBase.render(f5);
-            }
-            else
-            {
-                if (!wearingChest)
-                {
-                    if (wearingHead)
-                    {
+            } else {
+                if (!wearingChest) {
+                    if (wearingHead) {
                         head.render(f5);
                     }
-                    
-                    if (wearingLegs)
-                    {
+
+                    if (wearingLegs) {
                         upperLegL.render(f5);
                         upperLegR.render(f5);
                     }
-                }
-                else
-                {
+                } else {
                     waist.render(f5);
                 }
             }
         }
     }
-    
+
     @Override
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity)
-    {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity) {
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, entity);
-        
-        if (entity instanceof EntityPlayer)
-        {
+
+        if (entity instanceof EntityPlayer) {
             setToInitPose();
             EntityPlayer player = (EntityPlayer) entity;
             int t = TFDataManager.getTransformationTimer(player);
             ModelOffset offsets = TFModelHelper.getOffsets(player);
-            
+
             boolean wearingHead = TFHelper.getTransformerFromArmor(player, 3) instanceof TransformerVurp;
-            
+
             Transformer transformerChest = TFHelper.getTransformerFromArmor(player, 2);
             boolean wearingChest = transformerChest instanceof TransformerVurp;
-            
+
             Transformer transformerLegs = TFHelper.getTransformerFromArmor(player, 1);
             boolean wearingLegs = transformerLegs instanceof TransformerVurp;
-            
+
             head.showModel = wearingHead;
             upperLegR.showModel = wearingLegs;
             upperLegL.showModel = wearingLegs;
-            
+
             float globalSpeed = 1;
             float globalDegree = 0.8F;
-            
+
             this.head.rotationPointX += offsets.headOffsetX;
             this.head.rotationPointY += offsets.headOffsetY;
             this.head.rotationPointZ += offsets.headOffsetZ;
-            
-            if (wearingHead)
-            {
+
+            if (wearingHead) {
                 faceTarget(head, 1, par4, par5);
             }
-            
-            if (!wearingChest)
-            {
+
+            if (!wearingChest) {
                 head.rotationPointY += 2;
                 upperLegL.rotationPointY += 10;
                 upperLegR.rotationPointY += 10;
-            }
-            else
-            {
+            } else {
                 head.rotationPointY -= 3.5F;
                 offsets.headOffsetY = 3.5F;
-                
-                if (!wearingLegs)
-                {
+
+                if (!wearingLegs) {
                     waist.rotationPointY -= 1F;
                     waist.rotationPointZ -= 1F;
-                    
+
                     offsets.headOffsetY -= 1F;
                     head.rotationPointY += 1F;
-                    
-                    if (transformerLegs instanceof TransformerSkystrike)
-                    {
+
+                    if (transformerLegs instanceof TransformerSkystrike) {
                         waist.rotationPointY -= 3;
                         offsets.headOffsetY -= 3;
                         head.rotationPointY += 3;
                     }
                 }
             }
-            
-            if (transformerChest instanceof TransformerSkystrike)
-            {
+
+            if (transformerChest instanceof TransformerSkystrike) {
                 head.rotationPointY -= 1;
                 head.rotationPointZ -= 1;
             }
-            
+
             int backwardInverter = 1;
             float moveForward = player.moveForward;
-            
-            if (moveForward < 0)
-            {
+
+            if (moveForward < 0) {
                 backwardInverter = -1;
                 globalDegree = 0.5F;
             }
-            
+
             applyDefaultHoldingAnimation(upperArmR, upperArmL, lowerArmR, lowerArmL);
             applyDefaultHittingAnimation(armbaseR1, armbaseL1, head, torsobase, lowerArmR, lowerArmL);
-            
+
             ItemStack heldItemStack = player.getHeldItem();
             boolean holdingSniper = heldItemStack != null && heldItemStack.getItem() instanceof ItemVurpsSniper;
-            
-            if (this.aimedBow)
-            {
+
+            if (this.aimedBow) {
                 this.upperArmR.rotateAngleY += -0.1F + this.head.rotateAngleY;
                 this.upperArmL.rotateAngleY += 0.1F + this.head.rotateAngleY + 0.4F;
                 this.upperArmR.rotateAngleX += -((float) Math.PI / 2F) + this.head.rotateAngleX;
@@ -990,32 +970,28 @@ public class ModelVurp extends MowzieModelBase
                 this.upperArmR.rotateAngleX += MathHelper.sin(par3 * 0.067F) * 0.05F;
                 this.upperArmL.rotateAngleX -= MathHelper.sin(par3 * 0.067F) * 0.05F;
             }
-            
-            if (this.isRiding)
-            {
+
+            if (this.isRiding) {
                 this.upperArmR.rotateAngleX -= (float) Math.PI / 5F;
                 this.upperArmL.rotateAngleX -= (float) Math.PI / 5F;
                 this.upperLegR.rotateAngleX -= (float) Math.PI * 2F / 5F;
                 this.upperLegL.rotateAngleX -= (float) Math.PI * 2F / 5F;
-                
+
                 this.upperLegR.rotateAngleY += (float) Math.PI / 10F;
                 this.upperLegL.rotateAngleY -= (float) Math.PI / 10F;
             }
-            
-            if (wearingChest && wearingHead && wearingLegs)
-            {
+
+            if (wearingChest && wearingHead && wearingLegs) {
                 boolean playerOnGround = onGround(player);
-                
-                if (playerOnGround || player.capabilities.isFlying)
-                {
+
+                if (playerOnGround || player.capabilities.isFlying) {
                     waist.rotationPointY -= 3F;
-                    
-                    if (!this.isRiding)
-                    {
+
+                    if (!this.isRiding) {
                         upperLegR.rotateAngleY += 0.2;
                         upperLegL.rotateAngleY -= 0.2;
                     }
-                    
+
                     upperLegR.rotateAngleX -= 0.1;
                     upperLegL.rotateAngleX -= 0.1;
                     lowerLegL.rotateAngleX += 0.1;
@@ -1023,7 +999,7 @@ public class ModelVurp extends MowzieModelBase
                     lowerArmL.rotateAngleX -= 0.1;
                     lowerArmR.rotateAngleX -= 0.1;
                     head.rotateAngleX += 0.1;
-                    
+
                     bob(waist, 1F * globalSpeed, 1.7F * globalDegree, false, par1, par2);
                     waist.rotationPointY += (1 * par2) + 3;
                     walk(waist, 1F * globalSpeed, 0.05F * globalDegree, false, 1, 0.15F * par2 * backwardInverter, par1, par2);
@@ -1031,13 +1007,13 @@ public class ModelVurp extends MowzieModelBase
                     swing(torsobase, 0.5F * globalSpeed, 0.6F * globalDegree, true, 0, 0, par1, par2);
                     swing(waist, 0.5F * globalSpeed, 0.2F * globalDegree, false, 0, 0, par1, par2);
                     walk(head, 1F * globalSpeed, -0.1F * globalDegree, false, 1F, -0.3F * par2 * backwardInverter, par1, par2);
-                    
+
                     swing(head, 0.5F * globalSpeed, 0.4F * globalDegree, false, 0, 0, par1, par2);
                     head.rotationPointX += 0.6 * globalDegree * par2 * Math.cos(par1 * 0.5F * globalSpeed);
-                    
+
                     swing(upperLegR, 0.5F * globalSpeed, 0.2F * globalDegree, true, 0, -0.2F, par1, par2);
                     swing(upperLegL, 0.5F * globalSpeed, 0.2F * globalDegree, true, 0, 0.2F, par1, par2);
-                    
+
                     walk(upperLegR, 0.5F * globalSpeed, 1.2F * globalDegree, false, 0, 0, par1, par2);
                     walk(upperLegL, 0.5F * globalSpeed, 1.2F * globalDegree, true, 0, 0, par1, par2);
                     walk(lowerLegR, 0.5F * globalSpeed, 1.2F * globalDegree, false, -2.2F * backwardInverter, 0.6F, par1, par2);
@@ -1046,22 +1022,21 @@ public class ModelVurp extends MowzieModelBase
                     walk(upperArmL, 0.5F * globalSpeed, 0.5F * globalDegree, false, 0F, -0.3F * par2 * backwardInverter, par1, par2);
                     walk(lowerArmR, 0.5F * globalSpeed, 0.5F * globalDegree, true, -1F * backwardInverter, -0.5F * par2, par1, par2);
                     walk(lowerArmL, 0.5F * globalSpeed, 0.5F * globalDegree, false, -1F * backwardInverter, -0.5F * par2, par1, par2);
-                    
+
                     int ticksExisted = entity.ticksExisted;
-                    
+
                     walk(fronttorso1, 0.08F, 0.1F, true, 1, 0, ticksExisted, 1F);
                     walk(torsobase, 0.08F, 0.15F, false, 1, 0, ticksExisted, 1F);
                     walk(head, 0.08F, 0.05F, true, 1, 0, ticksExisted, 1F);
                     walk(upperArmR, 0.08F, 0.05F, true, 1, 0, ticksExisted, 1F);
                     walk(upperArmL, 0.08F, 0.05F, true, 1, 0, ticksExisted, 1F);
-                    
+
                     flap(upperArmR, 0.08F, 0.05F, true, 1, 0, ticksExisted, 1F);
                     flap(upperArmL, 0.08F, 0.05F, false, 1, 0, ticksExisted, 1F);
                     walk(lowerArmR, 0.08F, 0.1F, true, 1, 0, ticksExisted, 1F);
                     walk(lowerArmL, 0.08F, 0.1F, true, 1, 0, ticksExisted, 1F);
-                    
-                    if (player.isSneaking())
-                    {
+
+                    if (player.isSneaking()) {
                         waist.rotationPointY -= par2;
                         waist.rotateAngleX += 0.35F;
                         upperLegR.rotateAngleX -= 1F;
@@ -1082,37 +1057,35 @@ public class ModelVurp extends MowzieModelBase
                         footbaseL.rotateAngleX -= 0.35F;
                         head.rotateAngleX -= 0.35F;
                     }
-                }
-                else if (t == 20)
-                {
+                } else if (t == 20) {
                     double motionY = entity.posY - entity.prevPosY;
-                    
+
                     float upwardPose = (float) (1 / (1 + Math.exp(-20 * (motionY + 0.2))));
                     float downwardPose = (float) (1 / (1 + Math.exp(10 * (motionY + 0.2))));
-                    
+
                     waist.rotateAngleX += 0.2 * par2 * backwardInverter;
-                    
+
                     fronttorso1.rotateAngleX += 0.2 * upwardPose;
                     torsobase.rotateAngleX -= 0.4 * upwardPose;
                     head.rotateAngleX += 0.6 * upwardPose;
-                    
+
                     upperArmR.rotateAngleX += 0.1 * upwardPose;
                     upperArmL.rotateAngleX += 0.1 * upwardPose;
                     upperArmR.rotateAngleZ -= 0.1 * upwardPose;
                     upperArmL.rotateAngleZ += 0.1 * upwardPose;
                     lowerArmR.rotateAngleX += 0.2 * upwardPose;
                     lowerArmL.rotateAngleX += 0.2 * upwardPose;
-                    
+
                     upperLegR.rotateAngleX += 0.2 * upwardPose;
                     upperLegL.rotateAngleX -= 1 * upwardPose;
                     lowerLegR.rotateAngleX += 0.3 * upwardPose;
                     lowerLegL.rotateAngleX += 1.5 * upwardPose;
-                    
+
                     walk(upperLegR, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, false, 0, 0, par1, par2);
                     walk(upperLegL, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, true, 0, 0, par1, par2);
                     walk(lowerLegR, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, false, -2.2F * backwardInverter, 0F, par1, par2);
                     walk(lowerLegL, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, true, -2.2F * backwardInverter, 0F, par1, par2);
-                    
+
                     waist.rotateAngleX -= 0.2 * downwardPose;
                     fronttorso1.rotateAngleX += 0.3 * downwardPose;
                     torsobase.rotateAngleX += 0.3 * downwardPose;
@@ -1126,37 +1099,31 @@ public class ModelVurp extends MowzieModelBase
                     lowerArmR.rotateAngleX -= 1 * downwardPose;
                     lowerArmL.rotateAngleX -= 1 * downwardPose;
                 }
-            }
-            else
-            {
+            } else {
                 waist.rotationPointY += 1;
                 this.upperArmL.rotateAngleX += (MathHelper.cos(par1 * 0.6662F) * 1.4F * par2) / 2;
                 this.upperArmR.rotateAngleX += (MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2) / 2;
-                
+
                 this.lowerArmL.rotateAngleX += (MathHelper.cos(par1 * 0.6662F) * 1.4F * par2) / 4;
                 this.lowerArmR.rotateAngleX += (MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2) / 4;
-                
+
                 this.upperLegR.rotateAngleX += (MathHelper.cos(par1 * 0.6662F) * 1.4F * par2) / 2;
                 this.upperLegL.rotateAngleX += (MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2) / 2;
-                
+
                 this.waist.rotationPointY -= 0.8F;
-                
-                if (this.isSneak)
-                {
+
+                if (this.isSneak) {
                     this.waist.rotationPointY -= 0.8F;
                     this.waist.rotateAngleX += 0.4F;
                     this.waist.rotationPointZ += 3F;
                     this.upperArmR.rotateAngleX -= 0.1F;
                     this.upperArmL.rotateAngleX -= 0.1F;
-                    
-                    if (wearingChest)
-                    {
+
+                    if (wearingChest) {
                         this.head.rotateAngleX -= 0.4F;
                         this.upperLegR.rotateAngleX -= 0.4F;
                         this.upperLegL.rotateAngleX -= 0.4F;
-                    }
-                    else
-                    {
+                    } else {
                         this.upperLegL.rotationPointZ += 5F;
                         this.upperLegL.rotationPointY -= 0.8F;
                         this.upperLegR.rotationPointZ += 5F;
@@ -1164,14 +1131,13 @@ public class ModelVurp extends MowzieModelBase
                     }
                 }
             }
-            
-            if (t != 20)
-            {
+
+            if (t != 20) {
                 float f = (float) (20 - t);
                 //				float f = 20;
                 float f1 = f / 20;
                 float f2 = 1.0F - f1;
-                
+
                 setToInitPose();
                 rotateTo(waist, vehicleBase, f);
                 setRotateAngle(kneeR1, 0, 0, 0);
@@ -1231,49 +1197,41 @@ public class ModelVurp extends MowzieModelBase
                 setRotateAngle(shoulderpadR, 0.20943951023931953F * f2, 0.0F, 1.064650843716541F * f2);
                 setRotateAngle(shoulderpadL, -0.20943951023931953F * f2, 0.0F, 1.064650843716541F * f2);
             }
-            
-            for (ModelRenderer modelRenderer : new ModelRenderer[] { vehicleWheelR, vehicleWheelL, vehicleWheelBackR, vehicleWheelBackL })
-            {
+
+            for (ModelRenderer modelRenderer : new ModelRenderer[]{vehicleWheelR, vehicleWheelL, vehicleWheelBackR, vehicleWheelBackL}) {
                 VehicleMotion transformedPlayer = TFMotionManager.getTransformerPlayer(player);
-                
-                if (transformedPlayer != null)
-                {
+
+                if (transformedPlayer != null) {
                     float wheelSpinSpeed = (transformedPlayer.getForwardVelocity() < 0 ? -par1 : par1) * 0.8F;
                     modelRenderer.rotateAngleX = wheelSpinSpeed;
                 }
             }
-            
-            if (t == 0)
-            {
+
+            if (t == 0) {
                 float d = this.bipedHead.rotateAngleY - (this.bipedBody.rotateAngleY - this.bipedHead.rotateAngleY) / 3;
-                if (vehicleBase.rotateAngleY < d)
-                {
+                if (vehicleBase.rotateAngleY < d) {
                     vehicleBase.rotateAngleY += 0.05F;
                 }
-                if (vehicleBase.rotateAngleY > d)
-                {
+                if (vehicleBase.rotateAngleY > d) {
                     vehicleBase.rotateAngleY -= 0.05F;
                 }
                 vehicleBase.rotateAngleY = d;
-                
+
                 vehicleBase.rotateAngleX = 1.65F;
-                
-                if (player == Minecraft.getMinecraft().thePlayer)
-                {
+
+                if (player == Minecraft.getMinecraft().thePlayer) {
                     vehicleBase.rotateAngleX += -(float) player.motionY - 0.0784000015258789F;
-                }
-                else
-                {
+                } else {
                     vehicleBase.rotateAngleX += -(float) (player.posY - player.prevPosY) * 1.5F;
                 }
-                
+
                 vehicleBase.rotateAngleX -= 0.1F;
             }
-            
+
             if (holdingSniper) // Always put special item holding animations at the bottom, otherwise other animations like i.e. walking will override it!
             {
                 ModelRenderer head = wearingHead ? this.head : bipedHead;
-                
+
                 upperArmR.rotateAngleX = -0.3F;
                 lowerArmR.rotateAngleX = -1.0F;
                 lowerArmR.rotateAngleY = -0.5F;
@@ -1286,9 +1244,8 @@ public class ModelVurp extends MowzieModelBase
             }
         }
     }
-    
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

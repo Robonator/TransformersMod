@@ -1,14 +1,14 @@
 package fiskfille.tf.client.model.tileentity;
 
+import fiskfille.tf.common.entity.EntityTransformiumSeed;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
-import fiskfille.tf.common.entity.EntityTransformiumSeed;
-
-public class ModelTransformiumSeed extends ModelBase
-{
+@SideOnly(Side.CLIENT)
+public class ModelTransformiumSeed extends ModelBase {
     public ModelRenderer shape1;
     public ModelRenderer shape2;
     public ModelRenderer shape3;
@@ -21,9 +21,8 @@ public class ModelTransformiumSeed extends ModelBase
     public ModelRenderer wingC;
     public ModelRenderer wingD;
     public ModelRenderer antenna;
-    
-    public ModelTransformiumSeed()
-    {
+
+    public ModelTransformiumSeed() {
         this.textureWidth = 64;
         this.textureHeight = 32;
         this.shape1 = new ModelRenderer(this, 0, 0);
@@ -68,9 +67,8 @@ public class ModelTransformiumSeed extends ModelBase
         this.wingD.addBox(-0.5F, -5.0F, -1.0F, 1, 6, 2, 0.0F);
         this.setRotation(wingD, 0.0F, 0.0F, 0.06981317007977318F);
     }
-    
-    public void render(EntityTransformiumSeed seed)
-    {
+
+    public void render(EntityTransformiumSeed seed) {
         setRotationAngles(seed);
         float f5 = 0.0625F;
         float scale = 1.3F;
@@ -91,21 +89,19 @@ public class ModelTransformiumSeed extends ModelBase
         this.wingD.render(f5);
         GL11.glPopMatrix();
     }
-    
-    public void setRotation(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+
+    public void setRotation(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
     }
-    
-    public void setRotationAngles(EntityTransformiumSeed seed)
-    {
+
+    public void setRotationAngles(EntityTransformiumSeed seed) {
         super.setRotationAngles(0, 0, 0, 0, 0, 0, seed);
-        
+
         float t = (float) (seed.ticksExisted <= 50 ? seed.ticksExisted : 50) / 50;
         float i = 1.0F - t;
-        
+
         this.setRotation(wingA, (0.06981317007977318F * i + ((float) Math.PI / 2) * t), 0.0F, 0.0F);
         this.setRotation(wingB, 0.0F, 0.0F, -(0.06981317007977318F * i + ((float) Math.PI / 2) * t));
         this.setRotation(wingC, -(0.06981317007977318F * i + ((float) Math.PI / 2) * t), 0.0F, 0.0F);

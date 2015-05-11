@@ -1,9 +1,11 @@
 package fiskfille.tf.client.model.transformer.vehicle;
 
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ModelPurgeVehicle extends ModelVehicleBase
-{
+@SideOnly(Side.CLIENT)
+public class ModelPurgeVehicle extends ModelBaseVehicle {
     public ModelRenderer vehicleTread1;
     public ModelRenderer vehicleTread2;
     public ModelRenderer vehicleFoot1;
@@ -22,12 +24,11 @@ public class ModelPurgeVehicle extends ModelVehicleBase
     public ModelRenderer vehicleGun;
     public ModelRenderer vehicleTurretRear;
     public ModelRenderer vehicleMissileLauncher;
-    
-    public ModelPurgeVehicle()
-    {
+
+    public ModelPurgeVehicle() {
         textureWidth = 128;
         textureHeight = 128;
-        
+
         this.vehicleTread2 = new ModelRenderer(this, 0, 64);
         this.vehicleTread2.setRotationPoint(4.1F, 0.0F, 4.0F);
         this.vehicleTread2.addBox(0.0F, -1.5F, -13.0F, 2, 3, 17, 0.0F);
@@ -109,15 +110,13 @@ public class ModelPurgeVehicle extends ModelVehicleBase
         this.vehicleBody.addChild(this.vehicleTrackcover1);
         this.vehicleTurret.addChild(this.vehicleGun);
     }
-    
-    public void render()
-    {
+
+    public void render() {
         this.vehicleTurret.rotationPointZ = -2;
         this.vehicleBody.render(0.0625F);
     }
-    
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

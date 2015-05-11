@@ -1,16 +1,5 @@
 package fiskfille.tf;
 
-import java.lang.reflect.Method;
-
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
-import net.minecraftforge.common.config.Configuration;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
 import fiskfille.tf.common.achievement.TFAchievements;
 import fiskfille.tf.common.block.TFBlocks;
 import fiskfille.tf.common.entity.TFEntities;
@@ -25,81 +14,82 @@ import fiskfille.tf.config.TFConfig;
 import fiskfille.tf.web.donator.Donators;
 import fiskfille.tf.web.update.Update;
 import fiskfille.tf.web.update.UpdateChecker;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import java.lang.reflect.Method;
 
 @Mod(modid = TransformersMod.modid, name = "Transformers Mod", version = TransformersMod.version, guiFactory = "fiskfille.tf.client.gui.TFGuiFactory")
-public class TransformersMod
-{
-    @Instance(TransformersMod.modid)
-    public static TransformersMod instance;
-    
-    public static Configuration configFile;
-    
+public class TransformersMod {
     public static final String modid = "transformers";
     public static final String version = "0.5.0";
-    
+    @Mod.Instance(TransformersMod.modid)
+    public static TransformersMod instance;
+    public static Configuration configFile;
     @SidedProxy(clientSide = "fiskfille.tf.common.proxy.ClientProxy", serverSide = "fiskfille.tf.common.proxy.CommonProxy")
     public static CommonProxy proxy;
-    
+
     public static TFConfig config = new TFConfig();
+    public static CreativeTabs tabTransformers = new CreativeTabTransformers();
+    public static Method setSizeMethod;
+    public static Update latestUpdate;
     public TFItems items = new TFItems();
     public TFBlocks blocks = new TFBlocks();
-    
-    public static CreativeTabs tabTransformers = new CreativeTabTransformers();
-    
-    public static Method setSizeMethod;
-    
-    public static Update latestUpdate;
-    
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
+
+    @Mod.EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
         TransformerManager.register();
-        
+
         configFile = new Configuration(event.getSuggestedConfigurationFile());
         configFile.load();
         config.load(configFile);
-        
-        if (configFile.hasChanged())
-        {
+
+        if (configFile.hasChanged()) {
             configFile.save();
         }
-        
-        if (TFConfig.checkForUpdates)
-        {
+
+        if (TFConfig.checkForUpdates) {
             UpdateChecker updateChecker = new UpdateChecker();
             updateChecker.handleUpdates();
             Donators.loadDonators();
         }
-        
+
         items.register();
         blocks.register();
-        
+
         TFAchievements.register();
         TFRecipes.registerRecipes();
         TFEntities.registerEntities();
-        
+
         GameRegistry.registerWorldGenerator(new OreWorldGenerator(), 0);
-        
-        proxy.registerRenderInformation();
-        proxy.registerKeyBinds();
-        proxy.registerTickHandlers();
-        
-        for (Method method : Entity.class.getDeclaredMethods())
-        {
+
+        for (Method method : Entity.class.getDeclaredMethods()) {
             Class<?>[] parameters = method.getParameterTypes();
-            
-            if (parameters.length == 2)
-            {
-                if (parameters[0] == float.class && parameters[1] == float.class)
-                {
+
+            if (parameters.length == 2) {
+                if (parameters[0] == float.class && parameters[1] == float.class) {
                     method.setAccessible(true);
                     setSizeMethod = method;
                     break;
                 }
             }
         }
-        
+
         TFEvents.registerEvents(event.getSide());
         TFNetworkManager.registerPackets();
+    }
+
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event)
+    {
+        proxy.registerRenderInformation();
+        proxy.registerKeyBinds();
+        proxy.registerTickHandlers();
     }
 }

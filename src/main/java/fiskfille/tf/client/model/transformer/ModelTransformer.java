@@ -1,23 +1,17 @@
 package fiskfille.tf.client.model.transformer;
 
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MathHelper;
 import fiskfille.tf.client.model.tools.MowzieModelBase;
 import fiskfille.tf.client.model.tools.MowzieModelRenderer;
 import fiskfille.tf.common.entity.EntityTransformer;
 import fiskfille.tf.common.item.TFItems;
-import fiskfille.tf.common.playerdata.TFDataManager;
-import fiskfille.tf.common.transformer.TransformerPurge;
-import fiskfille.tf.common.transformer.TransformerSkystrike;
-import fiskfille.tf.common.transformer.base.Transformer;
-import fiskfille.tf.helper.ModelOffset;
-import fiskfille.tf.helper.TFHelper;
-import fiskfille.tf.helper.TFModelHelper;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ModelTransformer extends MowzieModelBase
-{
+@SideOnly(Side.CLIENT)
+public class ModelTransformer extends MowzieModelBase {
     public MowzieModelRenderer upperLegR;
     public MowzieModelRenderer upperLegPanel1;
     public MowzieModelRenderer lowerLeg1;
@@ -64,7 +58,7 @@ public class ModelTransformer extends MowzieModelBase
     public MowzieModelRenderer lowerLegPanel2;
     public MowzieModelRenderer footCylinder2;
     public MowzieModelRenderer foot2;
-    
+
     public ModelRenderer vehicleTread1;
     public ModelRenderer vehicleTread2;
     public ModelRenderer vehicleFoot1;
@@ -83,12 +77,11 @@ public class ModelTransformer extends MowzieModelBase
     public ModelRenderer vehicleGun;
     public ModelRenderer vehicleTurretRear;
     public ModelRenderer vehicleMissileLauncher;
-    
-    public ModelTransformer()
-    {
+
+    public ModelTransformer() {
         textureWidth = 128;
         textureHeight = 128;
-        
+
         bipedBody = new MowzieModelRenderer(this, 1000, 1000);
         bipedHead = new MowzieModelRenderer(this, 1000, 1000);
         bipedHeadwear = new MowzieModelRenderer(this, 1000, 1000);
@@ -96,7 +89,7 @@ public class ModelTransformer extends MowzieModelBase
         bipedLeftLeg = new MowzieModelRenderer(this, 1000, 1000);
         bipedRightArm = new MowzieModelRenderer(this, 1000, 1000);
         bipedLeftArm = new MowzieModelRenderer(this, 1000, 1000);
-        
+
         this.shoulderPad2 = new MowzieModelRenderer(this, 23, 102);
         this.shoulderPad2.setRotationPoint(-0.5F, 1.0F, 0.0F);
         this.shoulderPad2.addBox(0.0F, -3.0F, -3.0F, 4, 6, 6, 0.0F);
@@ -327,7 +320,7 @@ public class ModelTransformer extends MowzieModelBase
         this.chest.addChild(upperArmL);
         this.waist.addChild(upperLegR);
         this.waist.addChild(upperLegL);
-        
+
         this.vehicleTread2 = new ModelRenderer(this, 0, 64);
         this.vehicleTread2.setRotationPoint(4.1F, 0.0F, 4.0F);
         this.vehicleTread2.addBox(0.0F, -1.5F, -13.0F, 2, 3, 17, 0.0F);
@@ -408,101 +401,88 @@ public class ModelTransformer extends MowzieModelBase
         this.vehicleBody.addChild(this.vehicleBack1);
         this.vehicleBody.addChild(this.vehicleTrackcover1);
         this.vehicleTurret.addChild(this.vehicleGun);
-        
+
         //parts = new MowzieModelRenderer[]{upperLegL, lowerLeg2, foot2, footCylinder2, lowerLegPanel2, upperLegPanel2, upperLegR, lowerLeg1, foot1, footCylinder1, lowerLegPanel1, upperLegPanel1, waist, stomach, hipSlab1, hipSlab2, chest, backKibble, chestSlab1, chestSlab2, tread1, tread2, turret, gun, turretFront, turretSights, turretRear, missileLauncher, hipPanel1, hipPanel2, upperArmL, shoulderPad2, lowerArm2, lowerArmPanel2, upperArmR, shoulderPad1, lowerArm1, lowerArmPanel1, head, helmetRight, helmetLeft, helmetTop, helmetBack, horn1, horn2, centerHorn};
         setInitPose();
     }
-    
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-        
-        if (entity instanceof EntityTransformer)
-        {
+
+        if (entity instanceof EntityTransformer) {
             EntityTransformer transformer = (EntityTransformer) entity;
-            
-            if (transformer.getTransformationTimer() != 0)
-            {
+
+            if (transformer.getTransformationTimer() != 0) {
                 waist.render(f5);
-            }
-            else
-            {
+            } else {
                 vehicleBody.render(f5);
             }
         }
     }
-    
-    private void setRotation(MowzieModelRenderer model, float x, float y, float z)
-    {
+
+    private void setRotation(MowzieModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-    
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity)
-    {
+
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity) {
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, entity);
-        
-        if (entity instanceof EntityTransformer)
-        {
+
+        if (entity instanceof EntityTransformer) {
             EntityTransformer transformer = (EntityTransformer) entity;
-            
+
             setToInitPose();
-            
+
             float globalSpeed = 1;
             float globalDegree = 0.8F;
-            
+
             this.upperArmR.rotationPointX = 1;
             this.upperArmL.rotationPointX = -1;
-            
+
             this.vehicleTurret.rotationPointZ = -1;
-            
+
             //Walk animation
             upperArmR.rotationPointX -= 5;
             upperArmL.rotationPointX += 5;
             upperArmR.rotationPointY -= 5;
             upperArmL.rotationPointY -= 5;
             backKibble.rotationPointY += 5;
-            
+
             waist.rotationPointY += 1;
-            
+
             boolean sneaking = entity.isSneaking();
-            
-            if (sneaking)
-            {
+
+            if (sneaking) {
                 waist.rotateAngleX -= 0.5F;
                 waist.rotationPointZ -= 6F;
                 waist.rotationPointY -= 3F;
                 globalDegree = 1.5F;
                 globalSpeed = 1.5F;
             }
-            
+
             head.rotationPointY -= 5.5F;
-            
+
             head.rotateAngleY = par4 / (180F / (float) Math.PI);
             head.rotateAngleX = par5 / (180F / (float) Math.PI);
-            
+
             int backwardInverter = 1;
-            if (transformer.moveForward < 0)
-            {
+            if (transformer.moveForward < 0) {
                 backwardInverter = -1;
                 globalDegree = 0.5F;
             }
-            
-            if (this.heldItemLeft != 0)
-            {
+
+            if (this.heldItemLeft != 0) {
                 this.upperArmL.rotateAngleX -= 0.2F;
             }
-            if (this.heldItemRight != 0)
-            {
+            if (this.heldItemRight != 0) {
                 this.upperArmR.rotateAngleX -= 0.2F;
             }
-            
-            if (this.onGround > -9990.0F)
-            {
-                float hitTick = this.onGround;
+
+            if (this.swingProgress > -9990.0F) {
+                float hitTick = this.swingProgress;
                 double max = 0.99126524;
-                
+
                 stomach.rotateAngleY += 20 * (hitTick) * (hitTick - 0.4) * (Math.pow(hitTick, 0.3F) - max);
                 chest.rotateAngleY += 20 * (hitTick) * (hitTick - 0.4) * (Math.pow(hitTick, 0.3F) - max);
                 head.rotateAngleY += -40 * (hitTick) * (hitTick - 0.4) * (Math.pow(hitTick, 0.3F) - max);
@@ -512,14 +492,13 @@ public class ModelTransformer extends MowzieModelBase
                 upperArmL.rotateAngleX -= 40 * (hitTick) * (hitTick - 0.4) * (Math.pow(hitTick, 0.3F) - max);
                 lowerArm2.rotateAngleX += 25 * (hitTick) * (Math.pow(hitTick, 0.1) - max);
             }
-            
+
             upperLegL.rotationPointY -= 12;
             upperLegR.rotationPointY -= 12;
-            
+
             boolean playerOnGround = onGround(transformer);
-            
-            if (playerOnGround)
-            {
+
+            if (playerOnGround) {
                 //New pose!
                 upperLegR.rotateAngleY += 0.2;
                 upperLegL.rotateAngleY -= 0.2;
@@ -529,11 +508,11 @@ public class ModelTransformer extends MowzieModelBase
                 lowerLeg2.rotateAngleX += 0.6;
                 foot1.rotateAngleX -= 0.3;
                 foot2.rotateAngleX -= 0.3;
-                
+
                 waist.rotateAngleX += 0.1;
-                
+
                 head.rotateAngleX += 0.1;
-                
+
                 bob(waist, 1F * globalSpeed, 1.7F * globalDegree, false, par1, par2);
                 waist.rotationPointY += 1.2 * par2;
                 walk(waist, 1F * globalSpeed, 0.05F * globalDegree, false, 1, 0.15F * par2 * backwardInverter, par1, par2);
@@ -541,10 +520,10 @@ public class ModelTransformer extends MowzieModelBase
                 swing(chest, 0.5F * globalSpeed, 0.6F * globalDegree, true, 0, 0, par1, par2);
                 swing(waist, 0.5F * globalSpeed, 0.2F * globalDegree, false, 0, 0, par1, par2);
                 walk(head, 1F * globalSpeed, -0.1F * globalDegree, false, 1F, -0.3F * par2 * backwardInverter, par1, par2);
-                
+
                 swing(head, 0.5F * globalSpeed, 0.4F * globalDegree, false, 0, 0, par1, par2);
                 head.rotationPointX += 0.6 * globalDegree * par2 * Math.cos(par1 * 0.5F * globalSpeed);
-                
+
                 swing(upperLegR, 0.5F * globalSpeed, 0F * globalDegree, false, 0, -0.15F, par1, par2);
                 swing(upperLegL, 0.5F * globalSpeed, 0F * globalDegree, false, 0, 0.15F, par1, par2);
                 walk(upperLegR, 0.5F * globalSpeed, 1.2F * globalDegree, false, 0, 0, par1, par2);
@@ -555,27 +534,26 @@ public class ModelTransformer extends MowzieModelBase
                 walk(upperArmL, 0.5F * globalSpeed, 0.5F * globalDegree, false, 0F, -0.3F * par2 * backwardInverter, par1, par2);
                 walk(lowerArm1, 0.5F * globalSpeed, 0.5F * globalDegree, true, -1F * backwardInverter, -0.5F * par2, par1, par2);
                 walk(lowerArm2, 0.5F * globalSpeed, 0.5F * globalDegree, false, -1F * backwardInverter, -0.5F * par2, par1, par2);
-                
+
                 flap(hipPanel1, 1F * globalSpeed, 0.2F * globalDegree, false, -1, 0, par1, par2);
                 flap(hipPanel2, 1F * globalSpeed, 0.2F * globalDegree, true, -1, 0, par1, par2);
                 walk(gun, 1F * globalSpeed, -0.3F * globalDegree, false, -1, 0, par1, par2);
-                
+
                 //Idle animation
                 int ticksExisted = entity.ticksExisted;
-                
+
                 walk(stomach, 0.08F, 0.1F, true, 1, 0, ticksExisted, 1F);
                 walk(chest, 0.08F, 0.15F, false, 1, 0, ticksExisted, 1F);
                 walk(head, 0.08F, 0.05F, true, 1, 0, ticksExisted, 1F);
                 walk(upperArmR, 0.08F, 0.05F, true, 1, 0, ticksExisted, 1F);
                 walk(upperArmL, 0.08F, 0.05F, true, 1, 0, ticksExisted, 1F);
-                
+
                 flap(upperArmR, 0.08F, 0.05F, true, 1, 0, ticksExisted, 1F);
                 flap(upperArmL, 0.08F, 0.05F, false, 1, 0, ticksExisted, 1F);
                 walk(lowerArm1, 0.08F, 0.1F, true, 1, 0, ticksExisted, 1F);
                 walk(lowerArm2, 0.08F, 0.1F, true, 1, 0, ticksExisted, 1F);
-                
-                if (sneaking)
-                {
+
+                if (sneaking) {
                     waist.rotationPointY += 3;
                     waist.rotationPointZ += 3;
                     waist.rotateAngleX += 0.5;
@@ -598,31 +576,29 @@ public class ModelTransformer extends MowzieModelBase
                     lowerArm1.rotateAngleZ -= 0.5;
                     lowerArm2.rotateAngleZ += 0.5;
                 }
-            }
-            else
-            {
+            } else {
                 double motionY = entity.posY - entity.prevPosY;
                 float upwardPose = (float) (1 / (1 + Math.exp(-20 * (motionY + 0.2))));
                 float downwardPose = (float) (1 / (1 + Math.exp(10 * (motionY + 0.2))));
-                
+
                 waist.rotateAngleX += 0.2 * par2 * backwardInverter;
-                
+
                 stomach.rotateAngleX += 0.2 * upwardPose;
                 chest.rotateAngleX -= 0.4 * upwardPose;
                 head.rotateAngleX += 0.6 * upwardPose;
-                
+
                 upperArmR.rotateAngleX += 0.1 * upwardPose;
                 upperArmL.rotateAngleX += 0.1 * upwardPose;
                 upperArmR.rotateAngleZ -= 0.1 * upwardPose;
                 upperArmL.rotateAngleZ += 0.1 * upwardPose;
                 lowerArm1.rotateAngleX += 0.2 * upwardPose;
                 lowerArm2.rotateAngleX += 0.2 * upwardPose;
-                
+
                 upperLegR.rotateAngleX += 0.2 * upwardPose;
                 upperLegL.rotateAngleX -= 1 * upwardPose;
                 lowerLeg1.rotateAngleX += 0.3 * upwardPose;
                 lowerLeg2.rotateAngleX += 1.5 * upwardPose;
-                
+
                 walk(upperLegR, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, false, 0, 0, par1, par2);
                 walk(upperLegL, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, true, 0, 0, par1, par2);
                 walk(lowerLeg1, 0.5F * globalSpeed, 0.2F * globalDegree * downwardPose, false, -2.2F * backwardInverter, 0F, par1, par2);
@@ -640,12 +616,12 @@ public class ModelTransformer extends MowzieModelBase
                 lowerArm1.rotateAngleX -= 1 * downwardPose;
                 lowerArm2.rotateAngleX -= 1 * downwardPose;
             }
-            
+
             int transformationTimer = transformer.getTransformationTimer();
-            
+
             float transformProgress = (float) (20 - transformationTimer) / 20;
             float transformProgressSin = MathHelper.sin(1.57079632679F * transformProgress) * MathHelper.sin(1.57079632679F * transformProgress);
-            
+
             head.rotateAngleX += Math.PI * transformProgressSin;
             waist.rotateAngleX += Math.PI / 2 * transformProgressSin;
             waist.rotateAngleY = (float) (Math.PI * transformProgressSin);
@@ -673,23 +649,17 @@ public class ModelTransformer extends MowzieModelBase
             lowerLeg2.rotateAngleX += Math.PI * transformProgressSin;
             hipPanel1.rotateAngleZ -= Math.PI / 2 * transformProgressSin;
             hipPanel2.rotateAngleZ += Math.PI / 2 * transformProgressSin;
-            
-            if (transformationTimer == 0)
-            {
+
+            if (transformationTimer == 0) {
                 float xRotation = par5 / (180F / (float) Math.PI);
-                
+
                 this.vehicleBody.rotateAngleY = bipedBody.rotateAngleY;
                 this.vehicleGun.rotateAngleX = par5 < 0 ? xRotation : 0;
                 this.vehicleTurret.rotateAngleY = par4 / (180F / (float) Math.PI);
-            }
-            else
-            {
-                if (transformer.getHeldItem() != null && transformer.getHeldItem().getItem() == TFItems.purgesKatana)
-                {
+            } else {
+                if (transformer.getHeldItem() != null && transformer.getHeldItem().getItem() == TFItems.purgesKatana) {
                     tread1.showModel = false;
-                }
-                else
-                {
+                } else {
                     tread1.showModel = true;
                 }
             }

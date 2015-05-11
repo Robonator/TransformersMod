@@ -1,121 +1,98 @@
 package fiskfille.tf.common.entity;
 
+import fiskfille.tf.client.particle.TFParticleType;
+import fiskfille.tf.client.particle.TFParticles;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import fiskfille.tf.client.particle.TFParticleType;
-import fiskfille.tf.client.particle.TFParticles;
-import fiskfille.tf.common.motion.TFMotionManager;
 
-public class EntityFlamethrowerFire extends EntityThrowable
-{
-    public EntityFlamethrowerFire(World world)
-    {
+public class EntityFlamethrowerFire extends EntityThrowable {
+    public EntityFlamethrowerFire(World world) {
         super(world);
     }
-    
-    public EntityFlamethrowerFire(World world, EntityLivingBase entity)
-    {
+
+    public EntityFlamethrowerFire(World world, EntityLivingBase entity) {
         super(world, entity);
     }
-    
-    public EntityFlamethrowerFire(World world, double x, double y, double z)
-    {
+
+    public EntityFlamethrowerFire(World world, double x, double y, double z) {
         super(world, x, y, z);
     }
-    
-    protected float getGravityVelocity()
-    {
+
+    protected float getGravityVelocity() {
         return 0.0F;
     }
-    
-    protected float func_70182_d()
-    {
+
+    protected float getInaccuracy() {
         return 1.0F;
     }
-    
-    public void onUpdate()
-    {
+
+    public void onUpdate() {
         super.onUpdate();
-        
-        if (this.isEntityAlive())
-        {
-            if (worldObj.isRemote)
-            {
-                for (int i = 0; i < 5; ++i)
-                {
+
+        if (this.isEntityAlive()) {
+            if (worldObj.isRemote) {
+                for (int i = 0; i < 5; ++i) {
                     float f = (rand.nextFloat() / 5);
-                    
+
                     TFParticles.spawnParticle(TFParticleType.FLAMETHROWER_FLAME, posX + f, posY + 0.15F + f, posZ + f, 0, 0, 0);
                 }
             }
-            
-            if (ticksExisted > 7)
-            {
+
+            if (ticksExisted > 7) {
                 this.setDead();
             }
         }
     }
-    
-    protected void onImpact(MovingObjectPosition mop)
-    {
-        if (mop.entityHit != null)
-        {
+
+    protected void onImpact(MovingObjectPosition mop) {
+        if (mop.entityHit != null) {
             mop.entityHit.setFire(20);
-            
-            if (getThrower() instanceof EntityPlayer)
-            {
+
+            if (getThrower() instanceof EntityPlayer) {
                 EntityPlayer player = (EntityPlayer) getThrower();
                 mop.entityHit.attackEntityFrom(DamageSource.causePlayerDamage(player), 10.0F);
             }
         }
-        
-        setFire(worldObj, mop.blockX, mop.blockY, mop.blockZ, mop.sideHit);
+
+        setFire(worldObj, mop.getBlockPos(), mop.sideHit.getIndex());
         this.setDead();
     }
-    
-    public boolean setFire(World world, int x, int y, int z, int sideHit)
-    {
-        if (sideHit == 0)
-        {
-            --y;
+
+    public boolean setFire(World world, BlockPos pos, int sideHit) {
+        if (sideHit == 0) {
+            pos.down();
         }
-        
-        if (sideHit == 1)
-        {
-            ++y;
+
+        if (sideHit == 1) {
+            pos.up();
         }
-        
-        if (sideHit == 2)
-        {
-            --z;
+
+        if (sideHit == 2) {
+            pos.north();
         }
-        
-        if (sideHit == 3)
-        {
-            ++z;
+
+        if (sideHit == 3) {
+            pos.south();
         }
-        
-        if (sideHit == 4)
-        {
-            --x;
+
+        if (sideHit == 4) {
+            pos.west();
         }
-        
-        if (sideHit == 5)
-        {
-            ++x;
+
+        if (sideHit == 5) {
+            pos.east();
         }
-        
-        if (world.isAirBlock(x, y, z))
-        {
-            world.setBlock(x, y, z, Blocks.fire);
+
+        if (world.isAirBlock(pos)) {
+            world.setBlockState(pos, Blocks.fire.getDefaultState());
         }
-        
+
         return true;
     }
 }

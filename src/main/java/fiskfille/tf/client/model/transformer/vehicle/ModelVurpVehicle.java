@@ -1,11 +1,12 @@
 package fiskfille.tf.client.model.transformer.vehicle;
 
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import fiskfille.tf.client.model.tools.MowzieModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ModelVurpVehicle extends ModelVehicleBase
-{
+@SideOnly(Side.CLIENT)
+public class ModelVurpVehicle extends ModelBaseVehicle {
     public MowzieModelRenderer vehicleBase;
     public MowzieModelRenderer vehicleWaist1;
     public MowzieModelRenderer vehicleWaist2;
@@ -58,12 +59,11 @@ public class ModelVurpVehicle extends ModelVehicleBase
     public MowzieModelRenderer vehicleWindow2;
     public MowzieModelRenderer vehiclerear1;
     public MowzieModelRenderer vehicleRear2;
-    
-    public ModelVurpVehicle()
-    {
+
+    public ModelVurpVehicle() {
         this.textureWidth = 128;
         this.textureHeight = 128;
-        
+
         this.vehiclebackplate2 = new MowzieModelRenderer(this, 51, 74);
         this.vehiclebackplate2.mirror = true;
         this.vehiclebackplate2.setRotationPoint(-2.3F, -1.8F, 1.8F);
@@ -253,7 +253,7 @@ public class ModelVurpVehicle extends ModelVehicleBase
         this.vehiclehood1.setRotationPoint(0.0F, -0.5F, -3.8F);
         this.vehiclehood1.addBox(-1.5F, -3.0F, -1.0F, 3, 4, 1);
         this.setRotateAngle(vehiclehood1, -1.3439035240356336F, 0.0F, 0.0F);
-        
+
         this.vehicleWheelBackR = new MowzieModelRenderer(this, 55, 68);
         this.vehicleWheelBackR.setRotationPoint(-1F, 3F, 2.2F);
         this.vehicleWheelBackR.addBox(-1.0F, -1.0F, -1.0F, 1, 2, 2);
@@ -268,7 +268,7 @@ public class ModelVurpVehicle extends ModelVehicleBase
         this.vehicleWheelR = new MowzieModelRenderer(this, 55, 68);
         this.vehicleWheelR.setRotationPoint(-2.7F, 0.3F, -2.0F);
         this.vehicleWheelR.addBox(-1.0F, -1.0F, -1.0F, 1, 2, 2);
-        
+
         this.vehiclearmbaseL1 = new MowzieModelRenderer(this, 64, 60);
         this.vehiclearmbaseL1.mirror = true;
         this.vehiclearmbaseL1.setRotationPoint(1.0F, -0.4F, 1.0F);
@@ -277,7 +277,7 @@ public class ModelVurpVehicle extends ModelVehicleBase
         this.vehicletorsobase.setRotationPoint(0.0F, -4.0F, 0.0F);
         this.vehicletorsobase.addBox(-2.0F, -2.0F, -1.3F, 4, 3, 4);
         this.setRotateAngle(vehicletorsobase, -1.5707963267948966F, -0.7853981633974483F, 0.0F);
-        
+
         this.vehicleWaistConnector1.addChild(this.vehicleRearplate);
         this.vehicletorsobase.addChild(this.vehiclehood1);
         this.vehiclelowerlegL1.addChild(this.vehicleWheelBackL);
@@ -330,27 +330,24 @@ public class ModelVurpVehicle extends ModelVehicleBase
         this.vehicleLowerlegR1.addChild(this.vehicleWheelBackR);
         this.vehicleLowerarmL1.addChild(this.vehicleLowerarmL2);
     }
-    
+
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         this.vehicleBase.render(f5);
     }
-    
+
     @Override
-    public void render()
-    {
+    public void render() {
         vehicleBase.render(0.0625F);
-        
+
         float scale = 1.25F;
         vehicleWheelR.setScale(1, scale, scale);
         vehicleWheelL.setScale(1, scale, scale);
         vehicleWheelBackR.setScale(1, scale, scale);
         vehicleWheelBackL.setScale(1, scale, scale);
     }
-    
-    public void setRotateAngle(MowzieModelRenderer modelRenderer, float x, float y, float z)
-    {
+
+    public void setRotateAngle(MowzieModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

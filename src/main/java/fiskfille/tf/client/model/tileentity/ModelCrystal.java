@@ -2,21 +2,22 @@ package fiskfille.tf.client.model.tileentity;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ModelCrystal extends ModelBase
-{
+@SideOnly(Side.CLIENT)
+public class ModelCrystal extends ModelBase {
     ModelRenderer shape1;
     ModelRenderer shape2;
     ModelRenderer shape3;
     ModelRenderer shape4;
     ModelRenderer shape5;
     ModelRenderer shape6;
-    
-    public ModelCrystal()
-    {
+
+    public ModelCrystal() {
         textureWidth = 64;
         textureHeight = 64;
-        
+
         shape1 = new ModelRenderer(this, 0, 0);
         shape1.addBox(-1F, -6F, -1F, 2, 6, 2);
         shape1.setRotationPoint(-1F, 24F, -2F);
@@ -54,9 +55,8 @@ public class ModelCrystal extends ModelBase
         shape6.mirror = true;
         setRotation(shape6, -0.6806784F, 0F, -0.2268928F);
     }
-    
-    public void renderAll()
-    {
+
+    public void renderAll() {
         float f5 = 0.0625F;
         shape1.render(f5);
         shape2.render(f5);
@@ -65,16 +65,14 @@ public class ModelCrystal extends ModelBase
         shape5.render(f5);
         shape6.render(f5);
     }
-    
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-    
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
-    {
+
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, null);
     }
 }

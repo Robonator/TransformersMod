@@ -1,64 +1,53 @@
 package fiskfille.tf.common.transformer.base;
 
-import java.util.Random;
-
-import net.minecraft.client.Minecraft;
+import fiskfille.tf.TransformersMod;
+import fiskfille.tf.client.particle.NitroParticleHandler;
+import fiskfille.tf.common.entity.EntityTankShell;
+import fiskfille.tf.common.item.TFItems;
+import fiskfille.tf.common.motion.TFMotionManager;
+import fiskfille.tf.common.playerdata.TFDataManager;
+import fiskfille.tf.config.TFConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.Vec3;
-import fiskfille.tf.TransformersMod;
-import fiskfille.tf.client.keybinds.TFKeyBinds;
-import fiskfille.tf.client.particle.NitroParticleHandler;
-import fiskfille.tf.common.entity.EntityTankShell;
-import fiskfille.tf.common.item.TFItems;
-import fiskfille.tf.common.motion.TFMotionManager;
-import fiskfille.tf.common.motion.VehicleMotion;
-import fiskfille.tf.common.network.MessageVehicleNitro;
-import fiskfille.tf.common.network.base.TFNetworkManager;
-import fiskfille.tf.common.playerdata.TFDataManager;
-import fiskfille.tf.config.TFConfig;
+
+import java.util.Random;
 
 /**
  * @author gegy1000
  */
-public abstract class TransformerTank extends Transformer
-{
-    public TransformerTank(String name)
-    {
+public abstract class TransformerTank extends Transformer {
+    public TransformerTank(String name) {
         super(name);
     }
-    
-    public boolean canZoom(EntityPlayer player)
-    {
+
+    public boolean canZoom(EntityPlayer player) {
         return true;
     }
-    
-    public float getVehicleCameraYOffset(EntityPlayer player)
-    {
+
+    public float getVehicleCameraYOffset(EntityPlayer player) {
         return -0.9F;
     }
-    
+
     @Override
-    public String getShootSound()
-    {
+    public String getShootSound() {
         return TransformersMod.modid + ":tankfire";
     }
-    
+
     @Override
-    public float fall(EntityPlayer player, float distance)
-    {
+    public float fall(EntityPlayer player, float distance) {
         return TFDataManager.isInVehicleMode(player) ? 0 : super.fall(player, distance);
     }
-    
+
     @Override
-    public void updateMovement(EntityPlayer player)
-    {
+    public void updateMovement(EntityPlayer player) {
         //    	TFMotionManager.motion(player, false, 20, 30, 10, 20, false, true, true);
         TFMotionManager.motion(player, 20, 30, 0, 20, false, true, false, false);
-        
+
         //        Minecraft minecraft = Minecraft.getMinecraft();
         //        boolean moveForward = minecraft.gameSettings.keyBindForward.getIsKeyPressed();
         //        boolean nitroPressed = TFKeyBinds.keyBindingNitro.getIsKeyPressed() || minecraft.gameSettings.keyBindSprint.getIsKeyPressed();
@@ -111,18 +100,14 @@ public abstract class TransformerTank extends Transformer
         //            }
         //        }
     }
-    
+
     @Override
-    public void tick(EntityPlayer player, int timer)
-    {
+    public void tick(EntityPlayer player, int timer) {
         IAttributeInstance entityAttribute = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
-        
-        if (TFDataManager.isInVehicleMode(player) && timer == 0)
-        {
+
+        if (TFDataManager.isInVehicleMode(player) && timer == 0) {
             entityAttribute.setBaseValue(0.0D);
-        }
-        else if (timer == 20)
-        {
+        } else if (timer == 20) {
             entityAttribute.setBaseValue(0.1D);
         }
         //    		if (!TFPlayerData.getData(player).stealthForce)
@@ -138,33 +123,28 @@ public abstract class TransformerTank extends Transformer
         //    			}
         //    		}
     }
-    
+
     @Override
-    public boolean canShoot(EntityPlayer player)
-    {
+    public boolean canShoot(EntityPlayer player) {
         return true;
     }
-    
+
     @Override
-    public Item getShootItem()
-    {
+    public Item getShootItem() {
         return TFItems.tankShell;
     }
-    
+
     @Override
-    public Entity getShootEntity(EntityPlayer player)
-    {
+    public Entity getShootEntity(EntityPlayer player) {
         return new EntityTankShell(player.worldObj, player, TFConfig.allowTankShellExplosions);
     }
-    
+
     @Override
-    public void doNitroParticles(EntityPlayer player)
-    {
-        for (int i = 0; i < 4; ++i)
-        {
+    public void doNitroParticles(EntityPlayer player) {
+        for (int i = 0; i < 4; ++i) {
             Vec3 side = NitroParticleHandler.getBackSideCoords(player, 0.15F, i < 2, -0.6, false);
             Random rand = new Random();
-            player.worldObj.spawnParticle("smoke", side.xCoord, side.yCoord + 0.3F, side.zCoord, rand.nextFloat() / 20, rand.nextFloat() / 20, rand.nextFloat() / 20);
+            player.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, side.xCoord, side.yCoord + 0.3F, side.zCoord, rand.nextFloat() / 20, rand.nextFloat() / 20, rand.nextFloat() / 20);
         }
     }
 }

@@ -1,39 +1,33 @@
 package fiskfille.tf;
 
+import fiskfille.tf.common.transformer.base.Transformer;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import fiskfille.tf.common.transformer.base.Transformer;
 
 /**
  * @author gegy1000
  */
-public class TransformersAPI
-{
+public class TransformersAPI {
     private static List<Transformer> transformers = new ArrayList<Transformer>();
-    
+
     /**
      * Used to register the specified Transformer.
-     * 
+     *
      * @param transformer The Transformer registered.
      */
-    public static void registerTransformer(Transformer transformer)
-    {
-        if (!transformers.contains(transformer))
-        {
+    public static void registerTransformer(Transformer transformer) {
+        if (!transformers.contains(transformer)) {
             transformers.add(transformer);
-        }
-        else
-        {
+        } else {
             System.err.println("[TransformersAPI] " + transformer.getName() + " has already been registered!");
         }
     }
-    
+
     /**
      * @returns a list of registered Transformers.
      */
-    public static List<Transformer> getTransformers()
-    {
+    public static List<Transformer> getTransformers() {
         return transformers;
     }
 }

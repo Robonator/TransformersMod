@@ -1,9 +1,11 @@
 package fiskfille.tf.client.model.transformer.vehicle;
 
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ModelSkystrikeVehicle extends ModelVehicleBase
-{
+@SideOnly(Side.CLIENT)
+public class ModelSkystrikeVehicle extends ModelBaseVehicle {
     public ModelRenderer shape131;
     public ModelRenderer shape132;
     public ModelRenderer shape133;
@@ -52,12 +54,11 @@ public class ModelSkystrikeVehicle extends ModelVehicleBase
     public ModelRenderer shape77;
     public ModelRenderer shape78;
     public ModelRenderer vehicleBody;
-    
-    public ModelSkystrikeVehicle()
-    {
+
+    public ModelSkystrikeVehicle() {
         textureWidth = 128;
         textureHeight = 128;
-        
+
         this.shape59 = new ModelRenderer(this, 75, 55);
         this.shape59.mirror = true;
         this.shape59.setRotationPoint(-4.5F, 13.5F, 3.9F);
@@ -289,7 +290,7 @@ public class ModelSkystrikeVehicle extends ModelVehicleBase
         vehicleBody = new ModelRenderer(this, 0, 0);
         vehicleBody.addBox(-4.0F, 0.0F, -2.0F, 0, 0, 0);
         vehicleBody.setRotationPoint(0.0F, 0.0F, 0.0F);
-        
+
         //	    try
         //	    {
         //		    for (Field field : getClass().getDeclaredFields())
@@ -308,7 +309,7 @@ public class ModelSkystrikeVehicle extends ModelVehicleBase
         //	    {
         //	    	e.printStackTrace();
         //	    }
-        
+
         //	    this.addChildTo(shape1, vehichleBody);
         //	    this.addChildTo(shape2, vehichleBody);
         //	    this.addChildTo(shape3, vehichleBody);
@@ -345,7 +346,7 @@ public class ModelSkystrikeVehicle extends ModelVehicleBase
         //	    this.addChildTo(shape75, vehichleBody);
         //	    this.addChildTo(shape77, vehichleBody);
         //	    this.addChildTo(shape78, vehichleBody);
-        
+
         this.addChildTo(shape1, vehicleBody);
         this.addChildTo(shape30, vehicleBody);
         this.addChildTo(shape56, vehicleBody);
@@ -362,18 +363,16 @@ public class ModelSkystrikeVehicle extends ModelVehicleBase
         this.addChildTo(shape139, vehicleBody);
         this.addChildTo(shape140, vehicleBody);
         this.addChildTo(shape141, vehicleBody);
-        
+
         vehicleBody.offsetY = 1.2F;
     }
-    
-    public void render()
-    {
+
+    public void render() {
         vehicleBody.render(0.0625F);
         vehicleBody.offsetY = 1.2F;
     }
-    
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

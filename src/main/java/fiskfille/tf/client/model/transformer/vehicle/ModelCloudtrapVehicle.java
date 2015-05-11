@@ -1,9 +1,11 @@
 package fiskfille.tf.client.model.transformer.vehicle;
 
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ModelCloudtrapVehicle extends ModelVehicleBase
-{
+@SideOnly(Side.CLIENT)
+public class ModelCloudtrapVehicle extends ModelBaseVehicle {
     ModelRenderer vehicleBody;
     ModelRenderer vehicleFrontPiece2;
     ModelRenderer vehicleFrontPiece3;
@@ -23,12 +25,11 @@ public class ModelCloudtrapVehicle extends ModelVehicleBase
     ModelRenderer vehicleLeftBackWing;
     ModelRenderer vehicleCockpit;
     ModelRenderer vehicleFrontPiece1;
-    
-    public ModelCloudtrapVehicle()
-    {
+
+    public ModelCloudtrapVehicle() {
         textureWidth = 64;
         textureHeight = 128;
-        
+
         vehicleBody = new ModelRenderer(this, 0, 98);
         vehicleBody.addBox(-4.0F, 0.0F, -2.0F, 0, 0, 0);
         vehicleBody.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -94,7 +95,7 @@ public class ModelCloudtrapVehicle extends ModelVehicleBase
         vehicleLeftWing.setRotationPoint(5.8F, 0.0F, 3.0F);
         vehicleLeftWing.addBox(0.0F, -0.5F, -1.0F, 8, 1, 4);
         setRotateAngle(vehicleLeftWing, 0.0F, -0.9075712110370513F, 0.0F);
-        
+
         this.addChildTo(vehicleBackFin1, vehicleBody);
         this.addChildTo(vehicleBackFin2, vehicleBody);
         this.addChildTo(vehicleBackFin3, vehicleBody);
@@ -115,15 +116,13 @@ public class ModelCloudtrapVehicle extends ModelVehicleBase
         this.addChildTo(vehicleRightWing, vehicleBody);
         vehicleBody.offsetY = 1.25F;
     }
-    
-    public void render()
-    {
+
+    public void render() {
         vehicleBody.render(0.0625F);
         vehicleBody.offsetY = 1.25F;
     }
-    
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
